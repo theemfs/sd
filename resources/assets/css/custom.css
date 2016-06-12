@@ -1,0 +1,51 @@
+task {
+	border-bottom: 1px solid #ccc;
+}
+
+#example {
+	display: none;
+}
+
+/*.list-group-item {
+	height: 245px;
+	max-height: 245px;
+	min-height: 245px;
+	overflow: hidden;
+}*/
+
+.list-group-item {
+	cursor: default;
+}
+
+.snippet {
+	border-radius: 4px;
+	border: 1px solid #ddd;
+	color: #555;
+	display: block;
+	margin-bottom: 15px;
+	padding: 10px 15px;
+	position: relative;
+	overflow: hidden;
+}
+
+.message {
+	border-radius: 4px;
+	border: 1px solid #ddd;
+	color: #555;
+	display: block;
+	margin-bottom: 15px;
+	padding: 10px 15px;
+	position: relative;
+	overflow: hidden;
+}
+.message-body {
+	white-space: pre-wrap;
+}
+/*pre {
+	background: #fff;
+	border: none;
+}*/
+
+img {
+	vertical-align: baseline;
+}
