@@ -48,14 +48,14 @@ return [
 			'root'   => storage_path(''),
 		],
 
-		'originals' => [
+		'uploads' => [
 			'driver' => 'local',
 			'root'   => storage_path('') . '/uploads',
 		],
 
-		'uploads' => [
+		'thumbnails' => [
 			'driver' => 'local',
-			'root'   => public_path('') . '/uploads',
+			'root'   => public_path('') . '/thumbnails',
 		],
 
 		'ftp' => [

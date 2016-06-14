@@ -20,11 +20,7 @@ class User extends Model implements AuthenticatableContract,
 {
     use Authenticatable, CanResetPassword, ShinobiTrait;
 	use SoftDeletes;
-	/**
-	 * The attributes that are mass assignable.
-	 *
-	 * @var array
-	 */
+	
 	protected $fillable = [
 		'name',
 		'email',
@@ -35,11 +31,6 @@ class User extends Model implements AuthenticatableContract,
 		'last_login_at',
 	];
 
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
 	protected $hidden = [
 		'password',
 		'remember_token',
@@ -49,14 +40,21 @@ class User extends Model implements AuthenticatableContract,
 
 	public function cases()
 	{
-		return $this->hasMany('App\Cases');
+		return $this->hasMany('App\Cases', 'user_id');
 	}
 
 
 
 	public function files()
 	{
-		return $this->hasMany('App\Files');
+		return $this->hasMany('App\Files', 'user_id');
+	}
+
+
+
+	public function messages()
+	{
+		return $this->hasMany('App\Messages', 'user_id');
 	}
 
 

@@ -14,7 +14,8 @@
         "laravelcollective/remote": "5.2.*",
         "caffeinated/shinobi": "^2.3",
         "nesbot/carbon": "^1.21",
-        "intervention/image": "^2.3"
+        "intervention/image": "^2.3",
+        "cloudconvert/cloudconvert-php": "^2.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

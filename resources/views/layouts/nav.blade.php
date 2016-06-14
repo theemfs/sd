@@ -1,61 +1,68 @@
-<div class="container">
-	<div class="navbar-header">
-		<!-- Collapsed Hamburger -->
-		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#spark-navbar-collapse">
-			<span class="sr-only"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		</button>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{{ url('/') }}">N</a>
+    </div>
 
-		<a class="navbar-brand" href="{{ url('/') }}">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
 
-		</a>
-	</div>
-
-	<div class="collapse navbar-collapse" id="spark-navbar-collapse">
-
-		<ul class="nav navbar-nav">
-			@if (Auth::user())
-
-				<li><a href="{{ action('PagesController@dashboardShow') }}"><i class="fa fa-fw fa-btn fa-phone"></i> {{ trans('app.Dashboard') }}</a></li>
-				<li><a href="{{ action('CasesController@index') }}"><i class="fa fa-fw fa-btn fa-phone"></i> {{ trans('app.Cases') }}</a></li>
-				<li><a href="{{ action('FilesController@index') }}"><i class="fa fa-fw fa-btn fa-phone"></i> {{ trans('app.Files') }}</a></li>
-				{{-- <li><a href="{{ action('RoundsController@index') }}"><i class="fa fa-fw fa-btn fa-play-circle"></i> {{ trans('app.Rounds') }}</a></li>
-				<li><a href="{{ action('PagesController@send') }}"><i class="fa fa-fw fa-btn fa-envelope-o"></i> {{ trans('app.Send SMS') }}</a></li> --}}
-				
-				
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-						<i class="fa fa-fw fa-btn fa-cog"></i> {{ trans('app.Settings') }}<span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu" role="menu">
-						{{-- <li><a href="{{ action('GatewaysController@show', 1) }}"><i class="fa fa-fw fa-btn fa-usb"></i> {{ trans('app.Modems') }}</a></li>
-						<li><a href="{{ action('OperatorsController@index') }}"><i class="fa fa-fw fa-btn fa-mobile"></i> {{ trans('app.Operators') }}</a></li> --}}
-					</ul>
-				</li>
-
-			@else
-			@endif
-		</ul>
-
-		<ul class="nav navbar-nav navbar-right">
 			@if (Auth::guest())
-				<!-- <li><a href="{{ url('/login') }}">Login</a></li> -->
-				<!-- <li><a href="{{ url('/register') }}">Register</a></li> -->
+				<li><a href="{{ url('/about') }}">About</a></li>
 			@else
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-						{{ Auth::user()->name }}
-						 <span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu" role="menu">
-						{{-- <li class="divider"></li> --}}
-						<li><a href="{{ action('AuthController@logout') }}"><i class="fa fa-fw fa-btn fa-sign-out"></i>&nbsp; {{ trans('app.Logout') }}</a></li>
-					</ul>
-				</li>
+				<li><a href="{{ action('CasesController@index') }}"><i class="fa fa-fw fa-btn fa-briefcase"></i> {{ trans('app.Cases') }}</a></li>
+				        <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li> -->
+        <!-- <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li> -->
 			@endif
-		</ul>
 
-	</div>
-</div>
+
+      </ul>
+      @if (Auth::user())
+
+			<!-- SEARCH -->
+	      <form class="navbar-form navbar-left" role="search">
+	        <div class="form-group">
+	          <input type="text" class="form-control" placeholder="Search">
+	        </div>
+	        <button type="submit" class="btn btn-default">Submit</button>
+	      </form>
+
+	      <ul class="nav navbar-nav navbar-right">
+	       <!--  <li><a href="#">Link</a></li> -->
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="Profile and Settings"><i class="fa fa-fw fa-btn fa-user"></i>{{ Auth::user()->name }}<span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="#">Action</a></li>
+	            <li><a href="#">Another action</a></li>
+	            <li><a href="#">Something else here</a></li>
+	            <li role="separator" class="divider"></li>
+	           <li><a href="{{ action('AuthController@logout') }}"><i class="fa fa-fw fa-btn fa-sign-out"></i>{{ trans('app.Logout') }}</a></li>
+
+	          </ul>
+	        </li>
+	      </ul>
+      	@else
+		@endif
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

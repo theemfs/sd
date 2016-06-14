@@ -15,20 +15,15 @@ class Files extends Model
 	protected $fillable = [
 		'id',
 		'comment',
-		
 		'name',
 		'ext',
-
 		'mimetype',
 		'size',
-
 		'original',
 		'converted',
 		'thumbnail',
-
 		'user_id',
-		'case_id',
-		
+		'message_id'
 	];
 
 	protected $dates = [
@@ -44,61 +39,68 @@ class Files extends Model
 
 
 
-	public function cases()
+	public function message()
 	{
-		return $this->belongsTo('App\Cases', 'case_id');
+		return $this->belongsTo('App\Messages', 'message_id');
 	}
 
 
 
-	public function upload(UploadedFile $attachment)
-	{
+	// public function cases()
+	// {
+	// 	return $this->belongsTo('App\Cases', 'message_id');
+	// }
 
-		dd($attachment->getRealPath());
 
-		$path 		= 'cases/' . $this->case_id . '/';
-		$hash 		= md5($this->name . time());
-		$original 	= $path . $hash . '.' . $this->ext;
 
-		dd($original);
+	// public function upload(UploadedFile $attachment)
+	// {
 
-		//$unique_filename_mini 	= $path . $this->case_id . '/' . $hash . '_mini.' . $attachment->getClientOriginalExtension();
+	// 	dd($attachment->getRealPath());
 
-		//saving original
-		Storage::put(
-			$original,
-			file_get_contents($attachment->getRealPath())
-		);
+	// 	$path 		= 'cases/' . $this->case_id . '/';
+	// 	$hash 		= md5($this->name . time());
+	// 	$original 	= $path . $hash . '.' . $this->ext;
 
-		//creating new file
+	// 	dd($original);
 
-		//creating a thumb and converted copy of image
-		if ( substr($attachment->getMimeType(), 0, 5) == 'image' ) {
-			Storage::disk('uploads')->put(
-				// $unique_filename_mini,
-				$unique_filename,
-				Image::make( $attachment
-					->getRealPath())
-					->resize(64, null, function($callback) {
-						$callback->aspectRatio();
-						$callback->upsize();							
-					})
-					->stream($attachment->getClientOriginalExtension(), 75)
-			);
+	// 	//$unique_filename_mini 	= $path . $this->case_id . '/' . $hash . '_mini.' . $attachment->getClientOriginalExtension();
 
-			Storage::disk('uploads')->put(
-				// $unique_filename_mini,
-				$unique_filename,
-				Image::make( $attachment
-					->getRealPath())
-					->resize(1280, null, function($callback) {
-						$callback->aspectRatio();
-						$callback->upsize();							
-					})
-					->stream($attachment->getClientOriginalExtension(), 75)
-			);	
-		}
-	}
+	// 	//saving original
+	// 	Storage::put(
+	// 		$original,
+	// 		file_get_contents($attachment->getRealPath())
+	// 	);
+
+	// 	//creating new file
+
+	// 	//creating a thumb and converted copy of image
+	// 	if ( substr($attachment->getMimeType(), 0, 5) == 'image' ) {
+	// 		Storage::disk('uploads')->put(
+	// 			// $unique_filename_mini,
+	// 			$unique_filename,
+	// 			Image::make( $attachment
+	// 				->getRealPath())
+	// 				->resize(64, null, function($callback) {
+	// 					$callback->aspectRatio();
+	// 					$callback->upsize();							
+	// 				})
+	// 				->stream($attachment->getClientOriginalExtension(), 75)
+	// 		);
+
+	// 		Storage::disk('uploads')->put(
+	// 			// $unique_filename_mini,
+	// 			$unique_filename,
+	// 			Image::make( $attachment
+	// 				->getRealPath())
+	// 				->resize(1280, null, function($callback) {
+	// 					$callback->aspectRatio();
+	// 					$callback->upsize();							
+	// 				})
+	// 				->stream($attachment->getClientOriginalExtension(), 75)
+	// 		);	
+	// 	}
+	// }
 
 	// public function spectators()
 	// {
