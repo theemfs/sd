@@ -1,5 +1,7 @@
 vendor/
 node_modules/
+/storage/uploads/
+/public/thumbnails/
 /bower_components
 .env.*.php
 .env.php
