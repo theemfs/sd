@@ -23,6 +23,7 @@ Route::group(['middleware' => 'web'], function () {
 
 		Route::resource('/cases',	'CasesController');
 		Route::resource('/files',	'FilesController');
+		Route::resource('/messages','MessagesController');
 		Route::get('/getoriginal/{id}',		'FilesController@getOriginal');
 		Route::get('/getthumbnail/{id}',	'FilesController@getThumbnail');
 

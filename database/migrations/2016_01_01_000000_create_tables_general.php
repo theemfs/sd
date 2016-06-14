@@ -10,6 +10,8 @@ class CreateTablesGeneral extends Migration
 
 	public function up()
 	{
+
+
 		Schema::create('users', function (Blueprint $table) {
 			$table->increments('id')->index();
 			$table->timestamps();
@@ -39,10 +41,10 @@ class CreateTablesGeneral extends Migration
 
 			$table->string('name');
 			$table->string('text', 10240)->index();
-
-			$table->integer('user_id')->unsigned();
-			$table->foreign('user_id')->references('id')->on('users');
+			$table->integer('user_id')->unsigned()->index();
+				$table->foreign('user_id')->references('id')->on('users');
 		});
+
 			// Schema::create('batch_numbers', function (Blueprint $table) {
 			// 	$table->string('numbers_id', 11)->index();
 			// 	$table->integer('sets_id')->unsigned()->index();
@@ -53,33 +55,38 @@ class CreateTablesGeneral extends Migration
 			// 		$table->primary(['numbers_id', 'sets_id']);
 			// });
 
+
 		Schema::create('messages', function (Blueprint $table) {
 			$table->increments('id')->index();
 			$table->timestamps();
 			$table->softDeletes();
 			$table->string('comment');
 
-			$table->integer('author');
 			$table->string('text', 10240)->index();
+			$table->integer('user_id')->unsigned()->index();
+				$table->foreign('user_id')->references('id')->on('users');
+			$table->integer('case_id')->unsigned()->index();
 		});
 
-		Schema::create('types', function (Blueprint $table) {
-			$table->increments('id')->index();
-			$table->timestamps();
-			$table->softDeletes();
-			$table->string('comment');
 
-			$table->string('name');
-		});
+		// Schema::create('types', function (Blueprint $table) {
+		// 	$table->increments('id')->index();
+		// 	$table->timestamps();
+		// 	$table->softDeletes();
+		// 	$table->string('comment');
 
-		Schema::create('priorities', function (Blueprint $table) {
-			$table->increments('id')->index();
-			$table->timestamps();
-			$table->softDeletes();
-			$table->string('comment');
+		// 	$table->string('name');
+		// });
 
-			$table->string('name');
-		});
+		// Schema::create('priorities', function (Blueprint $table) {
+		// 	$table->increments('id')->index();
+		// 	$table->timestamps();
+		// 	$table->softDeletes();
+		// 	$table->string('comment');
+
+		// 	$table->string('name');
+		// });
+
 
 		Schema::create('files', function (Blueprint $table) {
 			$table->increments('id')->index();
@@ -99,11 +106,15 @@ class CreateTablesGeneral extends Migration
 			$table->string('thumbnail');
 
 			$table->integer('user_id')->unsigned();
-			$table->foreign('user_id')->references('id')->on('users');
+				$table->foreign('user_id')->references('id')->on('users');
 
-			$table->integer('case_id')->unsigned();
-			$table->foreign('case_id')->references('id')->on('cases');
+			// $table->integer('case_id')->unsigned();
+			// $table->foreign('case_id')->references('id')->on('cases');
+
+			$table->integer('message_id')->unsigned();
+			// $table->foreign('message_id')->references('id')->on('messages');
 		});
+
 
 	}
 
@@ -113,8 +124,8 @@ class CreateTablesGeneral extends Migration
 	{
 		Schema::drop('users');
 		Schema::drop('cases');
-		Schema::drop('types');
-		Schema::drop('priorities');
+		// Schema::drop('types');
+		// Schema::drop('priorities');
 		Schema::drop('files');
 	}
 }

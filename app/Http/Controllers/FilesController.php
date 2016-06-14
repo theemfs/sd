@@ -25,7 +25,7 @@ class FilesController extends Controller
 		//$this->middleware('auth');
 	}
 
-	
+
 
 	public function index(Request $request)
 	{
@@ -43,7 +43,7 @@ class FilesController extends Controller
 				->with('filter', 			$filter);
 	}
 
-	
+
 
 	public function create()
 	{
@@ -55,7 +55,7 @@ class FilesController extends Controller
 
 	}
 
-	
+
 
 	public function store(Request $request)
 	{
@@ -67,29 +67,26 @@ class FilesController extends Controller
 	{
 		dd($this);
 	}
-		
-	
+
+
 
 	public function show($id)
 	{
 		$file = Files::findOrFail($id);
 
-		if ( substr($file->mimetype, 0, 3) == 'ima' ) {
-			
+		if ( substr($file->mimetype, 0, 5) == 'image' ) {
 			// $img = Image::make(Storage::disk('originals')->get($file->original))->encode('jpg', 100);
 			// $img = 'data:image/jpg;base64,' . base64_encode($img);
-
-			$img = url('uploads/' . $file->converted);
-
-			return view('files.show')
-				->with('file',	$file)
-				->with('img',	$img)
-			;
+			// $image = Storage::disk('uploads')->get($file->converted);
+			// $img = url('uploads/' . $file->converted);
+			return view('files.show_image')->with('file', $file);
+		} else {
+			return view('files.show_document')->with('file', $file);
 		}
-		
+
 	}
 
-	
+
 
 	public function edit($id)
 	{
@@ -125,11 +122,11 @@ class FilesController extends Controller
 		return redirect()->action('CasesController@show', [$id]);
 	}
 
-	
+
 
 	public function destroy($id)
 	{
-		$performer 		= Files::findOrFail($id);
+		$performer = Files::findOrFail($id);
 		$performer->delete();
 		return redirect()->action('CasesController@index');
 	}
@@ -146,12 +143,12 @@ class FilesController extends Controller
 		// $img = Storage::get($file->name_stored);
 		// dd(Storage);
 		//return Response::make($img, 200, ['Content-Type' => 'image/jpeg']);
-		
+
 		// return view('files.get')
 		// 		->with('link', storage_path() . '/' . $file->name_stored)
 		// ;
 
-		return Response::download(storage_path() . '/' . $file->original);
+		return Response::download(storage_path() . '/uploads/' . $file->original);
 	}
 
 

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3e10985cbe94cbefec13f5ae4ca54a9f",
-    "content-hash": "364ecb7b5957bbaaa6551eae32761e57",
+    "hash": "b9c6240f498526a531f44d88d2b6f12e",
+    "content-hash": "119df9141f7aae8de0c7f991175c6b1f",
     "packages": [
         {
             "name": "bllim/datatables",
@@ -171,6 +171,46 @@
                 "preload"
             ],
             "time": "2015-11-09 22:51:51"
+        },
+        {
+            "name": "cloudconvert/cloudconvert-php",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cloudconvert/cloudconvert-php.git",
+                "reference": "064f484a66078e90e5396b2dea6d3b4ada7b7fec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cloudconvert/cloudconvert-php/zipball/064f484a66078e90e5396b2dea6d3b4ada7b7fec",
+                "reference": "064f484a66078e90e5396b2dea6d3b4ada7b7fec",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "6.*"
+            },
+            "require-dev": {
+                "clue/phar-composer": "~1.0",
+                "phpdocumentor/phpdocumentor": "2.*",
+                "phpunit/phpunit": "4.0.*",
+                "squizlabs/php_codesniffer": "1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CloudConvert\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Josias Montag",
+                    "email": "josias@montag.info"
+                }
+            ],
+            "description": "PHP Wrapper for CloudConvert APIs",
+            "homepage": "https://github.com/cloudconvert/cloudconvert-php",
+            "time": "2016-03-09 13:08:59"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",

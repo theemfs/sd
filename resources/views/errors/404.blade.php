@@ -41,6 +41,7 @@
         <div class="container">
             <div class="content">
                 <div class="title">404 Be right back.</div>
+                <a class="title" href="{{ url('/') }}">Go To Home</a>
             </div>
         </div>
     </body>

@@ -9,9 +9,7 @@
 
 <body>
 
-	<nav class="navbar navbar-default">
-		@include('layouts.nav')
-	</nav>
+	@include('layouts.nav')
 
 	<div class="container">
 		@if ( Session::has('flash_success') )

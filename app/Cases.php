@@ -33,33 +33,25 @@ class Cases extends Model
 
 
 
-	public function spectators()
-	{
-		return $this->belongsToMany('App\User', 'user_id');
-	}
+	// public function spectators()
+	// {
+	// 	return $this->belongsToMany('App\User', 'user_id');
+	// }
 
 
 
 	public function messages()
 	{
-		return $this->hasMany('App\Messages');
+		return $this->hasMany('App\Messages', 'message_id');
 	}
 
 
 
-	public function files()
-	{
-		return $this->hasMany('App\Files', 'file_id');
-	}
-
-
-
-	// /**
-	//  * Get a list of Ids of assigned groups to the Performer
-	//  */
-	// public function getGroupsListAttributes()
+	// public function files()
 	// {
-	//     //return $this->groups->lists('id');
+	// 	return $this->hasMany('App\Files', 'file_id');
 	// }
+
+
 
 }

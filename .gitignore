@@ -1,7 +1,5 @@
 vendor/
 node_modules/
-#bootstrap/cache/
-storage/
 /bower_components
 .env.*.php
 .env.php

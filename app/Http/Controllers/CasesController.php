@@ -15,6 +15,7 @@ use Auth;
 use DB;
 use Storage;
 use Image;
+use CloudConvert\Api;
 
 class CasesController extends Controller
 {
@@ -48,10 +49,10 @@ class CasesController extends Controller
 
 	public function create()
 	{
-		$types = DB::table('types')->orderBy('id', 'asc')->get();
+		//$types = DB::table('types')->orderBy('id', 'asc')->get();
 		return view('cases.create')
-				->with('types',		$types)
-				->with('typesIds',	'[]')
+				// ->with('types',		$types)
+				// ->with('typesIds',	'[]')
 		;
 	}
 
@@ -60,27 +61,37 @@ class CasesController extends Controller
 	public function store(Request $request)
 	{
 
-		$this->validate($request, [
-			// 'text' 			=> 'required|min:10',
-			// 'attachments' 	=> 'max:1',
-		]);
+		// $this->validate($request, [
+		// 	// 'text' 			=> 'required|min:10',
+		// 	// 'attachments' 	=> 'max:1',
+		// ]);
 
+		//return($request->all());
+
+
+		//CASE
 		$case = new Cases($request->all());
-		Auth::user()->cases()->save($case);
-		
+			Auth::user()->cases()->save($case);
+
+
+		//MESSAGE
+		$message = new Messages($request->all());
+		$message->case_id = $case->id;
+			Auth::user()->messages()->save($message);
+
+
+		//FILES
 		if (!is_null($request->attachments[0])) {
 			foreach ($request->attachments as $attachment) {
 
-				$path 		= 'cases/' . $case->id . '/';
 				$name 		= $attachment->getClientOriginalName();
 				$ext 		= $attachment->getClientOriginalExtension();
 				$mimetype	= $attachment->getMimeType();
 				$size 		= $attachment->getClientSize();
 				$temp_file 	= $attachment->getRealPath();
-				// $hash 		= md5($name . time());
-				$original 	= $path . md5($name . time() . '0') . '.' . $ext;
-				$converted 	= $path . md5($name . time() . '1') . '.' . $ext;
-				$thumbnail 	= $path . md5($name . time() . '2') . '.' . $ext;
+				$original 	= $case->id . '/' . md5($name . time() . '0') . '.' . $ext;
+				$converted 	= $case->id . '/' . md5($name . time() . '1') . '.' . $ext;
+				$thumbnail 	= $case->id . '/' . md5($name . time() . '2') . '.' . $ext;
 
 				//new file
 				$file = new Files([
@@ -88,44 +99,33 @@ class CasesController extends Controller
 					'ext' 			=> $ext,
 					'mimetype'		=> $mimetype,
 					'size'			=> $size,
-
 					'original' 		=> $original,
-					'converted' 	=> $converted,
-					'thumbnail'		=> $thumbnail,
-
-					'case_id' 		=> $case->id,
+					//'converted' 	=> $converted,
+					//'thumbnail'	=> $thumbnail,
+					'message_id' 	=> $message->id
 				]);
 
 				//storing original
-				Storage::disk('originals')->put($original, file_get_contents($temp_file));
+				Storage::disk('uploads')->put($original, file_get_contents($temp_file));
 
-				//creating a thumb and converted copy of image
+				//FILES WITH PREVIEW (IMAGES)
 				if ( substr($attachment->getMimeType(), 0, 5) == 'image' ) {
-
-					//storing converted
-					Storage::disk('uploads')->put(
-						$converted,
-						Image::make($temp_file)->resize(1280, null, function($callback) {
-							$callback->aspectRatio();
-							$callback->upsize();							
-						})->stream($ext, 50)
-					);
-
-					//storing thumbnail
-					Storage::disk('uploads')->put(
-						$thumbnail,
-						Image::make($temp_file)->fit(100, 100, function($callback) {
-							$callback->upsize();							
-						})->stream($ext, 75)
-					);
+					Storage::disk('uploads')->put($converted,Image::make($temp_file)->resize(1280, null, function($callback){$callback->aspectRatio();$callback->upsize();})->stream($ext, 50));
+					Storage::disk('thumbnails')->put($thumbnail,Image::make($temp_file)->fit(100, 100, function($callback){$callback->upsize();})->stream($ext, 75));
+					$file->thumbnail = $thumbnail;
+					$file->converted = $converted;
 				}
-				
+
+				// //NO PREVIEW FILES (DOCS, APPS)
+				// if ( substr($attachment->getMimeType(), 0, 5) == 'appli' ) {
+				// 	//Storage::disk('uploads')->put($original, file_get_contents($temp_file));
+				// }
+
 				Auth::user()->files()->save($file);
 
 			}
 		}
-		
-		
+
 		//$this->validate($request, ['id' => 'unique:cases|required|regex:/^89\d{9}$/']);
 		// Messages::create($request->all());
 		return redirect()->action('CasesController@show', [$case->id]);
@@ -135,16 +135,21 @@ class CasesController extends Controller
 
 	public function show($id)
 	{
-		$case = Cases::findOrFail($id);
-		$files = Files::where('case_id', $case->id)->get();
-
+		$case 			= Cases::findOrFail($id);
+		$message_first  = Messages::where('case_id', $case->id)->orderby('created_at', 'asc')->first();
+		$messages 		= Messages::where('case_id', $case->id)->orderby('created_at', 'asc')->get()->splice(1);
+		$users 			= User::orderby('name', 'asc')->lists('name', 'id');
+		$usersIds 		= $users->lists('id')->toArray();
 		return view('cases.show')
-				->with('case',	$case)
-				->with('files',	$files)
+				->with('case',			$case)
+				->with('messages',		$messages)
+				->with('message_first',	$message_first)
+				->with('users',			$users)
+				->with('usersIds',		$usersIds)
 		;
 	}
 
-	
+
 
 	public function edit($id)
 	{
@@ -158,7 +163,7 @@ class CasesController extends Controller
 				;
 	}
 
-	
+
 
 	public function update(Request $request, $id)
 	{
@@ -180,7 +185,7 @@ class CasesController extends Controller
 		return redirect()->action('CasesController@show', [$id]);
 	}
 
-	
+
 
 	public function destroy($id)
 	{
