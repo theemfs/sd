@@ -2,6 +2,8 @@
 
 <?php $__env->startSection('content'); ?>
 
+
+
 	<!-- LEFT BLOCK -->
 	<div class="col-sm-3">
 		<div class="row">
@@ -30,6 +32,8 @@
 			</div>
 		</div>
 	</div>
+
+
 
 	<!-- CENTER BLOCK -->
 	<div class="col-sm-6">
@@ -98,11 +102,11 @@
 								<?php foreach($message->files as $file): ?>
 									<?php if( substr($file->mimetype, 0, 5) == 'image'): ?>
 										<a href="<?php echo e(action('FilesController@show', $file->id)); ?>">
-											<img class="img img-rounded" src="<?php echo e(url('/') . '/thumbnails/' . $file->thumbnail); ?>" alt="<?php echo e($file->name); ?>">
+											<img class="img img-rounded" src="<?php echo e(url('/') . '/thumbnails/' . $file->thumbnail); ?>" title="<?php echo e($file->name); ?>">
 										</a>
 									<?php else: ?>
 										<a href="<?php echo e(action('FilesController@show', $file->id)); ?>">
-											<p><i class="fa fa-file" aria-hidden="true"></i><?php echo e($file->name); ?> [<?php echo e(human_filesize($file->size)); ?>]</p>
+											<p><i class="fa fa-file"></i><?php echo e($file->name); ?> [<?php echo e(human_filesize($file->size)); ?>]</p>
 										</a>
 									<?php endif; ?>
 								<?php endforeach; ?>
@@ -113,7 +117,8 @@
 				<hr>
 
 
-				<!-- reply area -->
+
+				<!-- REPLY AREA -->
 				<?php echo Form::open(['url'=>'messages', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']); ?>
 
 					<div class="message bg-info">
@@ -146,6 +151,8 @@
 		</div>
 	</div>
 
+
+
 	<!-- RIGHT BLOCK -->
 	<div class="col-sm-3">
 		<div class="row">
@@ -166,6 +173,8 @@
 			</div>
 		</div>
 	</div>
+
+
 
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
