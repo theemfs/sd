@@ -4,6 +4,8 @@
 
 @section('content')
 
+
+
 	<!-- LEFT BLOCK -->
 	<div class="col-sm-3">
 		<div class="row">
@@ -27,6 +29,8 @@
 			</div>
 		</div>
 	</div>
+
+
 
 	<!-- CENTER BLOCK -->
 	<div class="col-sm-6">
@@ -94,11 +98,11 @@
 								@foreach ($message->files as $file)
 									@if ( substr($file->mimetype, 0, 5) == 'image')
 										<a href="{{ action('FilesController@show', $file->id) }}">
-											<img class="img img-rounded" src="{{ url('/') . '/thumbnails/' . $file->thumbnail }}" alt="{{ $file->name }}">
+											<img class="img img-rounded" src="{{ url('/') . '/thumbnails/' . $file->thumbnail }}" title="{{ $file->name }}">
 										</a>
 									@else
 										<a href="{{ action('FilesController@show', $file->id) }}">
-											<p><i class="fa fa-file" aria-hidden="true"></i>{{ $file->name }} [{{ human_filesize($file->size) }}]</p>
+											<p><i class="fa fa-file"></i>{{ $file->name }} [{{ human_filesize($file->size) }}]</p>
 										</a>
 									@endif
 								@endforeach
@@ -109,7 +113,8 @@
 				<hr>
 
 
-				<!-- reply area -->
+
+				<!-- REPLY AREA -->
 				{!! Form::open(['url'=>'messages', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
 					<div class="message bg-info">
 						<div class=""></div>
@@ -136,6 +141,8 @@
 		</div>
 	</div>
 
+
+
 	<!-- RIGHT BLOCK -->
 	<div class="col-sm-3">
 		<div class="row">
@@ -155,5 +162,7 @@
 			</div>
 		</div>
 	</div>
+
+
 
 @stop

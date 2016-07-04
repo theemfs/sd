@@ -3,6 +3,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <meta property="og:type" content="article" />
+<meta property="og:title" content="The Rock" />
+<meta property="og:url" content="http://servicedesk.nyzix.com/cases/7/" />
+<meta property="og:image" content="http://servicedesk.nyzix.com/thumbnails/10/e0b7e98b30494004ae4f3a56a33a8463.jpg" />
 
 <!-- CSS -->
 <link href="<?php echo e(elixir('css/all.css')); ?>" rel="stylesheet">
