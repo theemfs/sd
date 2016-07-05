@@ -6,7 +6,7 @@ node_modules/
 /storage/framework/sessions/*.*
 /storage/framework/views/*.*
 /storage/app/*.*
-/public/thumbnails/
+/public/thumbnails/*.*
 /bower_components
 .env.*.php
 .env.php
