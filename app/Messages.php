@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Http\Request;
-use App\Http\Requests;
+// use Illuminate\Http\Request;
+// use App\Http\Requests;
 
 class Messages extends Model
 {
