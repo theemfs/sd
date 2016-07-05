@@ -8,6 +8,7 @@ use App\Gateways;
 use App\Modems;
 use App\Performers;
 use App\Groups;
+use App\User;
 use Storage;
 use SSH;
 use DB;
@@ -241,6 +242,33 @@ class PagesController extends Controller
 		return view('pages.dashboard')
 				// ->with('data', $data[0])
 			;
+	}
+
+
+
+	public function adminShow(Request $request)
+	{
+		
+		return view('pages.admin.admin')
+				// ->with('data', $data[0])
+			;
+	}
+
+
+
+	public function adminPhpinfoShow(Request $request)
+	{
+		return view('pages.admin.phpinfo');
+	}
+
+
+
+	public function adminUsersShow(Request $request)
+	{
+		$users = User::all();
+		return view('pages.admin.users')
+				->with('users', $users)
+		;
 	}
 
 }
