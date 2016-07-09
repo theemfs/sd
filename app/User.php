@@ -20,7 +20,7 @@ class User extends Model implements AuthenticatableContract,
 {
     use Authenticatable, CanResetPassword, ShinobiTrait;
 	use SoftDeletes;
-	
+
 	protected $fillable = [
 		'name',
 		'email',
@@ -45,16 +45,30 @@ class User extends Model implements AuthenticatableContract,
 
 
 
+	public function performerOf()
+	{
+		return $this->belongsToMany('App\Cases', 'case_performers', 'user_id', 'case_id');
+	}
+
+
+
+	public function memberOf()
+	{
+		return $this->belongsToMany('App\Cases', 'case_members', 'user_id', 'case_id');
+	}
+
+
+
 	public function files()
 	{
-		return $this->hasMany('App\Files', 'user_id');
+		return $this->hasMany('App\Files', 'user_id', 'id');
 	}
 
 
 
 	public function messages()
 	{
-		return $this->hasMany('App\Messages', 'user_id');
+		return $this->hasMany('App\Messages', 'user_id', 'id');
 	}
 
 

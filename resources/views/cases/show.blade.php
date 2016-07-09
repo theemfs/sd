@@ -7,7 +7,7 @@
 
 
 	<!-- LEFT BLOCK -->
-	<div class="col-sm-3">
+	<div class="col-md-3">
 		<div class="row">
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -16,15 +16,39 @@
 
 				<div class="panel-body">
 					<div class="">
-						{!! Form::label('users_list_members', null, ['class' => 'control-label']) !!}
-						{!! Form::select('users[]', $users, $usersIds, ['id' => 'users_list_members	', 'class' => 'form-control', 'multiple', 'autocomplete' => 'off', 'size' => '5']) !!}
+						{!! Form::model($case, ['method' => 'PATCH', 'action' => ['CasesController@update', $case->id], 'class' => 'form-horizontal']) !!}
+							{!! Form::label('users_list_members', null, ['class' => 'control-label']) !!}
+							<div class="form-group">
+								<div class="col-xs-12">
+									{!! Form::select('users[]', $users, $membersIds, ['id' => 'users_list_members	', 'class' => 'form-control', 'multiple', 'autocomplete' => 'off', 'size' => '10']) !!}
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-xs-12">
+									{!! Form::submit( trans('app.Save'), ['class' => 'btn btn-primary form-control col-xs-12']) !!}
+								</div>
+							</div>
+						{!! Form::close() !!}
 					</div>
 					<hr>
-					<div class="">
-						{!! Form::label('users_list_spectators', null, ['class' => 'control-label']) !!}
-						{!! Form::select('users[]', $users, $usersIds, ['id' => 'users_list_spectators', 'class' => 'form-control', 'multiple', 'autocomplete' => 'off', 'size' => '5']) !!}
+					{{-- <div class="">
+						{!! Form::model($case, ['method' => 'PATCH', 'action' => ['CasesController@update', $case->id], 'class' => 'form-horizontal']) !!}
+							{!! Form::label('users_list_spectators', null, ['class' => 'control-label']) !!}
+							<div class="form-group">
+								<div class="col-xs-12">
+									{!! Form::select('users[]', $users, $usersIds, ['id' => 'users_list_spectators', 'class' => 'form-control', 'multiple', 'autocomplete' => 'off', 'size' => '5']) !!}
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-xs-12">
+									{!! Form::submit( trans('app.Save'), ['class' => 'btn btn-primary form-control col-xs-12']) !!}
+								</div>
+							</div>
+						{!! Form::close() !!}
 					</div>
-					<hr>
+					<hr> --}}
 				</div>
 			</div>
 		</div>
@@ -33,7 +57,7 @@
 
 
 	<!-- CENTER BLOCK -->
-	<div class="col-sm-6">
+	<div class="col-md-6">
 		<div class="panel panel-default">
 
 			<div class="panel-heading">
@@ -144,7 +168,7 @@
 
 
 	<!-- RIGHT BLOCK -->
-	<div class="col-sm-3">
+	<div class="col-md-3">
 		<div class="row">
 			<div class="panel panel-default">
 				<div class="panel-heading">

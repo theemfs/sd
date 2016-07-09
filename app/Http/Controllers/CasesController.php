@@ -139,13 +139,16 @@ class CasesController extends Controller
 		$message_first  = Messages::where('case_id', $case->id)->orderby('created_at', 'asc')->first();
 		$messages 		= Messages::where('case_id', $case->id)->orderby('created_at', 'asc')->get()->splice(1);
 		$users 			= User::orderby('name', 'asc')->lists('name', 'id');
-		$usersIds 		= $users->lists('id')->toArray();
+		$membersIds 	= $case->members->lists('id')->toArray();
+
+		//return($case->members);
+
 		return view('cases.show')
 				->with('case',			$case)
 				->with('messages',		$messages)
 				->with('message_first',	$message_first)
 				->with('users',			$users)
-				->with('usersIds',		$usersIds)
+				->with('membersIds',	$membersIds)
 		;
 	}
 
@@ -168,7 +171,14 @@ class CasesController extends Controller
 	public function update(Request $request, $id)
 	{
 
+
 		$case = Cases::findOrFail($id);
+
+		if ( !is_null($request->input('users')) ) {
+			$case->members()->sync($request->input('users'));
+		} else {
+			$case->members()->detach();
+		}
 
 		// if ( !is_null($request->input('performers')) ) {
 		// 	$case->performers()->associate($request->input('performers')[0]);
@@ -182,6 +192,7 @@ class CasesController extends Controller
 		// }
 
 		$case->update( $request->all() );
+
 		return redirect()->action('CasesController@show', [$id]);
 	}
 
