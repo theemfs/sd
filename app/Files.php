@@ -30,7 +30,7 @@ class Files extends Model
 		'deleted_at'
 	];
 
-	
+
 
 	public function user()
 	{
@@ -83,7 +83,7 @@ class Files extends Model
 	// 				->getRealPath())
 	// 				->resize(64, null, function($callback) {
 	// 					$callback->aspectRatio();
-	// 					$callback->upsize();							
+	// 					$callback->upsize();
 	// 				})
 	// 				->stream($attachment->getClientOriginalExtension(), 75)
 	// 		);
@@ -95,10 +95,10 @@ class Files extends Model
 	// 				->getRealPath())
 	// 				->resize(1280, null, function($callback) {
 	// 					$callback->aspectRatio();
-	// 					$callback->upsize();							
+	// 					$callback->upsize();
 	// 				})
 	// 				->stream($attachment->getClientOriginalExtension(), 75)
-	// 		);	
+	// 		);
 	// 	}
 	// }
 
@@ -138,9 +138,9 @@ class Files extends Model
 	// 	// $file = Files::find($id);
 
 	// 	// if ( substr() ) {
-	// 	// 	return false	
+	// 	// 	return false
 	// 	// } else {
-	// 	// 	return true	
+	// 	// 	return true
 	// 	// }
 	//}
 

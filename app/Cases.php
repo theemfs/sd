@@ -24,7 +24,7 @@ class Cases extends Model
 		'deleted_at'
 	];
 
-	
+
 
 	public function user()
 	{
@@ -33,10 +33,17 @@ class Cases extends Model
 
 
 
-	// public function spectators()
-	// {
-	// 	return $this->belongsToMany('App\User', 'user_id');
-	// }
+	public function members()
+	{
+		return $this->belongsToMany('App\User', 'case_members', 'case_id');
+	}
+
+
+
+	public function performers()
+	{
+		return $this->belongsToMany('App\User', 'case_performers', 'case_id');
+	}
 
 
 

@@ -18,7 +18,7 @@ Route::group(['middleware' => 'web'], function () {
 
 
 		Route::group(['middleware' => 'auth'], function () {
-			
+
 
 
 			//PAGES
@@ -27,7 +27,7 @@ Route::group(['middleware' => 'web'], function () {
 			Route::get('/send', 	'PagesController@send');
 			Route::get('/settings',	'PagesController@settingsShow');
 			Route::post('/settings','PagesController@settingsSave');
-			
+
 				//admin section
 				Route::get('/admin',			'PagesController@adminShow');
 				Route::get('/admin/phpinfo',	'PagesController@adminPhpinfoShow');
@@ -36,18 +36,21 @@ Route::group(['middleware' => 'web'], function () {
 
 
 			//RESOURCES
-				
+
+				//users
+				Route::resource('/users',			'UsersController');
+
 				//cases
 				Route::resource('/cases',			'CasesController');
-				
+
 				//files
 				Route::resource('/files',			'FilesController');
 					Route::get('/getoriginal/{id}',		'FilesController@getOriginal');
 					Route::get('/getthumbnail/{id}',	'FilesController@getThumbnail');
-				
+
 				//messages
 				Route::resource('/messages',		'MessagesController');
-				
+
 				// Route::resource('/sendings',						'SendingsController');
 				// 	Route::post('/sendings/{sendings}/send',		'SendingsController@send');
 				// Route::resource('/gateways',						'GatewaysController');
