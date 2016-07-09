@@ -20,7 +20,7 @@
 							{!! Form::label('users_list_members', null, ['class' => 'control-label']) !!}
 							<div class="form-group">
 								<div class="col-xs-12">
-									{!! Form::select('users[]', $users, $membersIds, ['id' => 'users_list_members	', 'class' => 'form-control', 'multiple', 'autocomplete' => 'off', 'size' => '10']) !!}
+									{!! Form::select('users[]', $users, $membersIds, ['id' => 'users_list_members', 'class' => 'form-control selectpicker', 'multiple', 'autocomplete' => 'off', 'size' => '1']) !!}
 								</div>
 							</div>
 
@@ -187,6 +187,28 @@
 		</div>
 	</div>
 
+@endsection
 
 
-@stop
+
+@section('footer')
+
+<script>
+	// $('#users_list_members').select2();
+	$('#users_list_members').selectpicker({
+		// style: 'btn-info',
+		size: 'auto',
+		showTick: 'true',
+		selectOnTab: 'true',
+		selectedTextFormat: 'count > 1',
+		liveSearch: 'true',
+		actionsBox: 'true',
+		header: 'test',
+		liveSearchPlaceholder: '',
+		noneSelectedText: 'nothing selected :-)',
+		title: 'test!'
+	});
+
+</script>
+
+@endsection

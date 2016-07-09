@@ -8,7 +8,6 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "laravelcollective/html": "~5.0",
-        "twbs/bootstrap": "^3.3",
         "bllim/datatables": "*",
         "laravel/socialite": "~2.0",
         "laravelcollective/remote": "5.2.*",
@@ -18,8 +17,10 @@
         "cloudconvert/cloudconvert-php": "^2.2",
         "select2/select2": "^4.0",
         "components/font-awesome": "^4.6",
-        "components/jquery": "^3.1",
-        "ckeditor/ckeditor": "^4.5"
+        "components/jquery": "<3.0",
+        "ckeditor/ckeditor": "^4.5",
+        "twbs/bootstrap": "^3.3",
+        "bootstrap-select/bootstrap-select": "^1.10"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
