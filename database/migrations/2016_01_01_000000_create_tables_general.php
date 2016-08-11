@@ -46,6 +46,8 @@ class CreateTablesGeneral extends Migration
 			$table->dateTime('due_to')->nullable();
 			$table->integer('user_id')->unsigned()->index();
 				$table->foreign('user_id')->references('id')->on('users');
+			$table->integer('status_id')->unsigned()->index();
+				//$table->foreign('status_id')->references('id')->on('statuses');
 		});
 
 

@@ -9,8 +9,16 @@ var components = {
             "main": "jquery-built.js"
         },
         {
+            "name": "bootstrap-datetimepicker",
+            "main": "bootstrap-datetimepicker-built.js"
+        },
+        {
             "name": "bootstrap-datepicker",
             "main": "bootstrap-datepicker-built.js"
+        },
+        {
+            "name": "moment",
+            "main": "moment-built.js"
         },
         {
             "name": "select2",

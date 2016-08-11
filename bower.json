@@ -1,0 +1,6 @@
+{
+  "name": "Cool application",
+  "dependencies": {
+    "bootstrap": "*"
+  }
+}

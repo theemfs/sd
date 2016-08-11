@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
 		// DB::table('performers')->truncate();
 		// DB::table('phones')->truncate();
 
-		User::create(['email' => 'admin@example.com', 'password'=>Hash::make('12'), 'name' => 'Admin']);//default user
+		//User::create(['email' => 'admin@example.com', 'password'=>Hash::make('12'), 'name' => 'Admin']);//default user
 
 		Priorities::create(['name' => 'critical']);
 		Priorities::create(['name' => 'high']);

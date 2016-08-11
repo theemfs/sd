@@ -8,7 +8,7 @@
 
 @section('css')
 		<link href="{{ url('/') }}/css/jquery.dataTables.min.css" rel="stylesheet">
-		<link href="{{ url('/') }}/css/bootstrap-datepicker3.css" rel="stylesheet">
+		<link href="{{ url('/') }}/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 		<link href="{{ url('/') }}/css/bootstrap-select.min.css" rel="stylesheet">
 @endsection
 
@@ -59,16 +59,20 @@
 										<div class="col-md-3 col-sm-6 col-xs-12">
 											{!! Form::label('users_list_members', trans('app.Status'), ['class' => 'control-label']) !!}
 											<div class="form-group">
-												{!! Form::select('statuses[]', $statuses, $statusesIds, ['id' => 'statuses_list', 'class' => 'form-control selectpicker', 'multiple', 'autocomplete' => 'off', 'size' => '1']) !!}
+												{!! Form::select('status_id', $statuses, $case->status_id, ['id' => 'statuses_list', 'class' => 'form-control selectpicker', 'autocomplete' => 'off', 'size' => '1']) !!}
 											</div>
 										</div>
 
 										<div class="col-md-3 col-sm-6 col-xs-12">
-											{!! Form::label('users_list_members', trans('app.Performers'), ['class' => 'control-label']) !!}
+											{!! Form::label('users_list_members', trans('app.Due To'), ['class' => 'control-label']) !!}
 											<div class="form-group">
-												{!! Form::select('members[]', $users, $membersIds, ['id' => 'users_list_members', 'class' => 'form-control selectpicker', 'multiple', 'autocomplete' => 'off', 'size' => '1']) !!}
+												<input type='text' name="due_to" id='due_to' class="form-control date"/>
+												{{-- <span class="input-group-addon">
+													<span class="glyphicon glyphicon-calendar"></span>
+												</span> --}}
 											</div>
 										</div>
+
 
 									{!! Form::close() !!}
 								</div>
@@ -205,8 +209,11 @@
 
 
 @section('js')
+
+	<script src="{{ url('/') }}/js/moment-with-locales.min.js"></script>
+	<script src="{{ url('/') }}/js/bootstrap-datetimepicker.min.js"></script>
 	<script>
-		$('.selectpicker').selectpicker({
+		$('#users_list_performers, #users_list_members').selectpicker({
 			// style: 'btn-info',
 			size: '7',
 			showTick: 'true',
@@ -220,11 +227,29 @@
 			// title: 'test!',
 		});
 
+		$('#statuses_list').selectpicker({
+			size: '7',
+			showTick: 'true',
+			selectOnTab: 'true',
+			selectedTextFormat: 'count > 1',
+			actionsBox: 'true',
+			liveSearchPlaceholder: '',
+			noneSelectedText: "{{ trans('app.Nothing Selected') }}",
+		});
+
 		// $("body").scrollTop(1000);
 
-		// $('#datetimepicker1').datetimepicker({
-		// 	locale: 'ru',
-		// });
-
+		$(function () {
+			$('#due_to').datetimepicker({
+				defaultDate: '{{ date("Y-m-d H:i", strtotime($case->due_to)) }}',
+				locale: 'ru',
+				// useCurrent: true,
+				showTodayButton: true,
+				// showClear: true,
+				// showClose: true,
+				// focusOnShow: true,
+			});
+		});
 	</script>
+
 @endsection
