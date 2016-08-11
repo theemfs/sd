@@ -7,7 +7,8 @@
     "laravel-elixir-uncss": "~2.0.1"
   },
   "dependencies": {
+    "bootstrap-sass": "^3.0.0",
     "laravel-elixir": "^4.0.0",
-    "bootstrap-sass": "^3.0.0"
+    "moment": "^2.14.1"
   }
 }

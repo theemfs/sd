@@ -34,7 +34,7 @@ class CasesController extends Controller
 	public function index(Request $request)
 	{
 		// filered version
-		$filter = trim($request->input('filter'));
+		//$filter = trim($request->input('filter'));
 
 		// $cases 	= Cases::orderBy('updated_at', 'desc');
 		// dd($cases->paginate(10));
@@ -58,7 +58,7 @@ class CasesController extends Controller
 			->with('cases_author',		$cases_author)
 			->with('cases_performer',	$cases_performer)
 			->with('cases_member',		$cases_member)
-			->with('filter',			$filter)
+			// ->with('filter',			$filter)
 		;
 	}
 
@@ -160,19 +160,20 @@ class CasesController extends Controller
 		$users 			= User::orderby('name', 'asc')->lists('name', 'id');
 		$membersIds 	= $case->members->lists('id')->toArray();
 		$performersIds 	= $case->performers->lists('id')->toArray();
-		$statuses 		= Statuses::lists('id')->toArray();
-		$statusesIds 	= Statuses::lists('id')->toArray();
+		$statuses 		= Statuses::orderby('id', 'asc')->lists('name', 'id');
+		//$statusesIds 	= $case->toArray();
 
 		//return($case->members);
 
 		return view('cases.show')
-		->with('case',			$case)
-		->with('messages',		$messages)
-		->with('message_first',	$message_first)
-		->with('users',			$users)
-		->with('membersIds',	$membersIds)
-		->with('performersIds',	$performersIds)
-		->with('statusesIds',	$statusesIds)
+			->with('case',			$case)
+			->with('messages',		$messages)
+			->with('message_first',	$message_first)
+			->with('users',			$users)
+			->with('membersIds',	$membersIds)
+			->with('performersIds',	$performersIds)
+			->with('statuses',		$statuses)
+			// ->with('statusesIds',	$statusesIds)
 		;
 	}
 
@@ -194,6 +195,7 @@ class CasesController extends Controller
 
 	public function update(Request $request, $id)
 	{
+
 		$case = Cases::findOrFail($id);
 
 		if ( !is_null($request->input('performers')) ) {
@@ -209,6 +211,8 @@ class CasesController extends Controller
 		}
 
 		$case->update( $request->all() );
+		$case->due_to = date( "Y-m-d H:i", strtotime($request->due_to) );
+		$case->update();
 
 		return redirect()->action('CasesController@show', [$id]);
 	}

@@ -33,7 +33,7 @@ task {
 }
 .snippet:hover {
 	background-color: #eee;
-	cursor: pointer;
+	/*cursor: pointer;*/
 }
 
 .message {

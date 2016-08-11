@@ -28,6 +28,7 @@ return [
 	// 'Count' 								=> 'Количество',
 	// 'Description' 							=> 'Описание',
 	'Dashboard' 							=> 'Монитор',
+	'Due To' 								=> 'Крайний срок',
 	'Destroy' 								=> 'Удалить',
 	// 'Drop files here' 						=> 'Добавить файлы',
 	// 'Edit Performer' 						=> 'Редактирование исполнителя',

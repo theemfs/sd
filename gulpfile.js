@@ -8,12 +8,12 @@ elixir(function(mix) {
 
 
 	//CSS
-	// mix.copy('vendor/twbs/bootstrap/dist/css/bootstrap.min.css', 							'resources/assets/css/');//if need mix
-	mix.copy('vendor/twbs/bootstrap/dist/css/bootstrap.min.css', 							'public/css/');//not mixed
-	mix.copy('vendor/components/font-awesome/css/font-awesome.min.css', 					'public/css/');//not mixed
-	mix.copy('vendor/bootstrap-select/bootstrap-select/dist/css/bootstrap-select.min.css', 	'public/css/');//not mixed
-	mix.copy('vendor/eternicode/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css', 	'public/css/');//not mixed
-	mix.copy('vendor/datatables/datatables/media/css/jquery.dataTables.min.css', 			'public/css/');//not mixed
+	// mix.copy('vendor/twbs/bootstrap/dist/css/bootstrap.min.css', 									'resources/assets/css/');//if need mix
+	mix.copy('vendor/twbs/bootstrap/dist/css/bootstrap.min.css', 									'public/css/');//not mixed
+	mix.copy('vendor/components/font-awesome/css/font-awesome.min.css', 							'public/css/');//not mixed
+	mix.copy('vendor/bootstrap-select/bootstrap-select/dist/css/bootstrap-select.min.css', 			'public/css/');//not mixed
+	mix.copy('vendor/eonasdan/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css', 'public/css/');//not mixed
+	mix.copy('vendor/datatables/datatables/media/css/jquery.dataTables.min.css', 					'public/css/');//not mixed
 
 	mix.styles([
 		// 'bootstrap.min.css',
@@ -25,13 +25,14 @@ elixir(function(mix) {
 
 
 	//JS
-	//mix.copy('vendor/components/jquery/jquery.min.js', 										'resources/assets/js/');//if need mix
-	mix.copy('vendor/components/jquery/jquery.min.js', 										'public/js/');//not mixed
-	mix.copy('vendor/twbs/bootstrap/dist/js/bootstrap.min.js', 								'public/js/');//not mixed
-	mix.copy('vendor/bootstrap-select/bootstrap-select/dist/js/bootstrap-select.min.js',	'public/js/');//not mixed
-	mix.copy('vendor/eternicode/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',	'public/js/');//not mixed
-	mix.copy('vendor/ckeditor/ckeditor/ckeditor.js', 										'public/js/');//not mixed
-	mix.copy('vendor/datatables/datatables/media/js/jquery.dataTables.min.js', 				'public/js/');//not mixed
+	//mix.copy('vendor/components/jquery/jquery.min.js', 												'resources/assets/js/');//if need mix
+	mix.copy('vendor/components/jquery/jquery.min.js', 												'public/js/');//not mixed
+	mix.copy('vendor/twbs/bootstrap/dist/js/bootstrap.min.js', 										'public/js/');//not mixed
+	mix.copy('vendor/bootstrap-select/bootstrap-select/dist/js/bootstrap-select.min.js',			'public/js/');//not mixed
+	mix.copy('vendor/eonasdan/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',	'public/js/');//not mixed
+	mix.copy('vendor/ckeditor/ckeditor/ckeditor.js', 												'public/js/');//not mixed
+	mix.copy('vendor/datatables/datatables/media/js/jquery.dataTables.min.js', 						'public/js/');//not mixed
+	mix.copy('vendor/moment/moment/min/moment-with-locales.min.js', 								'public/js/');//not mixed
 
 	mix.scripts([
 		// 'jquery.min.js',
@@ -42,10 +43,10 @@ elixir(function(mix) {
 
 
 	//FONTS
-	// mix.copy('vendor/components/font-awesome/fonts/', 										'public/build/fonts/');
-	// mix.copy('vendor/twbs/bootstrap/dist/fonts/', 											'public/build/fonts/');
-	mix.copy('vendor/components/font-awesome/fonts/', 										'public/fonts/');//not mixed
-	mix.copy('vendor/twbs/bootstrap/dist/fonts/', 											'public/fonts/');//not mixed
+	// mix.copy('vendor/components/font-awesome/fonts/', 												'public/build/fonts/');
+	// mix.copy('vendor/twbs/bootstrap/dist/fonts/', 													'public/build/fonts/');
+	mix.copy('vendor/components/font-awesome/fonts/', 												'public/fonts/');//not mixed
+	mix.copy('vendor/twbs/bootstrap/dist/fonts/', 													'public/fonts/');//not mixed
 
 
 

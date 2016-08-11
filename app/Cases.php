@@ -13,15 +13,17 @@ class Cases extends Model
 	//protected $table = 'phones';
 
 	protected $fillable = [
-	'id',
-	'comment',
-	'name',
-	'text',
-	'user_id',
+		'id',
+		'comment',
+		'name',
+		'text',
+		'user_id',
+		'due_to',
+		'status_id',
 	];
 
 	protected $dates = [
-	'deleted_at'
+		'deleted_at'
 	];
 
 
@@ -50,6 +52,13 @@ class Cases extends Model
 	public function messages()
 	{
 		return $this->hasMany('App\Messages', 'message_id');
+	}
+
+
+
+	public function status()
+	{
+		return $this->belongsTo('App\Statuses', 'status_id');
 	}
 
 
