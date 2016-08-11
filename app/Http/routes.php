@@ -29,9 +29,11 @@ Route::group(['middleware' => 'web'], function () {
 			Route::post('/settings','PagesController@settingsSave');
 
 				//admin section
-				Route::get('/admin',			'PagesController@adminShow');
-				Route::get('/admin/phpinfo',	'PagesController@adminPhpinfoShow');
-				Route::get('/admin/users',		'PagesController@adminUsersShow');
+				Route::get('/admin',				'PagesController@adminShow');
+				Route::get('/admin/phpinfo',		'PagesController@adminPhpinfoShow');
+				Route::get('/admin/users',			'PagesController@adminUsersShow');
+				Route::get('/admin/ldapusers',		'PagesController@getUsersFromLdap');
+				Route::get('/admin/syncldapusers',	'PagesController@syncUsersFromLdap');
 
 
 
@@ -42,6 +44,8 @@ Route::group(['middleware' => 'web'], function () {
 
 				//cases
 				Route::resource('/cases',			'CasesController');
+					Route::patch('/cases/{cases}/updatePerformers', 'CasesController@updatePerformers')->name('cases.updatePerformers');
+					Route::patch('/cases/{cases}/updateMembers', 	'CasesController@updateMembers')->name('cases.updateMembers');
 
 				//files
 				Route::resource('/files',			'FilesController');

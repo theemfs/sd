@@ -16,9 +16,9 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Caffeinated\Shinobi\Traits\ShinobiTrait;
 
 class User extends Model implements AuthenticatableContract,
-                                    CanResetPasswordContract
+									CanResetPasswordContract
 {
-    use Authenticatable, CanResetPassword, ShinobiTrait;
+	use Authenticatable, CanResetPassword, ShinobiTrait;
 	use SoftDeletes;
 
 	protected $fillable = [
@@ -73,4 +73,12 @@ class User extends Model implements AuthenticatableContract,
 
 
 
+	public function getAllMyCases()
+	{
+		$cases0 = $this->cases->toBase();
+		$cases1 = $this->performerOf->toBase();
+		$cases2 = $this->memberOf->toBase();
+
+		return $cases0->merge($cases1)->merge($cases2);
+	}
 }

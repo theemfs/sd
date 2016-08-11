@@ -1,18 +1,21 @@
 @extends('layouts.app')
 
+
+
 @section('title', trans("app.Create Case"))
+
+
 
 @section('content')
 
-
 	<!-- LEFT BLOCK -->
-	<div class="col-sm-3">
+	<div class="col-md-2">
 	</div>
 
 
 
 	<!-- CENTER BLOCK -->
-	<div class="col-sm-6">
+	<div class="col-md-8">
 		<div class="panel panel-default">
 
 			<div class="panel-heading">
@@ -32,7 +35,7 @@
 					<div class="form-group">
 						{{-- {!! Form::label( trans('app.Text'), null, ['class' => 'control-label col-xs-2']) !!} --}}
 						<div class="col-sm-12">
-							{!! Form::textarea('text', null, ['class' => 'form-control', 'rows' => '3', 'autocomplete' => 'off', 'placeholder' => trans('app.Case Text')]) !!}
+							{!! Form::textarea('text', null, ['class' => 'form-control', 'rows' => '10', 'autocomplete' => 'off', 'placeholder' => trans('app.Case Text')]) !!}
 							{{-- <p class="text-muted">{{ trans('app.Text Hint') }}</p> --}}
 						</div>
 					</div>
@@ -66,9 +69,7 @@
 
 
 	<!-- RIGHT BLOCK -->
-	<div class="col-sm-3">
+	<div class="col-md-2">
 	</div>
 
-
-
-@stop
+@endsection

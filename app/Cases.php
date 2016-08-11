@@ -13,15 +13,15 @@ class Cases extends Model
 	//protected $table = 'phones';
 
 	protected $fillable = [
-		'id',
-		'comment',
-		'name',
-		'text',
-		'user_id',
+	'id',
+	'comment',
+	'name',
+	'text',
+	'user_id',
 	];
 
 	protected $dates = [
-		'deleted_at'
+	'deleted_at'
 	];
 
 
@@ -51,6 +51,15 @@ class Cases extends Model
 	{
 		return $this->hasMany('App\Messages', 'message_id');
 	}
+
+
+
+ //    public function getAllMyCases()
+	// {
+	// 	$case_members       = $this->belongsToMany('App\User', 'case_members', 'case_id');
+	// 	$case_performers    = $this->belongsToMany('App\User', 'case_performers', 'case_id');
+ //        return $case_members->merge($case_performers);
+	// }
 
 
 

@@ -43,3 +43,6 @@
 		$pinfo = preg_replace( '%^.*<body>(.*)</body>.*$%ms','$1',$pinfo);
 		return $pinfo;
 	}
+
+
+

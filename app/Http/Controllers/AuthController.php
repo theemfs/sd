@@ -149,7 +149,7 @@ class AuthController extends Controller
 			} else {
 				$title 				= '';
 			}
-			
+
 			$password		= $credentials['password'];
 
 			//action
