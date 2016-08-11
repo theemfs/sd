@@ -3,9 +3,13 @@
 return [
 
 	'Add Message' 							=> 'Добавить новое сообщение',
+	'Admin' 								=> 'Администрирование',
 	'LinkToThis' 							=> 'Ссылка на это сообщение',
 	'Cases' 								=> 'Кейсы',
 	'Case' 									=> 'Кейс',
+	'As Author' 							=> 'Я - автор',
+	'As Performer' 							=> 'Я - исполнитель',
+	'As Member' 							=> 'Я - участник',
 	// 'About' 								=> 'О системе',
 	// 'Add Phone' 							=> 'Добавить номер',
 	'Cancel' 								=> 'Отмена',
@@ -47,10 +51,11 @@ return [
 	// 'Name' 									=> 'Имя',
 	// 'No modems found. Insert at least one modem and press restart current gateway' 								=> 'Нет ни одного модема. Подключите хотя бы один модем и перезагрузите текущий шлюз',
 	// 'Numbers' 								=> 'Номера',
+	'Nothing Selected' 						=> 'Не выбрано',
 	'Password' 								=> 'Пароль',
 	// 'Performer' 							=> 'Исполнитель',
 	// 'Performers Count'						=> 'Количество исполнителей',
-	// 'Performers' 							=> 'Исполнители',
+	'Performers' 							=> 'Исполнители',
 	// 'Phones' 								=> 'Телефоны',
 	// 'Processing dropped files'				=> 'Загрузка',
 	'Refresh' 								=> 'Обновить',
@@ -71,6 +76,7 @@ return [
 	// 'Spams' 								=> 'Спам сообщения',
 	// 'Start' 								=> 'Старт',
 	'Status' 								=> 'Статус',
+	'Save' 									=> 'Сохранить',
 	// 'Tasks' 								=> 'Задачи',
 	// 'Task' 									=> 'Задача',
 	'Case Title' 							=> 'Заголовок',
@@ -81,6 +87,6 @@ return [
 	// 'throttle' 								=> 'Много попыток входа. Следующая попытка через :seconds секунд.',
 	// 'To' 									=> 'Адресат',
 	// 'Upload a file' 						=> 'Выбрать',
-	// 'Update' 								=> 'Обновить',
+		'Update' 								=> 'Обновить',
 
 ];

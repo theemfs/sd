@@ -19,7 +19,9 @@
 				</div>
 
 				<div class="col-sm-10">
-					<p><i class="fa fa-file-o fa-2x"></i> {{ $file->message->case->id }}</p>
+					{{-- <p><i class="fa fa-file-o fa-2x"></i> {{ $file->message->case->id }}</p> --}}
+					<p><i class="fa fa-file-o fa-2x"></i> {{ $file->name }}</p>
+					<p>{{ human_filesize($file->size) }}</p>
 					<hr>
 					<a class="btn btn-default" href="{{ action('CasesController@show', $file->message->case->id) }}" role="button">Go To Case</a>
 					<a class="btn btn-default" href="{{ action('FilesController@getOriginal', $file->id) }}" role="button">Download</a>

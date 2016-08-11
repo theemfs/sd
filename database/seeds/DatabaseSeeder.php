@@ -2,15 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
-// use App\Roles;
-// use App\Groups;
 use App\Types;
 use App\Priorities;
-// use App\Performers;
-// use App\Sendings;
-// use App\Phones;
-// use App\Gateways;
-// use App\Rounds;
+use App\Statuses;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,14 +23,20 @@ class DatabaseSeeder extends Seeder
 		// DB::table('phones')->truncate();
 
 		User::create(['email' => 'admin@example.com', 'password'=>Hash::make('12'), 'name' => 'Admin']);//default user
-		
+
 		Priorities::create(['name' => 'critical']);
 		Priorities::create(['name' => 'high']);
 		Priorities::create(['name' => 'normal']);
 		Priorities::create(['name' => 'low']);
-		
+
 		Types::create(['name' => 'event']);
 		Types::create(['name' => 'event']);
+
+		Statuses::create(['name' => 'new']);
+		Statuses::create(['name' => 'in work']);
+		Statuses::create(['name' => 'waiting']);
+		Statuses::create(['name' => 'done']);
+		Statuses::create(['name' => 'closed']);
 
 		// Rounds::create(['name' => 'test']);
 		// Roles::create(['name' => 'requestor']);
@@ -110,13 +110,3 @@ class DatabaseSeeder extends Seeder
 	}
 
 }
-
-// class UserTableSeeder extends Seeder {
-
-// 	public function run()
-// 	{
-// 		DB::table('users')->truncate();
-// 		User::create(['email' => 'admin@example.com', 'password'=>Hash::make('12')]);//default user
-// 	}
-
-// }

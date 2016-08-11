@@ -155,6 +155,8 @@ return [
 		// Collective\Html\HtmlServiceProvider::class, // For Watchtower Forms to function
 		// Smarch\Watchtower\WatchtowerServiceProvider::class, // For Watchtower
 		Intervention\Image\ImageServiceProvider::class,
+		Adldap\Laravel\AdldapServiceProvider::class,
+
 
 
 		/*
@@ -216,6 +218,7 @@ return [
 		'SSH'       => Collective\Remote\RemoteFacade::class,
 		'Image'		=> Intervention\Image\Facades\Image::class,
 		// 'Adldap'    => Adldap2-Laravel\Facades\Adldap::class,
+		'Adldap' 	=> Adldap\Laravel\Facades\Adldap::class,
 
 		// 'Shinobi'  => Caffeinated\Shinobi\Facades\Shinobi::class, // For RBAC functions
 		//'Watchtower'=> Smarch\Watchtower\WatchtowerFacade::class, // not required, but available

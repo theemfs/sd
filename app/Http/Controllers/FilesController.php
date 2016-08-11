@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Cases;
-use App\Files;
 use App\Messages;
 use App\User;
+use App\Files;
 
 use Auth;
 use DB;
@@ -23,6 +23,7 @@ class FilesController extends Controller
 	public function __construct()
 	{
 		//$this->middleware('auth');
+		$file = new Files;
 	}
 
 
@@ -148,7 +149,7 @@ class FilesController extends Controller
 		// 		->with('link', storage_path() . '/' . $file->name_stored)
 		// ;
 
-		return Response::download(storage_path() . '/uploads/' . $file->original);
+		return Response::download(storage_path() . '/uploads/' . $file->original, $file->name);
 	}
 
 

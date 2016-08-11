@@ -20,7 +20,10 @@
         "components/jquery": "<3.0",
         "ckeditor/ckeditor": "^4.5",
         "twbs/bootstrap": "^3.3",
-        "bootstrap-select/bootstrap-select": "^1.10"
+        "bootstrap-select/bootstrap-select": "^1.10",
+        "adldap2/adldap2-laravel": "^2.1",
+        "eternicode/bootstrap-datepicker": "^1.6",
+        "datatables/datatables": "^1.10"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

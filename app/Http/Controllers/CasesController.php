@@ -10,12 +10,16 @@ use App\Cases;
 use App\Messages;
 use App\User;
 use App\Files;
+use App\Statuses;
 
 use Auth;
 use DB;
 use Storage;
 use Image;
 use CloudConvert\Api;
+
+use Illuminate\Pagination\LengthAwarePaginator as Paginator;
+
 
 class CasesController extends Controller
 {
@@ -31,17 +35,30 @@ class CasesController extends Controller
 	{
 		// filered version
 		$filter = trim($request->input('filter'));
-		if (strlen($filter)==0) {
-			$cases 	= Cases::orderBy('updated_at', 'desc')->paginate(50);
-		} else {
-			$cases 	= Cases::where('id', 'LIKE', '%'.$filter.'%')
-				->orWhere('text', 'LIKE', '%'.$filter.'%')
-				->paginate(50);
-		}
+
+		// $cases 	= Cases::orderBy('updated_at', 'desc');
+		// dd($cases->paginate(10));
+
+		$cases_author 		= Auth::user()->cases;
+		$cases_performer 	= Auth::user()->performerOf;
+		$cases_member		= Auth::user()->memberOf;
+		//$cases = new Paginator($cases, $cases->count(), 2, $request);
+
+		// if (strlen($filter)==0) {
+		// 	$cases 	= Cases::orderBy('updated_at', 'desc')->paginate(50);
+		// } else {
+		// 	$cases 	= Cases::where('id', 'LIKE', '%'.$filter.'%')
+		// 		->orWhere('text', 'LIKE', '%'.$filter.'%')
+		// 		->paginate(50);
+		// }
+
+
 
 		return view('cases.index')
-				->with('cases',		$cases)
-				->with('filter',	$filter)
+			->with('cases_author',		$cases_author)
+			->with('cases_performer',	$cases_performer)
+			->with('cases_member',		$cases_member)
+			->with('filter',			$filter)
 		;
 	}
 
@@ -71,13 +88,15 @@ class CasesController extends Controller
 
 		//CASE
 		$case = new Cases($request->all());
-			Auth::user()->cases()->save($case);
+		Auth::user()->cases()->save($case);
+		$case->members()->sync( array(Auth::user()->id) );
+		$case->save();
 
 
 		//MESSAGE
 		$message = new Messages($request->all());
 		$message->case_id = $case->id;
-			Auth::user()->messages()->save($message);
+		Auth::user()->messages()->save($message);
 
 
 		//FILES
@@ -103,7 +122,7 @@ class CasesController extends Controller
 					//'converted' 	=> $converted,
 					//'thumbnail'	=> $thumbnail,
 					'message_id' 	=> $message->id
-				]);
+					]);
 
 				//storing original
 				Storage::disk('uploads')->put($original, file_get_contents($temp_file));
@@ -140,15 +159,20 @@ class CasesController extends Controller
 		$messages 		= Messages::where('case_id', $case->id)->orderby('created_at', 'asc')->get()->splice(1);
 		$users 			= User::orderby('name', 'asc')->lists('name', 'id');
 		$membersIds 	= $case->members->lists('id')->toArray();
+		$performersIds 	= $case->performers->lists('id')->toArray();
+		$statuses 		= Statuses::lists('id')->toArray();
+		$statusesIds 	= Statuses::lists('id')->toArray();
 
 		//return($case->members);
 
 		return view('cases.show')
-				->with('case',			$case)
-				->with('messages',		$messages)
-				->with('message_first',	$message_first)
-				->with('users',			$users)
-				->with('membersIds',	$membersIds)
+		->with('case',			$case)
+		->with('messages',		$messages)
+		->with('message_first',	$message_first)
+		->with('users',			$users)
+		->with('membersIds',	$membersIds)
+		->with('performersIds',	$performersIds)
+		->with('statusesIds',	$statusesIds)
 		;
 	}
 
@@ -160,36 +184,29 @@ class CasesController extends Controller
 		// $sets 			= Sets::lists('name', 'id');
 		// $performersIds	= $phone->performers->lists('id')->toArray();
 		return view('cases.edit')
-				->with('case',				$case)
+		->with('case',				$case)
 				// ->with('sets',					$sets)
 				// ->with('performersIds', 	$performersIds)
-				;
+		;
 	}
 
 
 
 	public function update(Request $request, $id)
 	{
-
-
 		$case = Cases::findOrFail($id);
 
-		if ( !is_null($request->input('users')) ) {
-			$case->members()->sync($request->input('users'));
+		if ( !is_null($request->input('performers')) ) {
+			$case->performers()->sync($request->input('performers'));
+		} else {
+			$case->performers()->detach();
+		}
+
+		if ( !is_null($request->input('members')) ) {
+			$case->members()->sync($request->input('members'));
 		} else {
 			$case->members()->detach();
 		}
-
-		// if ( !is_null($request->input('performers')) ) {
-		// 	$case->performers()->associate($request->input('performers')[0]);
-		// } else {
-		// 	// $phone->performers()->detach();
-		// }
-		// if ( !is_null($request->input('performers')) ) {
-		// 	$phone->performers()->sync($request->input('performers'));
-		// } else {
-		// 	$phone->performers()->detach();
-		// }
 
 		$case->update( $request->all() );
 
