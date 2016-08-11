@@ -45,17 +45,19 @@
 						<div role="tabpanel" class="tab-pane fade in active" id="author">
 							@foreach ($cases_author as $case_author)
 								<div class="snippet">
+									<span class="small">
+										<i class="fa fa-fw fa-btn fa-user"></i>
+										{{ $case_author->user->name }} |
+										{{ $case_author->created_at }} - {{ $case_author->due_to }} |
+										{{ $case_author->status->name }}
+									</span>
+									<hr>
 									<h4 class="snippet-heading">
 										<p class="pull-right small">
-											<i class="fa fa-fw fa-btn fa-code-fork"></i>
-											{{ $case_author->status->name }}
-											<i class="fa fa-fw fa-btn fa-clock-o"></i>
-											{{ $case_author->due_to }}
+											{{ $case_author->id }}
 										</p>
-										{{-- <a href="{{ action('CasesController@show', $case_author->id) }}">{{ mb_substr($case_author->text, 0, 50)."..." }}</a> --}}
 										<a href="{{ action('CasesController@show', $case_author->id) }}">{{ $case_author->name }}</a>
 									</h4>
-									<p>{{ $case_author->user->name }}</p>
 									<div class="snippet-body">
 										<p>{{ mb_substr($case_author->text, 0, 300)."..." }}</p>
 									</div>
@@ -65,12 +67,19 @@
 						<div role="tabpanel" class="tab-pane fade" id="performer">
 							@foreach ($cases_performer as $case_performer)
 								<div class="snippet">
+									<span class="small">
+										<i class="fa fa-fw fa-btn fa-user"></i>
+										{{ $case_performer->user->name }} |
+										{{ $case_performer->created_at }} - {{ $case_performer->due_to }} |
+										{{ $case_performer->status->name }}
+									</span>
+									<hr>
 									<h4 class="snippet-heading">
-										<p class="pull-right">{{ $case_performer->id }}</p>
-										<!-- <a href="{{ action('CasesController@show', $case_performer->id) }}">{{ mb_substr($case_performer->text, 0, 50)."..." }}</a> -->
+										<p class="pull-right small">
+											{{ $case_performer->id }}
+										</p>
 										<a href="{{ action('CasesController@show', $case_performer->id) }}">{{ $case_performer->name }}</a>
 									</h4>
-									<p>{{ $case_performer->user->name }}</p>
 									<div class="snippet-body">
 										<p>{{ mb_substr($case_performer->text, 0, 300)."..." }}</p>
 									</div>
@@ -80,12 +89,19 @@
 						<div role="tabpanel" class="tab-pane fade" id="member">
 							@foreach ($cases_member as $case_member)
 								<div class="snippet">
+									<span class="small">
+										<i class="fa fa-fw fa-btn fa-user"></i>
+										{{ $case_member->user->name }} |
+										{{ $case_member->created_at }} - {{ $case_member->due_to }} |
+										{{ $case_member->status->name }}
+									</span>
+									<hr>
 									<h4 class="snippet-heading">
-										<p class="pull-right">{{ $case_member->id }}</p>
-										<!-- <a href="{{ action('CasesController@show', $case_member->id) }}">{{ mb_substr($case_member->text, 0, 50)."..." }}</a> -->
+										<p class="pull-right small">
+											{{ $case_member->id }}
+										</p>
 										<a href="{{ action('CasesController@show', $case_member->id) }}">{{ $case_member->name }}</a>
 									</h4>
-									<p>{{ $case_member->user->name }}</p>
 									<div class="snippet-body">
 										<p>{{ mb_substr($case_member->text, 0, 300)."..." }}</p>
 									</div>

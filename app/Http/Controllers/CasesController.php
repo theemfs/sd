@@ -90,6 +90,7 @@ class CasesController extends Controller
 		$case = new Cases($request->all());
 		Auth::user()->cases()->save($case);
 		$case->members()->sync( array(Auth::user()->id) );
+		$case->status_id = 1; //status = new
 		$case->save();
 
 
