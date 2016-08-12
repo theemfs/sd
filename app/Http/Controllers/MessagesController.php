@@ -15,6 +15,7 @@ use Auth;
 use DB;
 use Storage;
 use Image;
+use Mail;
 use CloudConvert\Api;
 
 class MessagesController extends Controller
@@ -128,6 +129,27 @@ class MessagesController extends Controller
 		//$this->validate($request, ['id' => 'unique:cases|required|regex:/^89\d{9}$/']);
 		// Messages::create($request->all());
 		//return redirect()->back();
+		$data = array(
+			'case' => $case,
+			'message' => $message
+		);
+
+		Mail::send('emails.welcome', $data, function($email) use ($case, $message) {
+			$email->from('anton@grandbaikal.ru', 'Тест');
+			// $email->sender('anton@grandbaikal.ru', 'Тест2');
+			$email->to('theemfs@gmail.com');
+			$email->cc('anton@grandbaikal.ru');
+			// $email->bcc('khamaev_aa@grandbaikal.ru');
+			// $email->replyTo('anton@grandbaikal.ru');
+			$email->subject("[Case #$case->id]: added message");
+			$email->priority(2);
+			// $email->attach("https://www.facebook.com/images/fb_icon_325x325.png");
+			// $email->attach("https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2000px-Google_2015_logo.svg.png");
+			// $email->attach($pathToFile, array $options = []);
+			// $email->attachData($data, $name, array $options = []);
+			// $email->getSwiftMessage();
+		});
+
 		return redirect()->action('CasesController@show', [$case->id]);
 	}
 

@@ -13,13 +13,14 @@ use App\Files;
 use App\Statuses;
 
 use Auth;
+use Gate;
 use DB;
 use Storage;
 use Image;
-use CloudConvert\Api;
-
-use Illuminate\Pagination\LengthAwarePaginator as Paginator;
-
+use Mail;
+// use CloudConvert\Api;
+// use Illuminate\Pagination\LengthAwarePaginator as Paginator;
+// use App\Policies\CasesPolicy;
 
 class CasesController extends Controller
 {
@@ -156,6 +157,11 @@ class CasesController extends Controller
 	public function show($id)
 	{
 		$case 			= Cases::findOrFail($id);
+
+		if (Gate::denies('show-case', $case)) {
+			return view('errors.403');
+		}
+
 		$message_first  = Messages::where('case_id', $case->id)->orderby('created_at', 'asc')->first();
 		$messages 		= Messages::where('case_id', $case->id)->orderby('created_at', 'asc')->get()->splice(1);
 		$users 			= User::orderby('name', 'asc')->lists('name', 'id');
@@ -199,6 +205,10 @@ class CasesController extends Controller
 
 		$case = Cases::findOrFail($id);
 
+		if (Gate::denies('update-case', $case)) {
+			return view('errors.403');
+		}
+
 		if ( !is_null($request->input('performers')) ) {
 			$case->performers()->sync($request->input('performers'));
 		} else {
@@ -214,6 +224,10 @@ class CasesController extends Controller
 		$case->update( $request->all() );
 		$case->due_to = date( "Y-m-d H:i", strtotime($request->due_to) );
 		$case->update();
+
+
+
+
 
 		return redirect()->action('CasesController@show', [$id]);
 	}

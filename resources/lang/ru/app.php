@@ -12,6 +12,7 @@ return [
 	'As Member' 							=> 'Я - участник',
 	// 'About' 								=> 'О системе',
 	// 'Add Phone' 							=> 'Добавить номер',
+	'Case Settings' 						=> 'Параметры кейса',
 	'Cancel' 								=> 'Отмена',
 	// 'Check All Modems Balance'				=> 'Проверить баланс',
 	// 'Check Balance'							=> 'Проверить баланс',
