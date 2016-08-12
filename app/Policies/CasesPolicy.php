@@ -3,10 +3,10 @@
 namespace Policies;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
-use App\User;
-use App\Cases;
+// use App\User;
+// use App\Cases;
 
-class CasePolicy
+class CasesPolicy
 {
 	use HandlesAuthorization;
 
@@ -24,6 +24,17 @@ class CasePolicy
 
 	public function show(User $user, Cases $case)
 	{
-        return $user->id === $case->user_id;
+        //return ($user->id === $case->user_id) || () || ();
+        //return true;
 	}
+
+
+
+	public function update(User $user, Cases $case)
+	{
+		//return $user->id === $case->user_id;
+	}
+
+
+
 }

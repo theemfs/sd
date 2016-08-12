@@ -44,8 +44,8 @@ Route::group(['middleware' => 'web'], function () {
 
 				//cases
 				Route::resource('/cases',			'CasesController');
-					Route::patch('/cases/{cases}/updatePerformers', 'CasesController@updatePerformers')->name('cases.updatePerformers');
-					Route::patch('/cases/{cases}/updateMembers', 	'CasesController@updateMembers')->name('cases.updateMembers');
+					//Route::patch('/cases/{cases}/updatePerformers', 'CasesController@updatePerformers')->name('cases.updatePerformers');
+					//Route::patch('/cases/{cases}/updateMembers', 	'CasesController@updateMembers')->name('cases.updateMembers');
 
 				//files
 				Route::resource('/files',			'FilesController');
