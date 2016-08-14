@@ -145,7 +145,7 @@ class MessagesController extends Controller
 		foreach ($subscribers as $subscriber) {
 			Mail::send('emails.notification', $data, function($email) use ($case, $message, $subscriber) {
 
-				$email->from( env('MAIL_USERNAME'), env('APP_NAME') );
+				$email->from( env('MAIL_USERNAME') );
 				// $email->sender('', '');
 				// $email->to('');
 				$email->to($subscriber->email);

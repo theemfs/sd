@@ -14,7 +14,7 @@
 						<label class="col-md-3 control-label">{{ trans('app.Email') }}</label>
 
 						<div class="col-md-8">
-							<input type="email" class="form-control" name="email" value="{{ old('email') }}"" placeholder="{{ trans('app.Domain login') }}">
+							<input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="{{ trans('app.Domain login') }}">
 
 							@if ($errors->has('email'))
 								<span class="help-block">
