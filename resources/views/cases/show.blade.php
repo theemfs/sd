@@ -16,8 +16,8 @@
 
 @section('content')
 
-	<!-- TOP BLOCK -->
-	<div class="col-md-12">
+	{{-- TOP BLOCK --}}
+	<div class="col-md-8 col-md-offset-2">
 
 
 			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -121,7 +121,7 @@
 
 
 
-	<!-- CENTER BLOCK -->
+	{{-- CENTER BLOCK --}}
 	<div class="col-md-8 col-md-offset-2">
 		<div class="row">
 			<div class="panel panel-default">
@@ -133,7 +133,90 @@
 				<div class="panel-body">
 
 
-					<!-- FIRST MESSAGE -->
+
+					{{-- REPLY AREA --}}
+					{!! Form::open(['url'=>'messages', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
+						<div class="message bg-info">
+							<div class=""></div>
+							<div class="col-xs-12">
+								<div class="form-group">
+									{!! Form::textarea('text', null, ['class' => 'form-control', 'rows' => '3', 'autocomplete' => 'off', 'placeholder' => trans('app.Add Message Textarea Placeholder') ]) !!}
+								</div>
+									{!! Form::hidden('case', $case->id, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+								<div class="form-group">
+									{!! Form::file( 'attachments[]', ['class' => '', 'multiple' => 'true']) !!}
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-xs-12 pull-right">
+									{!! Form::submit( trans('app.Add Message'), ['class' => 'btn btn-primary form-control col-xs-12']) !!}
+								</div>
+							</div>
+						</div>
+					{!! Form::close() !!}
+					<hr>
+
+
+
+					{{-- SECOND AND ETC MESSAGES --}}
+					@foreach ($messages as $message)
+
+						{{-- COLORING MESSAGES BY AUTHOR --}}
+						{{-- @if ($message->user->id == Auth::user()->id)
+							<div class="message bg-warning" id="{{ $message->id }}">
+						@else
+							<div class="message" id="{{ $message->id }}">
+						@endif --}}
+
+						{{-- COLORING MESSAGES BY TYPE --}}
+						@if ($message->is_service_message == 1)
+						{{-- SERVICE MESSAGE --}}
+							<div class="message message_service" id="{{ $message->id }}">
+								<div class="col-xs-1">
+									<i class="fa fa-fw fa-info"></i>
+								</div>
+
+								<div class="col-xs-11">
+									<span class="small">{{ $message->user->name }} | {{ $message->created_at }}</span>
+									<div class="message-body small">{{ $message->text }}</div>
+								</div>
+							</div>
+						@else
+						{{-- REPLY MESSAGE --}}
+							<div class="message" id="{{ $message->id }}">
+								<div class="col-xs-1">
+									<i class="fa fa-fw fa-comment"></i>
+								</div>
+
+								<div class="col-xs-11">
+									<div class="form-group">
+										<span class="small">{{ $message->user->name }} | {{ $message->created_at }}</span>
+										<hr>
+
+										<div class="message-body">{{ $message->text }}</div>
+
+										@foreach ($message->files as $file)
+											@if ( substr($file->mimetype, 0, 5) == 'image')
+												<a href="{{ action('FilesController@show', $file->id) }}">
+													<img class="img img-rounded" src="{{ url('/') . '/thumbnails/' . $file->thumbnail }}" title="{{ $file->name }}">
+												</a>
+											@else
+												<a href="{{ action('FilesController@show', $file->id) }}">
+													<p><i class="fa fa-file"></i> {{ $file->name }} [{{ human_filesize($file->size) }}]</p>
+												</a>
+											@endif
+										@endforeach
+									</div>
+								</div>
+							</div>
+						@endif
+
+
+					@endforeach
+
+
+
+					{{-- <!-- FIRST MESSAGE -->
 					<div class="message bg-warning" id="{{ $message_first->id }}">
 						<div class="col-xs-1">
 							<i class="fa fa-fw fa-comment"></i>
@@ -163,67 +246,7 @@
 								@endforeach
 							</div>
 						</div>
-					</div>
-
-
-
-					<!-- SECOND AND ETC MESSAGES -->
-					@foreach ($messages as $message)
-						<div class="message" id="{{ $message->id }}">
-							<div class="col-xs-1">
-								<i class="fa fa-fw fa-comment"></i>
-								<!-- <img src="/build/images/user.png" alt="..." class="img-rounded"> -->
-								<a href="{{ action('CasesController@show', $case->id) }}#{{$message->id}}">
-									<!-- <i class="fa fa-fw fa-anchor"></i> -->
-								</a>
-							</div>
-
-							<div class="col-xs-11">
-								<div class="form-group">
-									<span class="small">{{ $message->user->name }} | {{ $message->created_at }}</span>
-									<hr>
-
-									<div class="message-body">{{ $message->text }}</div>
-
-									@foreach ($message->files as $file)
-										@if ( substr($file->mimetype, 0, 5) == 'image')
-											<a href="{{ action('FilesController@show', $file->id) }}">
-												<img class="img img-rounded" src="{{ url('/') . '/thumbnails/' . $file->thumbnail }}" title="{{ $file->name }}">
-											</a>
-										@else
-											<a href="{{ action('FilesController@show', $file->id) }}">
-												<p><i class="fa fa-file"></i> {{ $file->name }} [{{ human_filesize($file->size) }}]</p>
-											</a>
-										@endif
-									@endforeach
-								</div>
-							</div>
-						</div>
-					@endforeach
-					<hr>
-
-
-
-					<!-- REPLY AREA -->
-					{!! Form::open(['url'=>'messages', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
-						<div class="message bg-info">
-							<div class=""></div>
-							<div class="col-xs-12">
-								<div class="form-group">
-									{!! Form::textarea('text', null, ['class' => 'form-control', 'rows' => '3', 'autocomplete' => 'off', 'placeholder' => trans('app.Add Message Textarea Placeholder') ]) !!}
-								</div>
-									{!! Form::hidden('case', $case->id, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
-								<div class="form-group">
-									{!! Form::file( 'attachments[]', ['class' => '', 'multiple' => 'true']) !!}
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-xs-12 pull-right">
-									{!! Form::submit( trans('app.Add Message'), ['class' => 'btn btn-primary form-control col-xs-12']) !!}
-								</div>
-							</div>
-						</div>
-					{!! Form::close() !!}
+					</div> --}}
 
 
 
@@ -234,7 +257,7 @@
 
 
 
-	<!-- RIGHT BLOCK -->
+	{{-- RIGHT BLOCK --}}
 	<div class="col-md-3">
 
 	</div>
@@ -277,7 +300,7 @@
 
 		$(function () {
 			$('#due_to').datetimepicker({
-				defaultDate: '{{ date("Y-m-d H:i", strtotime($case->due_to)) }}',
+				defaultDate: '{{ $case->due_to > date("Y-m-d H:i", mktime(0, 0, 0, 1, 1, 1971)) ? date("Y-m-d H:i", strtotime($case->due_to)) : "" }}',
 				locale: 'ru',
 				// useCurrent: true,
 				showTodayButton: true,

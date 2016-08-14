@@ -22,11 +22,13 @@ Route::group(['middleware' => 'web'], function () {
 
 
 			//PAGES
-			Route::get('/', 		'PagesController@dashboardShow');
+			Route::get('/', 		'CasesController@index');
 			Route::get('/about', 	'PagesController@about');
 			Route::get('/send', 	'PagesController@send');
 			Route::get('/settings',	'PagesController@settingsShow');
 			Route::post('/settings','PagesController@settingsSave');
+
+
 
 				//admin section
 				Route::get('/admin',				'PagesController@adminShow');
@@ -41,6 +43,7 @@ Route::group(['middleware' => 'web'], function () {
 
 				//users
 				Route::resource('/users',			'UsersController');
+				Route::get('/profile',				'UsersController@profile');
 
 				//cases
 				Route::resource('/cases',			'CasesController');

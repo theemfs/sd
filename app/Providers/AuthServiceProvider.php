@@ -41,10 +41,18 @@ class AuthServiceProvider extends ServiceProvider
 
 		$gate->define('update-case', function ($user, $case) {
 			return $case->user->id === $user->id
-				// || $case->performers->contains($user->id)
+				|| $case->performers->contains($user->id)
 				// || $case->members->contains($user->id)
 			;
 		});
+
+		// $gate->define('view-page', function ($user, $page) {
+		// 	return true
+		// 		// $page-> === $user->permission_id;
+		// 		// || $case->performers->contains($user->id)
+		// 		// || $case->members->contains($user->id)
+		// 	;
+		// });
 
 	}
 }
