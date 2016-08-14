@@ -77,7 +77,9 @@
 			@yield('js')
 			@if (Auth::user())
 				<div class="container">
-					<p class="text-muted small">&copy Идея и разработка - Антон Хамаев</p>
+					{{-- <p class="text-muted small">&copy / &reg;</p> --}}
+					<p class="text-muted small">@</p>
+					{{-- <p class="text-muted small">&copy Идея и разработка - Антон Хамаев</p> --}}
 					<p class="text-muted small">По всем вопросам пишите <a href="mailto:">anton@grandbaikal.ru</a></p>
 				</div>
 			@endif
