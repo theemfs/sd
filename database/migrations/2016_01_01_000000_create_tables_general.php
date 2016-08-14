@@ -31,6 +31,7 @@ class CreateTablesGeneral extends Migration
 			$table->string('homephone')->nullable();
 			$table->string('title')->nullable();
 			$table->string('department')->nullable();
+			$table->string('can_be_performer')->nullable();
 		});
 
 
@@ -47,6 +48,7 @@ class CreateTablesGeneral extends Migration
 			$table->integer('user_id')->unsigned()->index();
 				$table->foreign('user_id')->references('id')->on('users');
 			$table->integer('status_id')->unsigned()->index();
+			$table->dateTime('last_reply_at')->nullable();
 				//$table->foreign('status_id')->references('id')->on('statuses');
 		});
 
@@ -82,6 +84,7 @@ class CreateTablesGeneral extends Migration
 			$table->integer('user_id')->unsigned()->index();
 				$table->foreign('user_id')->references('id')->on('users');
 			$table->integer('case_id')->unsigned()->index();
+			$table->integer('is_service_message')->unsigned();
 		});
 
 
@@ -148,6 +151,19 @@ class CreateTablesGeneral extends Migration
 
 
 
+		Schema::create('jobs', function (Blueprint $table) {
+			$table->bigIncrements('id');
+			$table->string('queue');
+			$table->longText('payload');
+			$table->tinyInteger('attempts')->unsigned();
+			$table->tinyInteger('reserved')->unsigned();
+			$table->unsignedInteger('reserved_at')->nullable();
+			$table->unsignedInteger('available_at');
+			$table->unsignedInteger('created_at');
+			$table->index(['queue', 'reserved', 'reserved_at']);
+		});
+
+
 	}
 
 
@@ -165,7 +181,11 @@ class CreateTablesGeneral extends Migration
 		Schema::drop('statuses');
 		Schema::drop('types');
 		Schema::drop('files');
+		Schema::drop('jobs');
 
 		DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 	}
+
+
+
 }

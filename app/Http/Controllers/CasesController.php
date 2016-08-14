@@ -163,7 +163,8 @@ class CasesController extends Controller
 		}
 
 		$message_first  = Messages::where('case_id', $case->id)->orderby('created_at', 'asc')->first();
-		$messages 		= Messages::where('case_id', $case->id)->orderby('created_at', 'asc')->get()->splice(1);
+		$messages 		= Messages::where('case_id', $case->id)->orderby('created_at', 'desc')->get();
+		//$messages 		= Messages::where('case_id', $case->id)->orderby('created_at', 'desc')->get()->splice(1);
 		$users 			= User::orderby('name', 'asc')->lists('name', 'id');
 		$membersIds 	= $case->members->lists('id')->toArray();
 		$performersIds 	= $case->performers->lists('id')->toArray();
@@ -204,11 +205,18 @@ class CasesController extends Controller
 	{
 
 		$case = Cases::findOrFail($id);
+		$case_before = clone($case);
 
+
+
+		// CHECK RIGHTS
 		if (Gate::denies('update-case', $case)) {
 			return view('errors.403');
 		}
 
+
+
+		// PROCESSING
 		if ( !is_null($request->input('performers')) ) {
 			$case->performers()->sync($request->input('performers'));
 		} else {
@@ -220,15 +228,34 @@ class CasesController extends Controller
 		} else {
 			$case->members()->detach();
 		}
+		$case->update($request->all());
 
-		$case->update( $request->all() );
-		$case->due_to = date( "Y-m-d H:i", strtotime($request->due_to) );
+		if ( date( "Y-m-d H:i", strtotime($request->due_to)) < date("Y-m-d H:i", mktime(0, 0, 0, 1, 1, 1971)) ) {
+			$case->due_to = NULL;
+		} else {
+			$case->due_to = date( "Y-m-d H:i:s", strtotime($request->due_to) );
+		}
 		$case->update();
 
 
 
+		// return([$case->due_to, $case_before->due_to]);
+		// GENERATE STATUS MESSAGE
+		$message = new Messages();
+		$message->is_service_message = 1;
+		$message->case_id = $case->id;
+			if (!($case_before->status_id == $case->status_id)) {
+				$message->text = trans('app.Status changed: ') . $case_before->status->name . ' -> ' . $case->status->name;
+				Auth::user()->messages()->save($message);
+			}
+			if (!($case_before->due_to == $case->due_to)) {
+				$message->text .= "\n" . trans('app.Due to changed: ') . $case_before->due_to . ' -> ' . $case->due_to;
+				Auth::user()->messages()->save($message);
+			}
 
 
+
+		// END
 		return redirect()->action('CasesController@show', [$id]);
 	}
 

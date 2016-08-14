@@ -5,6 +5,7 @@ use App\User;
 use App\Types;
 use App\Priorities;
 use App\Statuses;
+// use App\MessagesTypes;
 
 class DatabaseSeeder extends Seeder
 {
@@ -32,11 +33,15 @@ class DatabaseSeeder extends Seeder
 		Types::create(['name' => 'event']);
 		Types::create(['name' => 'event']);
 
-		Statuses::create(['name' => 'new']);
-		Statuses::create(['name' => 'in work']);
-		Statuses::create(['name' => 'waiting']);
-		Statuses::create(['name' => 'done']);
-		Statuses::create(['name' => 'closed']);
+		Statuses::create(['name' => 'новый']);
+		Statuses::create(['name' => 'в работе']);
+		Statuses::create(['name' => 'ожидание']);
+		Statuses::create(['name' => 'решён']);
+		Statuses::create(['name' => 'закрыт']);
+
+		// MessagesTypes::create(['name' => 'reply']);
+		// MessagesTypes::create(['name' => 'status']);
+		// MessagesTypes::create(['name' => 'sms']);
 
 		// Rounds::create(['name' => 'test']);
 		// Roles::create(['name' => 'requestor']);

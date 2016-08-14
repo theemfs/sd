@@ -27,17 +27,20 @@ class UsersController extends Controller
 	public function index(Request $request)
 	{
 		// filered version
-		$filter = trim($request->input('filter'));
-		if (strlen($filter)==0) {
-			$files 	= Files::paginate(50);
-		} else {
-			$files 	= Files::where('id', 'LIKE', '%'.$filter.'%')
-				->paginate(50);
-		}
+		// $filter = trim($request->input('filter'));
+		// if (strlen($filter)==0) {
+		// 	$users 	= User::paginate(50);
+		// } else {
+		// 	$users 	= User::where('id', 'LIKE', '%'.$filter.'%')
+		// 		->paginate(50);
+		// }
 
-		return view('files.index')
-				->with('files', 			$files)
-				->with('filter', 			$filter);
+		$users 	= User::orderBy('name')->get();
+
+		return view('users.index')
+				->with('users', 			$users)
+				// ->with('filter', 			$filter)
+		;
 	}
 
 
@@ -46,8 +49,8 @@ class UsersController extends Controller
 	{
 		$types = DB::table('types')->orderBy('id', 'asc')->get();
 		return view('cases.create')
-				->with('types',		$types)
-				->with('typesIds',	'[]')
+				->with('users',		$users)
+				// ->with('typesIds',	'[]')
 		;
 
 	}
@@ -149,4 +152,15 @@ class UsersController extends Controller
 
 		return storage_path() . '/uploads' . $file->thumbnail;
 	}
+
+
+
+	public function profile()
+	{
+		$user = Auth::user();
+		return view('users.profile')->with('user', $user);
+	}
+
+
+
 }

@@ -1,48 +1,48 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>404 - Be right back.</title>
+	<head>
+		<title>{{ trans('app.404') }}</title>
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+	   <link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
 
-        <style>
-            html, body {
-                height: 100%;
-            }
+		<style>
+			html, body {
+				height: 100%;
+			}
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                color: #B0BEC5;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
+			body {
+				margin: 0;
+				padding: 0;
+				width: 100%;
+				color: #B0BEC5;
+				display: table;
+				font-weight: 100;
+				font-family: 'Exo 2', sans-serif;
+			}
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
+			.container {
+				text-align: center;
+				display: table-cell;
+				vertical-align: middle;
+			}
 
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
+			.content {
+				text-align: center;
+				display: inline-block;
+			}
 
-            .title {
-                font-size: 72px;
-                margin-bottom: 40px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">404 Be right back.</div>
-                <a class="title" href="{{ url('/') }}">Go To Home</a>
-            </div>
-        </div>
-    </body>
+			.title {
+				font-size: 50px;
+				margin-bottom: 40px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="content">
+				<div class="title">{{ trans('app.404') }}</div>
+				<a class="title" href="{{ url('/') }}">{{ trans('app.go home') }}</a>
+			</div>
+		</div>
+	</body>
 </html>

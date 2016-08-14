@@ -10,13 +10,13 @@ use App\Cases;
 use App\Messages;
 use App\User;
 use App\Files;
-
 use Auth;
 use DB;
 use Storage;
 use Image;
 use Mail;
-use CloudConvert\Api;
+use Carbon\Carbon;
+
 
 class MessagesController extends Controller
 {
@@ -71,6 +71,8 @@ class MessagesController extends Controller
 
 		//CASE
 		$case = Cases::findOrFail($request->case);
+		$case->last_reply_at = new Carbon();
+		$case->save();
 
 
 		//MESSAGE
@@ -129,26 +131,36 @@ class MessagesController extends Controller
 		//$this->validate($request, ['id' => 'unique:cases|required|regex:/^89\d{9}$/']);
 		// Messages::create($request->all());
 		//return redirect()->back();
+
+
+
 		$data = array(
 			'case' => $case,
-			'message' => $message
+			'msg' => $message,
+			'user' => Auth::user()
 		);
 
-		Mail::send('emails.welcome', $data, function($email) use ($case, $message) {
-			$email->from('anton@grandbaikal.ru', 'Тест');
-			// $email->sender('anton@grandbaikal.ru', 'Тест2');
-			$email->to('theemfs@gmail.com');
-			$email->cc('anton@grandbaikal.ru');
-			// $email->bcc('khamaev_aa@grandbaikal.ru');
-			// $email->replyTo('anton@grandbaikal.ru');
-			$email->subject("[Case #$case->id]: added message");
-			$email->priority(2);
-			// $email->attach("https://www.facebook.com/images/fb_icon_325x325.png");
-			// $email->attach("https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2000px-Google_2015_logo.svg.png");
-			// $email->attach($pathToFile, array $options = []);
-			// $email->attachData($data, $name, array $options = []);
-			// $email->getSwiftMessage();
-		});
+		$subscribers = $case->members->merge($case->performers)->merge($case->user())->push($case->user)->unique();
+
+		foreach ($subscribers as $subscriber) {
+			Mail::send('emails.notification', $data, function($email) use ($case, $message, $subscriber) {
+
+				$email->from( env('MAIL_USERNAME'), env('APP_NAME') );
+				// $email->sender('', '');
+				// $email->to('');
+				$email->to($subscriber->email);
+				// $email->cc('');
+				// $email->bcc('');
+				// $email->replyTo('');
+				$email->subject("[Case #$case->id]: added message");
+				$email->priority(2);
+				// $email->attach("https://www.facebook.com/images/fb_icon_325x325.png");
+				// $email->attach($pathToFile, array $options = []);
+				// $email->attachData($data, '', []);
+				// $email->getSwiftMessage();
+
+			});
+		}
 
 		return redirect()->action('CasesController@show', [$case->id]);
 	}

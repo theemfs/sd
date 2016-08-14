@@ -3,6 +3,7 @@
 
 
 @section('css')
+<META HTTP-EQUIV="refresh" CONTENT="60">
 @endsection
 
 
@@ -13,7 +14,7 @@
 
 @section('content')
 
-	<!-- LEFT BLOCK -->
+	{{-- LEFT BLOCK --}}
 	<div class="col-md-2">
 		<div class="row">
 
@@ -22,7 +23,7 @@
 
 
 
-	<!-- CENTER BLOCK -->
+	{{-- CENTER BLOCK --}}
 	<div class="col-md-8">
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -33,13 +34,11 @@
 			<div class="panel-body">
 
 				<div> {{-- TABS --}}
-					<!-- Nav tabs -->
 					<ul class="nav nav-pills nav-justified" role="tablist">
 						<li role="presentation" class="active"><a href="#author" aria-controls="home" role="tab" data-toggle="tab">{{ trans('app.As Author') }} <span class="badge">{{ $cases_author->count() }}</span></a></li>
 						<li role="presentation"><a href="#performer" aria-controls="profile" role="tab" data-toggle="tab">{{ trans('app.As Performer') }} <span class="badge">{{ $cases_performer->count() }}</span></a></li>
 						<li role="presentation"><a href="#member" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.As Member') }} <span class="badge">{{ $cases_member->count() }}</span></a></li>
 					</ul>
-					<!-- Tab panes -->
 					<hr>
 					<div class="tab-content">
 						<div role="tabpanel" class="tab-pane fade in active" id="author">
@@ -49,7 +48,8 @@
 										<i class="fa fa-fw fa-btn fa-user"></i>
 										{{ $case_author->user->name }} |
 										{{ $case_author->created_at }} - {{ $case_author->due_to }} |
-										{{ $case_author->status->name }}
+										{{ $case_author->status->name }} |
+										{{ $case_author->last_reply_at }}
 									</span>
 									<hr>
 									<h4 class="snippet-heading">
@@ -71,7 +71,8 @@
 										<i class="fa fa-fw fa-btn fa-user"></i>
 										{{ $case_performer->user->name }} |
 										{{ $case_performer->created_at }} - {{ $case_performer->due_to }} |
-										{{ $case_performer->status->name }}
+										{{ $case_performer->status->name }} |
+										{{ $case_performer->last_reply_at }}
 									</span>
 									<hr>
 									<h4 class="snippet-heading">
@@ -93,7 +94,8 @@
 										<i class="fa fa-fw fa-btn fa-user"></i>
 										{{ $case_member->user->name }} |
 										{{ $case_member->created_at }} - {{ $case_member->due_to }} |
-										{{ $case_member->status->name }}
+										{{ $case_member->status->name }} |
+										{{ $case_member->last_reply_at }}
 									</span>
 									<hr>
 									<h4 class="snippet-heading">

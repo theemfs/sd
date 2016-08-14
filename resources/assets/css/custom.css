@@ -1,3 +1,15 @@
+/*.small,*/
+/*.btn,
+.panel-heading
+button,
+a,
+p,
+label,
+input*/
+/*{
+	font-family: 'Exo 2', sans-serif;
+}*/
+
 task {
 	border-bottom: 1px solid #ccc;
 }
@@ -46,6 +58,9 @@ task {
 	position: relative;
 	overflow: hidden;
 }
+	.message_service {
+		background-color: #eee;
+	}
 
 .message-body {
 	white-space: pre-wrap;
