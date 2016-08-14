@@ -245,11 +245,11 @@ class CasesController extends Controller
 		$message->is_service_message = 1;
 		$message->case_id = $case->id;
 			if (!($case_before->status_id == $case->status_id)) {
-				$message->text = trans('app.Status changed: ') . $case_before->status->name . ' -> ' . $case->status->name;
+				$message->text .= trans('app.Status changed: ') . $case_before->status->name . ' -> ' . $case->status->name . "\n";
 				Auth::user()->messages()->save($message);
 			}
 			if (!($case_before->due_to == $case->due_to)) {
-				$message->text .= "\n" . trans('app.Due to changed: ') . $case_before->due_to . ' -> ' . $case->due_to;
+				$message->text .= trans('app.Due to changed: ') . $case_before->due_to . ' -> ' . $case->due_to . "\n";
 				Auth::user()->messages()->save($message);
 			}
 
