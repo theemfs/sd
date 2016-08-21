@@ -1,8 +1,5 @@
 .env
-.env.*.php
-.env.example
-.env.php
-/bower_components
+/bower_components/
 /node_modules/
 /public/thumbnails/**
 /storage/app/**
