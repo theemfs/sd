@@ -2035,23 +2035,8 @@ var components = {
         {
             "name": "select2",
             "main": "select2-built.js"
-        },
-        {
-            "name": "bootstrap",
-            "main": "bootstrap-built.js"
-        },
-        {
-            "name": "bootstrap-datepicker",
-            "main": "bootstrap-datepicker-built.js"
         }
     ],
-    "shim": {
-        "bootstrap": {
-            "deps": [
-                "jquery"
-            ]
-        }
-    },
     "baseUrl": "components"
 };
 if (typeof require !== "undefined" && require.config) {
