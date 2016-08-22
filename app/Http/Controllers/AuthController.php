@@ -113,7 +113,7 @@ class AuthController extends Controller
 		/**
 		 * auth via LDAP
 		 */
-		$ldap = new Ldap('192.168.10.10', $credentials);
+		$ldap = new Ldap(env('LDAP_AUTH'), function), $credentials);
 
 		if ( $ldap->isCredentialsCorrect( $credentials ) ) {
 
