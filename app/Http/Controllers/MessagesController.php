@@ -152,7 +152,7 @@ class MessagesController extends Controller
 				// $email->cc('');
 				// $email->bcc('');
 				// $email->replyTo('');
-				$email->subject("[Case #$case->id]: added message");
+				$email->subject("[Case #$case->id]: trans('app.New reply')");
 				$email->priority(2);
 				// $email->attach("https://www.facebook.com/images/fb_icon_325x325.png");
 				// $email->attach($pathToFile, array $options = []);
