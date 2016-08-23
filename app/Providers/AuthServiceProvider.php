@@ -36,6 +36,7 @@ class AuthServiceProvider extends ServiceProvider
 			return $case->user->id === $user->id
 				|| $case->performers->contains($user->id)
 				|| $case->members->contains($user->id)
+				|| $user->is_admin
 			;
 		});
 
