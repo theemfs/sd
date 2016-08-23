@@ -38,6 +38,9 @@
 						<li role="presentation" class="active"><a href="#author" aria-controls="home" role="tab" data-toggle="tab">{{ trans('app.As Author') }} <span class="badge">{{ $cases_author->count() }}</span></a></li>
 						<li role="presentation"><a href="#performer" aria-controls="profile" role="tab" data-toggle="tab">{{ trans('app.As Performer') }} <span class="badge">{{ $cases_performer->count() }}</span></a></li>
 						<li role="presentation"><a href="#member" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.As Member') }} <span class="badge">{{ $cases_member->count() }}</span></a></li>
+						@can('show-admin')
+						<li role="presentation"><a href="#all" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.All') }} <span class="badge">{{ $cases_all->count() }}</span></a></li>
+						@endcan
 					</ul>
 					<hr>
 					<div class="tab-content">
@@ -110,6 +113,31 @@
 								</div>
 							@endforeach
 						</div>
+						@can('show-admin')
+						<div role="tabpanel" class="tab-pane fade" id="all">
+							@foreach ($cases_all as $case_all)
+								<div class="snippet">
+									<span class="small">
+										<i class="fa fa-fw fa-btn fa-user"></i>
+										{{ $case_all->user->name }} |
+										{{ $case_all->created_at }} - {{ $case_all->due_to }} |
+										{{ $case_all->status->name }} |
+										{{ $case_all->last_reply_at }}
+									</span>
+									<hr>
+									<h4 class="snippet-heading">
+										<p class="pull-right small">
+											{{ $case_all->id }}
+										</p>
+										<a href="{{ action('CasesController@show', $case_all->id) }}">{{ $case_all->name }}</a>
+									</h4>
+									<div class="snippet-body">
+										<p>{{ mb_substr($case_all->text, 0, 300)."..." }}</p>
+									</div>
+								</div>
+							@endforeach
+						</div>
+						@endcan
 					</div>
 				</div>
 
