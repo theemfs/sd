@@ -15,12 +15,11 @@
 
 						<div class="col-md-8">
 							<input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="{{ trans('app.Domain login') }}">
-
-							@if ($errors->has('email'))
+							{{-- @if ($errors->has('email'))
 								<span class="help-block">
 									<strong>{{ $errors->first('email') }}</strong>
 								</span>
-							@endif
+							@endif --}}
 						</div>
 					</div>
 
@@ -29,12 +28,11 @@
 
 						<div class="col-md-8">
 							<input type="password" class="form-control" name="password" placeholder="{{ trans('app.Domain Password') }}">
-
-							@if ($errors->has('password'))
+							{{-- @if ($errors->has('password'))
 								<span class="help-block">
 									<strong>{{ $errors->first('password') }}</strong>
 								</span>
-							@endif
+							@endif --}}
 						</div>
 					</div>
 
