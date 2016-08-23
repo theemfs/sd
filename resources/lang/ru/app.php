@@ -9,6 +9,7 @@ return [
 	'LinkToThis' 							=> 'Ссылка на это сообщение',
 	'Cases' 								=> 'Кейсы',
 	'Case' 									=> 'Кейс',
+	'ALl' 									=> 'Все',
 	'As Author' 							=> 'Я - автор',
 	'As Performer' 							=> 'Я - исполнитель',
 	'As Member' 							=> 'Я - участник',
