@@ -164,25 +164,27 @@ class CasesController extends Controller
 			return view('errors.403');
 		}
 
-		$message_first  = Messages::where('case_id', $case->id)->orderby('created_at', 'asc')->first();
-		$messages 		= Messages::where('case_id', $case->id)->orderby('created_at', 'desc')->get();
-		//$messages 		= Messages::where('case_id', $case->id)->orderby('created_at', 'desc')->get()->splice(1);
-		$users 			= User::orderby('name', 'asc')->lists('name', 'id');
-		$membersIds 	= $case->members->lists('id')->toArray();
-		$performersIds 	= $case->performers->lists('id')->toArray();
-		$statuses 		= Statuses::orderby('id', 'asc')->lists('name', 'id');
-		//$statusesIds 	= $case->toArray();
+		$message_first 			 	= Messages::where('case_id', $case->id)->orderby('created_at', 'asc')->first();
+		$messages 					= Messages::where('case_id', $case->id)->orderby('created_at', 'desc')->get();
+		//$messages 				= Messages::where('case_id', $case->id)->orderby('created_at', 'desc')->get()->splice(1);
+		$users 						= User::orderby('name', 'asc')->lists('name', 'id');
+		$users_can_be_performers 	= User::where('can_be_performer', '1')->orderby('name', 'asc')->lists('name', 'id');
+		$membersIds 				= $case->members->lists('id')->toArray();
+		$performersIds 				= $case->performers->lists('id')->toArray();
+		$statuses 					= Statuses::orderby('id', 'asc')->lists('name', 'id');
+		//$statusesIds 				= $case->toArray();
 
 		//return($case->members);
 
 		return view('cases.show')
-			->with('case',			$case)
-			->with('messages',		$messages)
-			->with('message_first',	$message_first)
-			->with('users',			$users)
-			->with('membersIds',	$membersIds)
-			->with('performersIds',	$performersIds)
-			->with('statuses',		$statuses)
+			->with('case',						$case)
+			->with('messages',					$messages)
+			->with('message_first',				$message_first)
+			->with('users',						$users)
+			->with('membersIds',				$membersIds)
+			->with('users_can_be_performers',	$users_can_be_performers)
+			->with('performersIds',				$performersIds)
+			->with('statuses',					$statuses)
 			// ->with('statusesIds',	$statusesIds)
 		;
 	}

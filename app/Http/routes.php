@@ -31,11 +31,11 @@ Route::group(['middleware' => 'web'], function () {
 
 
 				//admin section
-				// Route::get('/admin',				'PagesController@adminShow');
-				// Route::get('/admin/phpinfo',		'PagesController@adminPhpinfoShow');
-				// Route::get('/admin/users',			'PagesController@adminUsersShow');
-				// Route::get('/admin/ldapusers',		'PagesController@getUsersFromLdap');
-				// Route::get('/admin/syncldapusers',	'PagesController@syncUsersFromLdap');
+				Route::get('/admin',				'PagesController@adminShow');
+				Route::get('/admin/phpinfo',		'PagesController@adminPhpinfoShow');
+				Route::get('/admin/users',			'PagesController@adminUsersShow');
+				Route::get('/admin/ldapusers',		'PagesController@getUsersFromLdap');
+				Route::get('/admin/syncldapusers',	'PagesController@syncUsersFromLdap');
 
 
 
