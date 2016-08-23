@@ -44,6 +44,9 @@ class CasesController extends Controller
 		$cases_performer 	= Auth::user()->performerOf;
 		$cases_member		= Auth::user()->memberOf;
 		$cases_all			= Cases::all();
+		$cases_not_assigned = collect(DB::select(DB::raw("SELECT * FROM cases WHERE cases.id NOT IN (SELECT case_id FROM case_performers)")));
+		// $cases_not_assigned = Cases::whereNotIn('book_price', DB::select(DB::raw("SELECT * FROM cases WHERE cases.id NOT IN (SELECT case_id FROM case_performers)")))->get();
+
 		//$cases = new Paginator($cases, $cases->count(), 2, $request);
 
 		// if (strlen($filter)==0) {
@@ -61,6 +64,7 @@ class CasesController extends Controller
 			->with('cases_performer',	$cases_performer)
 			->with('cases_member',		$cases_member)
 			->with('cases_all',			$cases_all)
+			->with('cases_not_assigned',$cases_not_assigned)
 			// ->with('filter',			$filter)
 		;
 	}

@@ -81,4 +81,7 @@ class User extends Model implements AuthenticatableContract,
 
 		return $cases0->merge($cases1)->merge($cases2);
 	}
+
+
+
 }

@@ -38,6 +38,7 @@
 						<li role="presentation" class="active"><a href="#author" aria-controls="home" role="tab" data-toggle="tab">{{ trans('app.As Author') }} <span class="badge">{{ $cases_author->count() }}</span></a></li>
 						<li role="presentation"><a href="#performer" aria-controls="profile" role="tab" data-toggle="tab">{{ trans('app.As Performer') }} <span class="badge">{{ $cases_performer->count() }}</span></a></li>
 						<li role="presentation"><a href="#member" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.As Member') }} <span class="badge">{{ $cases_member->count() }}</span></a></li>
+						<li role="presentation"><a href="#not_assigned" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.Not assigned') }} <span class="badge">{{ $cases_not_assigned->count() }}</span></a></li>
 						@can('show-admin')
 						<li role="presentation"><a href="#all" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.All') }} <span class="badge">{{ $cases_all->count() }}</span></a></li>
 						@endcan
@@ -109,6 +110,29 @@
 									</h4>
 									<div class="snippet-body">
 										<p>{{ mb_substr($case_member->text, 0, 300)."..." }}</p>
+									</div>
+								</div>
+							@endforeach
+						</div>
+						<div role="tabpanel" class="tab-pane fade" id="not_assigned">
+							@foreach ($cases_not_assigned as $case_not_assigned)
+								<div class="snippet">
+									<span class="small">
+										<i class="fa fa-fw fa-btn fa-user"></i>
+										{{ $case_not_assigned->user->name }} |
+										{{ $case_not_assigned->created_at }} - {{ $case_not_assigned->due_to }} |
+										{{ $case_not_assigned->status->name }} |
+										{{ $case_not_assigned->last_reply_at }}
+									</span>
+									<hr>
+									<h4 class="snippet-heading">
+										<p class="pull-right small">
+											{{ $case_not_assigned->id }}
+										</p>
+										<a href="{{ action('CasesController@show', $case_not_assigned->id) }}">{{ $case_not_assigned->name }}</a>
+									</h4>
+									<div class="snippet-body">
+										<p>{{ mb_substr($case_not_assigned->text, 0, 300)."..." }}</p>
 									</div>
 								</div>
 							@endforeach
