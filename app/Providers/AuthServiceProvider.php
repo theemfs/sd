@@ -46,6 +46,10 @@ class AuthServiceProvider extends ServiceProvider
 			;
 		});
 
+		$gate->define('show-admin', function ($user) {
+			return $user->is_admin;
+		});
+
 		// $gate->define('view-page', function ($user, $page) {
 		// 	return true
 		// 		// $page-> === $user->permission_id;

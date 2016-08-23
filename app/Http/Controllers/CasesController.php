@@ -43,6 +43,7 @@ class CasesController extends Controller
 		$cases_author 		= Auth::user()->cases;
 		$cases_performer 	= Auth::user()->performerOf;
 		$cases_member		= Auth::user()->memberOf;
+		$cases_all			= Cases::all();
 		//$cases = new Paginator($cases, $cases->count(), 2, $request);
 
 		// if (strlen($filter)==0) {
@@ -59,6 +60,7 @@ class CasesController extends Controller
 			->with('cases_author',		$cases_author)
 			->with('cases_performer',	$cases_performer)
 			->with('cases_member',		$cases_member)
+			->with('cases_all',			$cases_all)
 			// ->with('filter',			$filter)
 		;
 	}

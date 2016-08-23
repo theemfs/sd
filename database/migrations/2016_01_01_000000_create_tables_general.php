@@ -31,7 +31,8 @@ class CreateTablesGeneral extends Migration
 			$table->string('homephone')->nullable();
 			$table->string('title')->nullable();
 			$table->string('department')->nullable();
-			$table->string('can_be_performer')->nullable();
+			$table->integer('can_be_performer')->nullable();
+			$table->integer('is_admin')->nullable();
 		});
 
 
