@@ -119,7 +119,7 @@
 								<div class="snippet">
 									<span class="small">
 										<i class="fa fa-fw fa-btn fa-user"></i>
-										{{ $case_not_assigned->user->name }} |
+										{{-- {{ $case_not_assigned->user->name }} | --}}
 										{{ $case_not_assigned->created_at }} - {{ $case_not_assigned->due_to }} |
 										{{ $case_not_assigned->status->name }} |
 										{{ $case_not_assigned->last_reply_at }}
