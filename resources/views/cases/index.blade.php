@@ -72,7 +72,7 @@
 						</div>
 						<div role="tabpanel" class="tab-pane fade in active" id="performer">
 							@foreach ($cases_performer as $case_performer)
-								<div class="snippet style="background-color: {{ $case_author->status->color }}">
+								<div class="snippet style="background-color: {{ $case_performer->status->color }}">
 									<span class="small">
 										<i class="fa fa-fw fa-btn fa-user"></i>
 										{{ $case_performer->user->name }} |
@@ -119,7 +119,7 @@
 						@can('show-new-cases')
 						<div role="tabpanel" class="tab-pane fade" id="not_assigned">
 							@foreach ($cases_not_assigned as $case_not_assigned)
-								<div class="snippet style="background-color: {{ $case_author->status->color }}">
+								<div class="snippet style="background-color: {{ $case_not_assigned->status->color }}">
 									<span class="small">
 										<i class="fa fa-fw fa-btn fa-user"></i>
 										{{-- {{ $case_not_assigned->user->name }} | --}}
@@ -144,7 +144,7 @@
 						@can('show-admin')
 						<div role="tabpanel" class="tab-pane fade" id="all">
 							@foreach ($cases_all as $case_all)
-								<div class="snippet style="background-color: {{ $case_author->status->color }}">
+								<div class="snippet style="background-color: {{ $case_all->status->color }}">
 									<span class="small">
 										<i class="fa fa-fw fa-btn fa-user"></i>
 										{{ $case_all->user->name }} |
