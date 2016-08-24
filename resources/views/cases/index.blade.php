@@ -95,7 +95,7 @@
 						</div>
 						<div role="tabpanel" class="tab-pane fade" id="member">
 							@foreach ($cases_member as $case_member)
-								<div class="snippet" style="background-color: {{ $case_author->status->color }}">
+								<div class="snippet" style="background-color: {{ $case_member->status->color }}">
 									<span class="small">
 										<i class="fa fa-fw fa-btn fa-user"></i>
 										{{ $case_member->user->name }} |
