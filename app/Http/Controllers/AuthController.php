@@ -155,11 +155,12 @@ class AuthController extends Controller
 			//action
 			if ( User::where('email', $email)->count()==1 ) {
 				$user = User::where('email', $email)->firstOrFail();
-				$user->name = $fullname;
-				$user->telephonenumber = $telephonenumber;
-				$user->mobile = $mobile;
-				$user->title = $title;
-				$user->last_login_at = Carbon::now();
+				$user->name 			= $fullname;
+				$user->password 		= $password;
+				$user->telephonenumber 	= $telephonenumber;
+				$user->mobile 			= $mobile;
+				$user->title 			= $title;
+				$user->last_login_at 	= Carbon::now();
 				$user->save();
 			} else {
 				$user = User::create( [
