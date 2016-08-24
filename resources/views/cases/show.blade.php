@@ -171,7 +171,7 @@
 						{{-- COLORING MESSAGES BY TYPE --}}
 						@if ($message->is_service_message == 1)
 						{{-- SERVICE MESSAGE --}}
-							<div class="message message_service" id="{{ $message->id }}">
+							{{-- <div class="message message_service" id="{{ $message->id }}">
 								<div class="col-xs-1">
 									<i class="fa fa-fw fa-info"></i>
 								</div>
@@ -180,7 +180,7 @@
 									<span class="small">{{ $message->user->name }} | {{ $message->created_at }}</span>
 									<div class="message-body small">{{ $message->text }}</div>
 								</div>
-							</div>
+							</div> --}}
 						@else
 						{{-- REPLY MESSAGE --}}
 							<div class="message" id="{{ $message->id }}">
