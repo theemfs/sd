@@ -38,7 +38,9 @@
 						<li role="presentation" class="active"><a href="#author" aria-controls="home" role="tab" data-toggle="tab">{{ trans('app.As Author') }} <span class="badge">{{ $cases_author->count() }}</span></a></li>
 						<li role="presentation"><a href="#performer" aria-controls="profile" role="tab" data-toggle="tab">{{ trans('app.As Performer') }} <span class="badge">{{ $cases_performer->count() }}</span></a></li>
 						<li role="presentation"><a href="#member" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.As Member') }} <span class="badge">{{ $cases_member->count() }}</span></a></li>
+						@can('show-new-cases')
 						<li role="presentation"><a href="#not_assigned" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.Not assigned') }} <span class="badge">{{ $cases_not_assigned->count() }}</span></a></li>
+						@endcan
 						@can('show-admin')
 						<li role="presentation"><a href="#all" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.All') }} <span class="badge">{{ $cases_all->count() }}</span></a></li>
 						@endcan
