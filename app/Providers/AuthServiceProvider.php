@@ -40,6 +40,12 @@ class AuthServiceProvider extends ServiceProvider
 			;
 		});
 
+		$gate->define('show-new-cases', function ($user, $case) {
+			return $user->can_be_performer
+				|| $user->is_admin
+			;
+		});
+
 		$gate->define('update-case', function ($user, $case) {
 			return $case->user->id === $user->id
 				|| $case->performers->contains($user->id)
