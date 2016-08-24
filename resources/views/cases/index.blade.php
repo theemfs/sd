@@ -119,7 +119,7 @@
 						@can('show-new-cases')
 						<div role="tabpanel" class="tab-pane fade" id="not_assigned">
 							@foreach ($cases_not_assigned as $case_not_assigned)
-								<div class="snippet" style="background-color: {{ $case_not_assigned->status->color }}">
+								<div class="snippet">
 									<span class="small">
 										<i class="fa fa-fw fa-btn fa-user"></i>
 										{{-- {{ $case_not_assigned->user->name }} | --}}
