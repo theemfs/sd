@@ -65,7 +65,7 @@
 										<a href="{{ action('CasesController@show', $case_author->id) }}">{{ $case_author->name }}</a>
 									</h4>
 									<div class="snippet-body">
-										<p>{{ mb_substr($case_author->text, 0, 300)."..." }}</p>
+										<p>{{ mb_substr($case_author->text, 0, 100)."..." }}</p>
 									</div>
 								</div>
 							@endforeach
@@ -88,7 +88,7 @@
 										<a href="{{ action('CasesController@show', $case_performer->id) }}">{{ $case_performer->name }}</a>
 									</h4>
 									<div class="snippet-body">
-										<p>{{ mb_substr($case_performer->text, 0, 300)."..." }}</p>
+										<p>{{ mb_substr($case_performer->text, 0, 100)."..." }}</p>
 									</div>
 								</div>
 							@endforeach
@@ -111,7 +111,7 @@
 										<a href="{{ action('CasesController@show', $case_member->id) }}">{{ $case_member->name }}</a>
 									</h4>
 									<div class="snippet-body">
-										<p>{{ mb_substr($case_member->text, 0, 300)."..." }}</p>
+										<p>{{ mb_substr($case_member->text, 0, 100)."..." }}</p>
 									</div>
 								</div>
 							@endforeach
@@ -135,7 +135,7 @@
 										<a href="{{ action('CasesController@show', $case_not_assigned->id) }}">{{ $case_not_assigned->name }}</a>
 									</h4>
 									<div class="snippet-body">
-										<p>{{ mb_substr($case_not_assigned->text, 0, 300)."..." }}</p>
+										<p>{{ mb_substr($case_not_assigned->text, 0, 100)."..." }}</p>
 									</div>
 								</div>
 							@endforeach
@@ -160,7 +160,7 @@
 										<a href="{{ action('CasesController@show', $case_all->id) }}">{{ $case_all->name }}</a>
 									</h4>
 									<div class="snippet-body">
-										<p>{{ mb_substr($case_all->text, 0, 300)."..." }}</p>
+										<p>{{ mb_substr($case_all->text, 0, 100)."..." }}</p>
 									</div>
 								</div>
 							@endforeach
