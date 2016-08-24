@@ -35,8 +35,8 @@
 
 				<div> {{-- TABS --}}
 					<ul class="nav nav-pills nav-justified" role="tablist">
-						<li role="presentation" class="active"><a href="#author" aria-controls="home" role="tab" data-toggle="tab">{{ trans('app.As Author') }} <span class="badge">{{ $cases_author->count() }}</span></a></li>
-						<li role="presentation"><a href="#performer" aria-controls="profile" role="tab" data-toggle="tab">{{ trans('app.As Performer') }} <span class="badge">{{ $cases_performer->count() }}</span></a></li>
+						<li role="presentation"><a href="#author" aria-controls="home" role="tab" data-toggle="tab">{{ trans('app.As Author') }} <span class="badge">{{ $cases_author->count() }}</span></a></li>
+						<li role="presentation" class="active"><a href="#performer" aria-controls="profile" role="tab" data-toggle="tab">{{ trans('app.As Performer') }} <span class="badge">{{ $cases_performer->count() }}</span></a></li>
 						<li role="presentation"><a href="#member" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.As Member') }} <span class="badge">{{ $cases_member->count() }}</span></a></li>
 						@can('show-new-cases')
 						<li role="presentation"><a href="#not_assigned" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.Not assigned') }} <span class="badge">{{ $cases_not_assigned->count() }}</span></a></li>
@@ -47,7 +47,7 @@
 					</ul>
 					<hr>
 					<div class="tab-content">
-						<div role="tabpanel" class="tab-pane fade in active" id="author">
+						<div role="tabpanel" class="tab-pane fade" id="author">
 							@foreach ($cases_author as $case_author)
 								<div class="snippet">
 									<span class="small">
@@ -70,7 +70,7 @@
 								</div>
 							@endforeach
 						</div>
-						<div role="tabpanel" class="tab-pane fade" id="performer">
+						<div role="tabpanel" class="tab-pane fade in active" id="performer">
 							@foreach ($cases_performer as $case_performer)
 								<div class="snippet">
 									<span class="small">
