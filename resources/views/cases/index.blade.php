@@ -114,6 +114,7 @@
 								</div>
 							@endforeach
 						</div>
+						@can('show-new-cases')
 						<div role="tabpanel" class="tab-pane fade" id="not_assigned">
 							@foreach ($cases_not_assigned as $case_not_assigned)
 								<div class="snippet">
@@ -137,6 +138,7 @@
 								</div>
 							@endforeach
 						</div>
+						@endcan
 						@can('show-admin')
 						<div role="tabpanel" class="tab-pane fade" id="all">
 							@foreach ($cases_all as $case_all)
