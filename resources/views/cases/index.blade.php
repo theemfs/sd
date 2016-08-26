@@ -3,7 +3,7 @@
 
 
 @section('css')
-<META HTTP-EQUIV="refresh" CONTENT="60">
+{{-- <META HTTP-EQUIV="refresh" CONTENT="60"> --}}
 @endsection
 
 

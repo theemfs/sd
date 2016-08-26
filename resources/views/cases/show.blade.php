@@ -20,27 +20,54 @@
 	<div class="col-md-8 col-md-offset-2">
 
 
+
+			<div class="page-header">
+				<h1>{{ $case->name }} <small>{{ $case->status->name }}</small></h1>
+			</div>
+
+
+
 			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 				<div class="row">
 					<div class="panel panel-default">
 						<div class="panel-heading" role="tab" id="headingOne">
 							{{-- <h4 class="panel-title"> --}}
 								<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-									<i class="fa fa-fw fa-btn fa-cogs"></i> {{ trans('app.Case Settings') }}
+									<i class="fa fa-fw fa-btn fa-cogs"></i>
+									{{ trans('app.Case') . " #" . $case->id . " - " . trans('app.Case Settings') }}
 								</a>
 							{{-- </h4> --}}
 						</div>
 
-						<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+						<div id="collapseOne" class="panel-collapse in" role="tabpanel" aria-labelledby="headingOne">
 							<div class="panel-body">
 								<div class="">
 								@can('update-case', $case)
 									{!! Form::model($case, ['method' => 'PATCH', 'action' => ['CasesController@update', $case->id], 'class' => 'form-horizontal']) !!}
+
 										<div class="form-group">
 											<div class="col-xs-12">
 												{!! Form::submit( trans('app.Update'), ['class' => 'btn btn-primary form-control col-xs-12']) !!}
 											</div>
 										</div>
+
+										{{-- <div class="form-group">
+											<div class="col-xs-12">
+												{!! Form::label( null, trans('app.Author'), ['class' => 'control-label']) !!}
+											</div>
+											<div class="col-xs-12">
+												{!! Form::text(null, $case->user->name , ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="col-xs-12">
+												{!! Form::label('name', trans('app.Performers'), ['class' => 'control-label']) !!}
+											</div>
+											<div class="col-xs-12">
+												{!! Form::text('name', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+											</div>
+										</div> --}}
 
 										<div class="col-md-3 col-sm-6 col-xs-12">
 											{!! Form::label('users_list_performers', trans('app.Performers'), ['class' => 'control-label']) !!}
@@ -52,7 +79,16 @@
 										<div class="col-md-3 col-sm-6 col-xs-12">
 											{!! Form::label('users_list_members', trans('app.Members'), ['class' => 'control-label']) !!}
 											<div class="form-group">
-												{!! Form::select('members[]', $users, $membersIds, ['id' => 'users_list_members', 'class' => 'form-control selectpicker', 'multiple', 'autocomplete' => 'off', 'size' => '1']) !!}
+												{{-- {!! Form::select('members[]', $users, $membersIds, ['id' => 'users_list_members', 'class' => 'form-control selectpicker', 'multiple', 'autocomplete' => 'off', 'size' => '1']) !!} --}}
+												<select id="users_list_members" class="form-control selectpicker" multiple="multiple" autocomplete="off" size="1" name="members[]">
+													@foreach($users_members as $user_member)
+														<option value="{{ $user_member->id }}" selected="selected">{{ $user_member->name }}</option>
+													@endforeach
+														<option data-divider="true"></option>
+													@foreach($users_can_be_members as $user_can_be_member)
+														<option value="{{ $user_can_be_member->id }}">{{ $user_can_be_member->name }}</option>
+													@endforeach
+												</select>
 											</div>
 										</div>
 
@@ -72,6 +108,7 @@
 												</span> --}}
 											</div>
 										</div>
+
 									{!! Form::close() !!}
 								@else
 										<div class="col-md-3 col-sm-6 col-xs-12">
@@ -127,7 +164,7 @@
 			<div class="panel panel-default">
 
 				<div class="panel-heading">
-					{{ trans('app.Case') . " #" . $case->id }}
+					{{ trans('app.Case') . " #" . $case->id . " - " . trans('app.Discussion') }}
 				</div>
 
 				<div class="panel-body">
@@ -135,26 +172,36 @@
 
 
 					{{-- REPLY AREA --}}
-					{!! Form::open(['url'=>'messages', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
-						<div class="message bg-info">
-							<div class=""></div>
-							<div class="col-xs-12">
-								<div class="form-group">
-									{!! Form::textarea('text', null, ['class' => 'form-control', 'rows' => '3', 'autocomplete' => 'off', 'placeholder' => trans('app.Add Message Textarea Placeholder') ]) !!}
+					<button class="btn btn-primary col-xs-12" type="button" data-toggle="collapse" data-target="#reply_area" aria-expanded="false" aria-controls="collapseExample">
+						{{ trans('app.Reply') }}
+					</button>
+					<div class="collapse" id="reply_area">
+						<div class="well">
+							{!! Form::open(['url'=>'messages', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
+								<div class="message bg-info">
+									<div class=""></div>
+									<div class="col-xs-12">
+										<div class="form-group">
+											{!! Form::textarea('text', null, ['class' => 'form-control', 'rows' => '3', 'autocomplete' => 'off', 'placeholder' => trans('app.Add Message Textarea Placeholder') ]) !!}
+										</div>
+											{!! Form::hidden('case', $case->id, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+										<div class="form-group">
+											{!! Form::file( 'attachments[]', ['class' => '', 'multiple' => 'true']) !!}
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-xs-12 pull-right">
+											{!! Form::submit( trans('app.Add Message'), ['class' => 'btn btn-primary form-control col-xs-12']) !!}
+										</div>
+									</div>
 								</div>
-									{!! Form::hidden('case', $case->id, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
-								<div class="form-group">
-									{!! Form::file( 'attachments[]', ['class' => '', 'multiple' => 'true']) !!}
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-xs-12 pull-right">
-									{!! Form::submit( trans('app.Add Message'), ['class' => 'btn btn-primary form-control col-xs-12']) !!}
-								</div>
-							</div>
+							{!! Form::close() !!}
 						</div>
-					{!! Form::close() !!}
-					<hr>
+					</div>
+					<div class="col-xs-12">
+						<hr>
+					</div>
+
 
 
 
