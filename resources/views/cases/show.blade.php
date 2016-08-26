@@ -20,7 +20,6 @@
 	<div class="col-md-8 col-md-offset-2">
 
 
-
 			<div class="page-header">
 				<h1>{{ $case->name }} <small>{{ $case->status->name }}</small></h1>
 			</div>
@@ -58,7 +57,7 @@
 											<div class="col-xs-12">
 												{!! Form::text(null, $case->user->name , ['class' => 'form-control', 'autocomplete' => 'off']) !!}
 											</div>
-										</div> --}}
+										</div>
 
 										<div class="form-group">
 											<div class="col-xs-12">
@@ -67,7 +66,7 @@
 											<div class="col-xs-12">
 												{!! Form::text('name', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
 											</div>
-										</div>
+										</div> --}}
 
 										<div class="col-md-3 col-sm-6 col-xs-12">
 											{!! Form::label('users_list_performers', trans('app.Performers'), ['class' => 'control-label']) !!}
@@ -172,11 +171,11 @@
 
 
 					{{-- REPLY AREA --}}
-					<button class="btn btn-primary col-xs-12" type="button" data-toggle="collapse" data-target="#reply_area" aria-expanded="false" aria-controls="collapseExample">
+					{{-- <button class="btn btn-primary col-xs-12" type="button" data-toggle="collapse" data-target="#reply_area" aria-expanded="false" aria-controls="collapseExample">
 						{{ trans('app.Reply') }}
 					</button>
 					<div class="collapse" id="reply_area">
-						<div class="well">
+						<div class="well"> --}}
 							{!! Form::open(['url'=>'messages', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
 								<div class="message bg-info">
 									<div class=""></div>
@@ -191,13 +190,13 @@
 									</div>
 									<div class="form-group">
 										<div class="col-xs-12 pull-right">
-											{!! Form::submit( trans('app.Add Message'), ['class' => 'btn btn-primary form-control col-xs-12']) !!}
+											{!! Form::submit( trans('app.Reply'), ['class' => 'btn btn-primary form-control col-xs-12']) !!}
 										</div>
 									</div>
 								</div>
 							{!! Form::close() !!}
-						</div>
-					</div>
+						{{-- </div>
+					</div> --}}
 					<div class="col-xs-12">
 						<hr>
 					</div>
