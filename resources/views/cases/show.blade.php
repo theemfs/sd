@@ -58,7 +58,7 @@
 											<div class="col-xs-12">
 												{!! Form::text(null, $case->user->name , ['class' => 'form-control', 'autocomplete' => 'off']) !!}
 											</div>
-										</div>
+										</div> --}}
 
 										<div class="form-group">
 											<div class="col-xs-12">
@@ -67,7 +67,7 @@
 											<div class="col-xs-12">
 												{!! Form::text('name', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
 											</div>
-										</div> --}}
+										</div>
 
 										<div class="col-md-3 col-sm-6 col-xs-12">
 											{!! Form::label('users_list_performers', trans('app.Performers'), ['class' => 'control-label']) !!}
