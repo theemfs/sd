@@ -94,14 +94,14 @@
 										</div>
 
 										<div class="col-md-3 col-sm-6 col-xs-12">
-											{!! Form::label('users_list_members', trans('app.Status'), ['class' => 'control-label']) !!}
+											{!! Form::label('status_id', trans('app.Status'), ['class' => 'control-label']) !!}
 											<div class="form-group">
 												{!! Form::select('status_id', $statuses, $case->status_id, ['id' => 'statuses_list', 'class' => 'form-control selectpicker', 'autocomplete' => 'off', 'size' => '1']) !!}
 											</div>
 										</div>
 
 										<div class="col-md-3 col-sm-6 col-xs-12">
-											{!! Form::label('users_list_members', trans('app.Due To'), ['class' => 'control-label']) !!}
+											{!! Form::label('due_to', trans('app.Due To'), ['class' => 'control-label']) !!}
 											<div class="form-group">
 												<input type='text' name="due_to" id='due_to' class="form-control date"/>
 												{{-- <span class="input-group-addon">
@@ -147,9 +147,9 @@
 										</div>
 								@endcan
 								</div>
-								<small>
-									Изменение параметров доступно только автору или исполнителю кейса.
-								</small>
+								<div class="col-xs-12">
+									<small>Изменение параметров доступно только автору или исполнителю кейса.</small>
+								</div>
 							</div>
 
 						</div>
@@ -354,7 +354,7 @@
 				locale: 'ru',
 				// useCurrent: true,
 				showTodayButton: true,
-				// showClear: true,
+				showClear: true,
 				// showClose: true,
 				// focusOnShow: true,
 			});

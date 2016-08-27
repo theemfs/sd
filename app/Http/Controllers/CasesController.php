@@ -86,10 +86,11 @@ class CasesController extends Controller
 	public function store(Request $request)
 	{
 
-		// $this->validate($request, [
-		// 	// 'text' 			=> 'required|min:10',
-		// 	// 'attachments' 	=> 'max:1',
-		// ]);
+		$this->validate($request, [
+			'name' 			=> 'required|min:10',
+			'text' 			=> 'required|min:10',
+			// 'attachments' 	=> 'max:1',
+		]);
 
 		//return($request->all());
 
