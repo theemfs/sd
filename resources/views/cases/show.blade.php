@@ -27,13 +27,16 @@
 
 			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 				<div class="row">
-					<div class="panel panel-default">
+					<div class="panel panel-primary">
 						<div class="panel-heading" role="tab" id="headingOne">
 							{{-- <h4 class="panel-title"> --}}
-								<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+								{{-- <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> --}}
 									{{-- {{ trans('app.Case') . " #" . $case->id . " - " . trans('app.Case Settings') }} --}}
-									<h3> {{ trans('app.Case') . " #" . $case->id . ". \"" . $case->name . "\""}} </h3>
-								</a>
+									{{ trans('app.Case') }}
+									#{{ $case->id }}.
+									"{{ $case->name }}"
+									({{ $case->user->name }})
+								{{-- </a> --}}
 							{{-- </h4> --}}
 						</div>
 
@@ -164,7 +167,7 @@
 			<div class="panel panel-default">
 
 				<div class="panel-heading">
-					{{ trans('app.Case') . " #" . $case->id . " - " . trans('app.Discussion') }}
+					{{ trans('app.Discussion') }}
 				</div>
 
 				<div class="panel-body">
@@ -182,7 +185,7 @@
 									<div class=""></div>
 									<div class="col-xs-12">
 										<div class="form-group">
-											{!! Form::textarea('text', null, ['class' => 'form-control', 'rows' => '3', 'autocomplete' => 'off', 'placeholder' => trans('app.Add Message Textarea Placeholder') ]) !!}
+											{!! Form::textarea('text', null, ['class' => 'form-control', 'rows' => '7', 'autocomplete' => 'off', 'placeholder' => trans('app.Add Message Textarea Placeholder') ]) !!}
 										</div>
 											{!! Form::hidden('case', $case->id, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
 										<div class="form-group">
@@ -191,7 +194,7 @@
 									</div>
 									<div class="form-group">
 										<div class="col-xs-12 pull-right">
-											{!! Form::submit( trans('app.Reply'), ['class' => 'btn btn-primary form-control col-xs-12']) !!}
+											{!! Form::submit( trans('app.Reply'), ['class' => 'btn btn-info form-control col-xs-12']) !!}
 										</div>
 									</div>
 								</div>
