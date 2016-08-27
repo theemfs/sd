@@ -43,7 +43,7 @@ class CasesController extends Controller
 		$cases_author 		= Auth::user()->cases;
 		$cases_performer 	= Auth::user()->performerOf;
 		$cases_member		= Auth::user()->memberOf;
-		$cases_all			= Cases::all();
+		$cases_all			= Cases::orderBy('updated_at','desc')->get();
 		$cases_not_assigned = collect(DB::select(DB::raw("SELECT * FROM cases WHERE cases.id NOT IN (SELECT case_id FROM case_performers)")));
 		// dd($cases_all);
 		// $cases_not_assigned = Cases::whereNotIn('book_price', DB::select(DB::raw("SELECT * FROM cases WHERE cases.id NOT IN (SELECT case_id FROM case_performers)")))->get();
@@ -155,9 +155,36 @@ class CasesController extends Controller
 			}
 		}
 
+
+
+		// SENDING EMAIL NOTIFICATION
+		$data = array(
+			'case' => $case,
+			'msg' => $message,
+			'user' => Auth::user()
+		);
+
+		$subscribers = User::where('can_be_performer', true)->get();
+		//$subscribers = User::where('email', 'anton@grandbaikal.ru')->get();
+
+		foreach ($subscribers as $subscriber) {
+			Mail::send('emails.notification_newcase', $data, function($email) use ($case, $message, $subscriber) {
+				$email->from( env('MAIL_USERNAME') );
+				$email->to($subscriber->email);
+				$email->subject("[Case #$case->id]: " . trans('app.New case'));
+				$email->priority(2);
+			});
+		}
+
+
+
+		// REDIRECT
 		//$this->validate($request, ['id' => 'unique:cases|required|regex:/^89\d{9}$/']);
 		// Messages::create($request->all());
 		return redirect()->action('CasesController@show', [$case->id]);
+
+
+
 	}
 
 

@@ -134,6 +134,7 @@ class MessagesController extends Controller
 
 
 
+		// SENDING EMAIL NOTIFICATION
 		$data = array(
 			'case' => $case,
 			'msg' => $message,
@@ -143,7 +144,7 @@ class MessagesController extends Controller
 		$subscribers = $case->members->merge($case->performers)->merge($case->user())->push($case->user)->unique();
 
 		foreach ($subscribers as $subscriber) {
-			Mail::send('emails.notification', $data, function($email) use ($case, $message, $subscriber) {
+			Mail::send('emails.notification_reply', $data, function($email) use ($case, $message, $subscriber) {
 
 				$email->from( env('MAIL_USERNAME') );
 				// $email->sender('', '');
@@ -162,7 +163,13 @@ class MessagesController extends Controller
 			});
 		}
 
+
+
+		// REDIRECT
 		return redirect()->action('CasesController@show', [$case->id]);
+
+
+
 	}
 
 

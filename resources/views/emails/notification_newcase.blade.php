@@ -1,4 +1,4 @@
-<?php echo $user->name; ?> оставил(а) сообщение в <a href="<?php echo action('CasesController@show', $case->id);?>">кейсе #<?php echo $case->id; ?> [<?php echo $case->name; ?>]</a>:
+<?php echo $user->name; ?> создал(а) новый кейс <a href="<?php echo action('CasesController@show', $case->id);?>">[# <?php echo $case->id; ?>] <?php echo $case->name; ?></a>:
 
 <hr>
 
