@@ -20,9 +20,8 @@
 	<div class="col-md-8 col-md-offset-2">
 
 
-			<div class="page-header">
-				<h1>{{ $case->name }} <small>{{ $case->status->name }}</small></h1>
-			</div>
+			{{-- <h2>{{ trans('app.Case') . " #" . $case->id . ". \"" . $case->name . "\""}}</h2> --}}
+
 
 
 
@@ -32,8 +31,8 @@
 						<div class="panel-heading" role="tab" id="headingOne">
 							{{-- <h4 class="panel-title"> --}}
 								<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-									<i class="fa fa-fw fa-btn fa-cogs"></i>
-									{{ trans('app.Case') . " #" . $case->id . " - " . trans('app.Case Settings') }}
+									{{-- {{ trans('app.Case') . " #" . $case->id . " - " . trans('app.Case Settings') }} --}}
+									<h3> {{ trans('app.Case') . " #" . $case->id . ". \"" . $case->name . "\""}} </h3>
 								</a>
 							{{-- </h4> --}}
 						</div>
@@ -138,7 +137,9 @@
 										<div class="col-md-3 col-sm-6 col-xs-12">
 											{!! Form::label('users_list_members', trans('app.Due To'), ['class' => 'control-label']) !!}
 											<div class="form-group">
-												<input type='text' name="due_to" id='due_to' class="form-control date" readonly value="{{ date("Y-m-d H:i", strtotime($case->due_to)) }}"/>
+												<input type='text' name="due_to" id='due_to' class="form-control date" readonly value="
+													{{ ($case->due_to)>1 ? date("Y-m-d H:i", strtotime($case->due_to)) : "" }}
+												"/>
 											</div>
 										</div>
 								@endcan
