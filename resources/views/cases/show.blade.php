@@ -232,8 +232,8 @@
 								</div>
 							</div> --}}
 						@else
-						{{-- REPLY MESSAGE --}}
-							<div class="message" id="{{ $message->id }}">
+						{{-- MESSAGES --}}
+							<div class="message" id="{{ $message->id }}" {!! Auth::user()->id==$message->user_id ? 'style="background-color: #FFFFD4"' : ""!!}>
 								<div class="col-xs-1">
 									<i class="fa fa-fw fa-comment"></i>
 								</div>
