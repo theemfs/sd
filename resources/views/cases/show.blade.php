@@ -115,7 +115,7 @@
 										<div class="col-md-3 col-sm-6 col-xs-12">
 											{!! Form::label('users_list_performers', trans('app.Performers'), ['class' => 'control-label']) !!}
 											<div class="form-group">
-												{!! Form::select('performers[]', $case->performers->lists('name', 'id'), $performersIds, ['id' => 'users_list_performers', 'class' => 'form-control selectpicker', 'multiple', 'autocomplete' => 'off', 'size' => '1']) !!}
+												{!! Form::select('performers[]', $users_can_be_performers, $performersIds, ['id' => 'users_list_performers', 'class' => 'form-control selectpicker', 'multiple', 'autocomplete' => 'off', 'size' => '1']) !!}
 											</div>
 										</div>
 
