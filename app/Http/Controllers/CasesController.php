@@ -164,8 +164,8 @@ class CasesController extends Controller
 			'user' => Auth::user()
 		);
 
-		$subscribers = User::where('can_be_performer', true)->get();
-		//$subscribers = User::where('email', 'anton@grandbaikal.ru')->get();
+		//$subscribers = User::where('can_be_performer', true)->get();
+		$subscribers = User::where('is_admin', true)->get();
 
 		foreach ($subscribers as $subscriber) {
 			Mail::send('emails.notification_newcase', $data, function($email) use ($case, $message, $subscriber) {

@@ -46,12 +46,6 @@
 								@can('update-case', $case)
 									{!! Form::model($case, ['method' => 'PATCH', 'action' => ['CasesController@update', $case->id], 'class' => 'form-horizontal']) !!}
 
-										<div class="form-group">
-											<div class="col-xs-12">
-												{!! Form::submit( trans('app.Update'), ['class' => 'btn btn-primary form-control col-xs-12']) !!}
-											</div>
-										</div>
-
 										{{-- <div class="form-group">
 											<div class="col-xs-12">
 												{!! Form::label( null, trans('app.Author'), ['class' => 'control-label']) !!}
@@ -107,6 +101,12 @@
 												{{-- <span class="input-group-addon">
 													<span class="glyphicon glyphicon-calendar"></span>
 												</span> --}}
+											</div>
+										</div>
+
+										<div class="form-group">
+											<div class="col-xs-12">
+												{!! Form::submit( trans('app.Update'), ['class' => 'btn btn-primary form-control col-xs-12']) !!}
 											</div>
 										</div>
 
