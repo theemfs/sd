@@ -40,7 +40,7 @@ return [
 	'Message' 								=> 'Сообщение',
 	'My profile' 							=> 'Мой профиль',
 	'New reply' 							=> 'Новый ответ',
-	'New case' 								=> 'Новый кейс',
+	'New case' 								=> 'Новый кейсы',
 	'Not assigned' 							=> 'Без исполнителя',
 	'Nothing Selected' 						=> 'Не выбрано',
 	'Password' 								=> 'Пароль',

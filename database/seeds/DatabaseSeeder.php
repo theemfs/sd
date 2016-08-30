@@ -25,19 +25,19 @@ class DatabaseSeeder extends Seeder
 
 		//User::create(['email' => 'admin@example.com', 'password'=>Hash::make('12'), 'name' => 'Admin']);//default user
 
-		Priorities::create(['name' => 'critical']);
-		Priorities::create(['name' => 'high']);
-		Priorities::create(['name' => 'normal']);
-		Priorities::create(['name' => 'low']);
+		Priorities::create(['name' => 'наивысший', 	'color' => '#FF0000']);
+		Priorities::create(['name' => 'высокий', 	'color' => '#F77777']);
+		Priorities::create(['name' => 'обычный', 	'color' => '#F1C6C6']);
+		Priorities::create(['name' => 'низкий', 	'color' => '#FFFFFF']);
 
 		Types::create(['name' => 'event']);
 		Types::create(['name' => 'event']);
 
-		Statuses::create(['name' => 'новый']);
-		Statuses::create(['name' => 'в работе']);
-		Statuses::create(['name' => 'ожидание']);
-		Statuses::create(['name' => 'решён']);
-		Statuses::create(['name' => 'закрыт']);
+		Statuses::create(['name' => 'новый', 	'color' => '#d9edf7']);
+		Statuses::create(['name' => 'в работе', 'color' => '#ebcccc']);
+		Statuses::create(['name' => 'ожидание', 'color' => '#fcf8e3']);
+		Statuses::create(['name' => 'решён', 	'color' => '#dff0d8']);
+		Statuses::create(['name' => 'закрыт', 	'color' => '#f7f7f9']);
 
 		// MessagesTypes::create(['name' => 'reply']);
 		// MessagesTypes::create(['name' => 'status']);

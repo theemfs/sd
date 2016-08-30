@@ -108,6 +108,7 @@ class CreateTablesGeneral extends Migration
 			$table->string('comment')->nullable();
 
 			$table->string('name')->nullable();
+			$table->string('color')->nullable();
 		});
 
 
@@ -120,6 +121,7 @@ class CreateTablesGeneral extends Migration
 
 			$table->string('name')->nullable();
 			$table->string('color')->nullable();
+			$table->integer('is_closed')->nullable();
 		});
 
 

@@ -218,19 +218,36 @@ class CasesController extends Controller
 
 		//return($case->members);
 
-		return view('cases.show_wide')
-			->with('case',						$case)
-			->with('messages',					$messages)
-			->with('message_first',				$message_first)
-			->with('users',						$users)
-			->with('membersIds',				$membersIds)
-			->with('users_can_be_performers',	$users_can_be_performers)
-			->with('performersIds',				$performersIds)
-			->with('statuses',					$statuses)
-			->with('users_members',				$users_members)
-			->with('users_can_be_members',		$users_can_be_members)
-			// ->with('statusesIds',	$statusesIds)
-		;
+		if ($case->status_id==5) {
+			return view('cases.show_wide')
+				->with('case',						$case)
+				->with('messages',					$messages)
+				->with('message_first',				$message_first)
+				->with('users',						$users)
+				->with('membersIds',				$membersIds)
+				->with('users_can_be_performers',	$users_can_be_performers)
+				->with('performersIds',				$performersIds)
+				->with('statuses',					$statuses)
+				->with('users_members',				$users_members)
+				->with('users_can_be_members',		$users_can_be_members)
+				// ->with('statusesIds',	$statusesIds)
+			;
+		} else {
+			return view('cases.show_wide')
+				->with('case',						$case)
+				->with('messages',					$messages)
+				->with('message_first',				$message_first)
+				->with('users',						$users)
+				->with('membersIds',				$membersIds)
+				->with('users_can_be_performers',	$users_can_be_performers)
+				->with('performersIds',				$performersIds)
+				->with('statuses',					$statuses)
+				->with('users_members',				$users_members)
+				->with('users_can_be_members',		$users_can_be_members)
+				// ->with('statusesIds',	$statusesIds)
+			;
+		}
+
 	}
 
 
