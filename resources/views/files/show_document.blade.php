@@ -7,8 +7,6 @@
 
 		<div class="panel-heading">
 			{{ trans('app.File From Case') }}
-			{{-- {{ trans('app.File') . " #" . $file->id }} --}}
-			{{-- {{ trans('app.From') . " #" . $file->id }} --}}
 			#{{ $file->message->case->id }}
 			"{{ $file->message->case->name }}"
 		</div>

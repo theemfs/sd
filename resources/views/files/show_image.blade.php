@@ -6,7 +6,9 @@
 	<div class="panel panel-default">
 
 		<div class="panel-heading">
-			{{ trans('app.File') . " #" . $file->id }}
+			{{ trans('app.File From Case') }}
+			#{{ $file->message->case->id }}
+			"{{ $file->message->case->name }}"
 		</div>
 
 		<div class="panel-body">
