@@ -1,4 +1,4 @@
-<?php echo $user->name; ?> оставил(а) сообщение в <a href="<?php echo action('CasesController@show', $case->id);?>">[#<?php echo $case->id; ?>] <?php echo $case->name; ?></a>:
+<?php echo $user->name; ?> оставил(а) в кейсе <a href="<?php echo action('CasesController@show', $case->id);?>">[#<?php echo $case->id; ?>] <?php echo $case->name; ?></a> новое сообщение:
 
 <hr>
 
@@ -21,8 +21,6 @@
 ?>
 
 <hr>
-
-
 
 <p>Это письмо было сформировано автоматически, пожалуйста, не отвечайте на него.</p>
 <p>Для ответа перейдите в личный кабинет по <a href="<?php echo action('CasesController@show', $case->id);?>">ссылке</a></p>

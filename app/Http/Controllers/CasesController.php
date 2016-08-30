@@ -218,35 +218,49 @@ class CasesController extends Controller
 
 		//return($case->members);
 
-		if ($case->status_id==5) {
-			return view('cases.show_wide')
-				->with('case',						$case)
-				->with('messages',					$messages)
-				->with('message_first',				$message_first)
-				->with('users',						$users)
-				->with('membersIds',				$membersIds)
-				->with('users_can_be_performers',	$users_can_be_performers)
-				->with('performersIds',				$performersIds)
-				->with('statuses',					$statuses)
-				->with('users_members',				$users_members)
-				->with('users_can_be_members',		$users_can_be_members)
-				// ->with('statusesIds',	$statusesIds)
-			;
-		} else {
-			return view('cases.show_wide')
-				->with('case',						$case)
-				->with('messages',					$messages)
-				->with('message_first',				$message_first)
-				->with('users',						$users)
-				->with('membersIds',				$membersIds)
-				->with('users_can_be_performers',	$users_can_be_performers)
-				->with('performersIds',				$performersIds)
-				->with('statuses',					$statuses)
-				->with('users_members',				$users_members)
-				->with('users_can_be_members',		$users_can_be_members)
-				// ->with('statusesIds',	$statusesIds)
-			;
-		}
+		return view('cases.show_closed')
+			->with('case',						$case)
+			->with('messages',					$messages)
+			->with('message_first',				$message_first)
+			->with('users',						$users)
+			->with('membersIds',				$membersIds)
+			->with('users_can_be_performers',	$users_can_be_performers)
+			->with('performersIds',				$performersIds)
+			->with('statuses',					$statuses)
+			->with('users_members',				$users_members)
+			->with('users_can_be_members',		$users_can_be_members)
+			// ->with('statusesIds',	$statusesIds)
+		;
+
+		// if ($case->status->is_closed) {
+		// 	return view('cases.show_closed')
+		// 		->with('case',						$case)
+		// 		->with('messages',					$messages)
+		// 		->with('message_first',				$message_first)
+		// 		->with('users',						$users)
+		// 		->with('membersIds',				$membersIds)
+		// 		->with('users_can_be_performers',	$users_can_be_performers)
+		// 		->with('performersIds',				$performersIds)
+		// 		->with('statuses',					$statuses)
+		// 		->with('users_members',				$users_members)
+		// 		->with('users_can_be_members',		$users_can_be_members)
+		// 		// ->with('statusesIds',	$statusesIds)
+		// 	;
+		// } else {
+		// 	return view('cases.show_wide')
+		// 		->with('case',						$case)
+		// 		->with('messages',					$messages)
+		// 		->with('message_first',				$message_first)
+		// 		->with('users',						$users)
+		// 		->with('membersIds',				$membersIds)
+		// 		->with('users_can_be_performers',	$users_can_be_performers)
+		// 		->with('performersIds',				$performersIds)
+		// 		->with('statuses',					$statuses)
+		// 		->with('users_members',				$users_members)
+		// 		->with('users_can_be_members',		$users_can_be_members)
+		// 		// ->with('statusesIds',	$statusesIds)
+		// 	;
+		// }
 
 	}
 
@@ -300,6 +314,9 @@ class CasesController extends Controller
 		} else {
 			$case->due_to = date( "Y-m-d H:i:s", strtotime($request->due_to) );
 		}
+
+		//$case->is_closed = $request->status
+
 		$case->update();
 
 
