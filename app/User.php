@@ -40,21 +40,21 @@ class User extends Model implements AuthenticatableContract,
 
 	public function cases()
 	{
-		return $this->hasMany('App\Cases', 'user_id')->orderBy('last_reply_at', 'desc');
+		return $this->hasMany('App\Cases', 'user_id')->where('status_id', '<>', '5')->orderBy('last_reply_at', 'desc');
 	}
 
 
 
 	public function performerOf()
 	{
-		return $this->belongsToMany('App\Cases', 'case_performers', 'user_id', 'case_id')->orderBy('last_reply_at', 'desc');
+		return $this->belongsToMany('App\Cases', 'case_performers', 'user_id', 'case_id')->where('status_id', '<>', '5')->orderBy('last_reply_at', 'desc');
 	}
 
 
 
 	public function memberOf()
 	{
-		return $this->belongsToMany('App\Cases', 'case_members', 'user_id', 'case_id')->orderBy('last_reply_at', 'desc');
+		return $this->belongsToMany('App\Cases', 'case_members', 'user_id', 'case_id')->where('status_id', '<>', '5')->orderBy('last_reply_at', 'desc');
 	}
 
 
