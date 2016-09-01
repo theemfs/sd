@@ -37,14 +37,14 @@
 								@can('update-case', $case)
 									{!! Form::model($case, ['method' => 'PATCH', 'action' => ['CasesController@update', $case->id], 'class' => 'form-horizontal']) !!}
 
-										<div class="col-md-3 col-sm-6 col-xs-12">
+										<div class="col-xs-12">
 											{!! Form::label('users_list_performers', trans('app.Performers'), ['class' => 'control-label']) !!}
 											<div class="form-group">
 												{!! Form::select('performers[]', $users_can_be_performers, $performersIds, ['id' => 'users_list_performers', 'class' => 'form-control selectpicker', 'multiple', 'autocomplete' => 'off', 'size' => '1']) !!}
 											</div>
 										</div>
 
-										<div class="col-md-3 col-sm-6 col-xs-12">
+										<div class="col-xs-12">
 											{!! Form::label('users_list_members', trans('app.Members'), ['class' => 'control-label']) !!}
 											<div class="form-group">
 												{{-- {!! Form::select('members[]', $users, $membersIds, ['id' => 'users_list_members', 'class' => 'form-control selectpicker', 'multiple', 'autocomplete' => 'off', 'size' => '1']) !!} --}}
@@ -60,14 +60,14 @@
 											</div>
 										</div>
 
-										<div class="col-md-3 col-sm-6 col-xs-12">
+										<div class="col-sm-6 col-xs-12">
 											{!! Form::label('status_id', trans('app.Status'), ['class' => 'control-label']) !!}
 											<div class="form-group">
 												{!! Form::select('status_id', $statuses, $case->status_id, ['id' => 'statuses_list', 'class' => 'form-control selectpicker', 'autocomplete' => 'off', 'size' => '1']) !!}
 											</div>
 										</div>
 
-										<div class="col-md-3 col-sm-6 col-xs-12">
+										<div class="col-sm-6 col-xs-12">
 											{!! Form::label('due_to', trans('app.Due To'), ['class' => 'control-label']) !!}
 											<div class="form-group">
 												<input type='text' name="due_to" id='due_to' class="form-control date"/>
@@ -85,14 +85,14 @@
 
 									{!! Form::close() !!}
 								@else
-										<div class="col-md-3 col-sm-6 col-xs-12">
+										<div class="col-xs-12">
 											{!! Form::label('users_list_performers', trans('app.Performers'), ['class' => 'control-label']) !!}
 											<div class="form-group">
 												{!! Form::select('performers[]', $users_can_be_performers, $performersIds, ['id' => 'users_list_performers', 'class' => 'form-control selectpicker', 'multiple', 'autocomplete' => 'off', 'size' => '1']) !!}
 											</div>
 										</div>
 
-										<div class="col-md-3 col-sm-6 col-xs-12">
+										<div class="col-xs-12">
 											{!! Form::label('users_list_members', trans('app.Members'), ['class' => 'control-label']) !!}
 											<div class="form-group">
 												{!! Form::select('members[]', $case->members->lists('name', 'id'), $membersIds, ['id' => 'users_list_members', 'class' => 'form-control selectpicker', 'multiple', 'autocomplete' => 'off', 'size' => '1']) !!}
@@ -103,14 +103,14 @@
 											</div>
 										</div>
 
-										<div class="col-md-3 col-sm-6 col-xs-12">
+										<div class="col-sm-6 col-xs-12">
 											{!! Form::label('users_list_members', trans('app.Status'), ['class' => 'control-label']) !!}
 											<div class="form-group">
 												{!! Form::select('status_id', $statuses, $case->status_id, ['id' => 'statuses_list', 'class' => 'form-control selectpicker', 'autocomplete' => 'off', 'size' => '1', 'disabled']) !!}
 											</div>
 										</div>
 
-										<div class="col-md-3 col-sm-6 col-xs-12">
+										<div class="col-sm-6 col-xs-12">
 											{!! Form::label('users_list_members', trans('app.Due To'), ['class' => 'control-label']) !!}
 											<div class="form-group">
 												<input type='text' name="due_to" id='due_to' class="form-control date" readonly value="
@@ -192,18 +192,20 @@
 						@endif --}}
 
 						{{-- COLORING MESSAGES BY TYPE --}}
-						@if ($message->is_service_message == 1)
-						{{-- SERVICE MESSAGE --}}
-							{{-- <div class="message message_service" id="{{ $message->id }}">
-								<div class="col-xs-1">
-									<i class="fa fa-fw fa-info"></i>
-								</div>
+						@if (($message->is_service_message == 1))
+							@if (Auth::user()->is_admin)
+							{{-- SERVICE MESSAGE --}}
+								<div class="message message_service" id="{{ $message->id }}">
+									<div class="col-xs-1">
+										<i class="fa fa-fw fa-info"></i>
+									</div>
 
-								<div class="col-xs-11">
-									<span class="small">{{ $message->user->name }} | {{ $message->created_at }}</span>
-									<div class="message-body small">{{ $message->text }}</div>
+									<div class="col-xs-11">
+										<span class="small">{{ $message->user->name }} | {{ $message->created_at }}</span>
+										<div class="message-body small">{{ $message->text }}</div>
+									</div>
 								</div>
-							</div> --}}
+							@endif
 						@else
 						{{-- MESSAGES --}}
 							<div class="message" id="{{ $message->id }}" {!! Auth::user()->id==$message->user_id ? 'style="background-color: #FFFFD4"' : ""!!}>
@@ -296,44 +298,35 @@
 	<script src="{{ url('/') }}/js/bootstrap-datetimepicker.min.js"></script>
 	<script>
 		$('#users_list_performers, #users_list_members').selectpicker({
-			// style: 'btn-info',
-			size: '7',
+			size: '10',
 			showTick: 'true',
 			selectOnTab: 'true',
-			selectedTextFormat: 'count > 1',
+			selectedTextFormat: 'count > 10',
 			liveSearch: 'true',
 			actionsBox: 'true',
-			// header: 'test',
 			liveSearchPlaceholder: '',
 			noneSelectedText: "{{ trans('app.Nothing Selected') }}",
-			// title: 'test!',
 		});
 
 		$('#statuses_list').selectpicker({
-			size: '7',
+			size: '10',
 			showTick: 'true',
 			selectOnTab: 'true',
-			selectedTextFormat: 'count > 1',
+			selectedTextFormat: 'count > 10',
 			actionsBox: 'true',
 			liveSearchPlaceholder: '',
 			noneSelectedText: "{{ trans('app.Nothing Selected') }}",
 		});
-
-		// $("body").scrollTop(1000);
 
 		$(function () {
 			$('#due_to').datetimepicker({
 				defaultDate: '{{ $case->due_to > date("Y-m-d H:i", mktime(0, 0, 0, 1, 1, 1971)) ? date("Y-m-d H:i", strtotime($case->due_to)) : "" }}',
 				locale: 'ru',
-				// useCurrent: true,
 				showTodayButton: true,
 				showClear: true,
-				// showClose: true,
-				// focusOnShow: true,
 			});
 		});
 	</script>
-
 @endcan
 
 @endsection

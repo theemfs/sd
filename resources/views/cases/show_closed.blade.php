@@ -322,7 +322,6 @@
 			});
 		});
 	</script>
-
 @endcan
 
 @endsection

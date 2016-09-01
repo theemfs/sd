@@ -218,7 +218,7 @@ class CasesController extends Controller
 
 		//return($case->members);
 
-		return view('cases.show_closed')
+		return view('cases.show')
 			->with('case',						$case)
 			->with('messages',					$messages)
 			->with('message_first',				$message_first)
