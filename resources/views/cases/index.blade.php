@@ -58,7 +58,7 @@
 								<div class="snippet" style="background-color: {{ $case_author->status->color }}">
 									<span class="small">
 										<i class="fa fa-fw fa-btn fa-user"></i>
-										{{ $case_author->user->name }} |
+										<a href="{{ action('UsersController@show', $case_author->user->id) }}">{{ $case_author->user->name }}</a> |
 										{{ $case_author->created_at }} - {{ $case_author->due_to }} |
 										{{ $case_author->status->name }} |
 										{{ $case_author->last_reply_at }}
@@ -84,7 +84,7 @@
 								<div class="snippet" style="background-color: {{ $case_performer->status->color }}">
 									<span class="small">
 										<i class="fa fa-fw fa-btn fa-user"></i>
-										{{ $case_performer->user->name }} |
+										<a href="{{ action('UsersController@show', $case_performer->user->id) }}">{{ $case_performer->user->name }}</a> |
 										{{ $case_performer->created_at }} - {{ $case_performer->due_to }} |
 										{{ $case_performer->status->name }} |
 										{{ $case_performer->last_reply_at }}
@@ -110,7 +110,7 @@
 								<div class="snippet" style="background-color: {{ $case_member->status->color }}">
 									<span class="small">
 										<i class="fa fa-fw fa-btn fa-user"></i>
-										{{ $case_member->user->name }} |
+										<a href="{{ action('UsersController@show', $case_member->user->id) }}">{{ $case_member->user->name }}</a> |
 										{{ $case_member->created_at }} - {{ $case_member->due_to }} |
 										{{ $case_member->status->name }} |
 										{{ $case_member->last_reply_at }}
@@ -162,7 +162,7 @@
 								<div class="snippet" style="background-color: {{ $case_all->status->color }}">
 									<span class="small">
 										<i class="fa fa-fw fa-btn fa-user"></i>
-										{{ $case_all->user->name }} |
+										<a href="{{ action('UsersController@show', $case_all->user->id) }}">{{ $case_all->user->name }}</a> |
 										{{ $case_all->created_at }} - {{ $case_all->due_to }} |
 										{{ $case_all->status->name }} |
 										{{ $case_all->last_reply_at }}
