@@ -6,45 +6,8 @@
 
 
 
-	<!-- LEFT BLOCK -->
-	<div class="col-md-3">
-		<div class="row">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					{{ trans('app.Photo') }}
-				</div>
-
-				<div class="panel-body">
-					<div class="">
-
-					</div>
-					<hr>
-					{{-- <div class="">
-						{!! Form::model($case, ['method' => 'PATCH', 'action' => ['CasesController@update', $case->id], 'class' => 'form-horizontal']) !!}
-							{!! Form::label('users_list_spectators', null, ['class' => 'control-label']) !!}
-							<div class="form-group">
-								<div class="col-xs-12">
-									{!! Form::select('users[]', $users, $usersIds, ['id' => 'users_list_spectators', 'class' => 'form-control', 'multiple', 'autocomplete' => 'off', 'size' => '5']) !!}
-								</div>
-							</div>
-
-							<div class="form-group">
-								<div class="col-xs-12">
-									{!! Form::submit( trans('app.Save'), ['class' => 'btn btn-primary form-control col-xs-12']) !!}
-								</div>
-							</div>
-						{!! Form::close() !!}
-					</div>
-					<hr> --}}
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
 	<!-- CENTER BLOCK -->
-	<div class="col-md-6">
+	<div class="col-md-8 col-md-offset-2">
 		<div class="panel panel-default">
 
 			<div class="panel-heading">
@@ -53,25 +16,50 @@
 
 			<div class="panel-body">
 
+				<div> {{-- TABS --}}
+					<ul class="nav nav-pills nav-justified" role="tablist">
+						<li role="presentation" class="active"><a href="#user_contacts" aria-controls="home" role="tab" data-toggle="tab">{{ trans('app.User Contacts') }}</a></li>
+						<li role="presentation"><a href="#user_cases" aria-controls="profile" role="tab" data-toggle="tab">{{ trans('app.User Cases') }}<span class="badge"></span></a></li>
+						{{-- @can('show-new-cases')
+							<li role="presentation"><a href="#not_assigned" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.Not assigned') }}<span class="badge">{{ $cases_not_assigned->count() }}</span></a></li>
+						@endcan
+						@can('show-admin')
+							<li role="presentation"><a href="#all" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.All') }}<span class="badge">{{ $cases_all->count() }}</span></a></li>
+						@endcan --}}
+					</ul>
+					<hr>
 
 
-			</div>
-		</div>
-	</div>
+
+					<div class="tab-content">
 
 
 
-	<!-- RIGHT BLOCK -->
-	<div class="col-md-3">
-		<div class="row">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					{{ trans('app.Member Of Cases') }}
-				</div>
+						<div role="tabpanel" class="tab-pane fade in active" id="user_contacts">
+							<p>{{ $user->department }} / {{ $user->title }}</p>
+							<p>{{ $user->email }}</p>
+							<p>{{ $user->telephonenumber }}</p>
+							<p>{{ $user->mobile }}</p>
+							<p>{{ $user->homephone }}</p>
+							{{-- <p>{{ $user->last_login_at }}</p> --}}
+						</div>
 
-				<div class="panel-body">
-					{{ $user->memberOf }}
-				</div>
+						<div role="tabpanel" class="tab-pane fade" id="user_cases">
+							<table class="table table-bordered table-hover table-striped">
+								@foreach($user->memberOf as $case_member)
+								<tr class="">
+									<td>{{ $case_member->id }}</td>
+									<td><a href="{{ action('CasesController@show', $case_member->id) }}"s>{{ $case_member->name }}</a></td>
+									<td>{{ $case_member->status->name }}</td>
+								</tr>
+								@endforeach
+							</table>
+						</div>
+
+
+
+					</div>
+
 			</div>
 		</div>
 	</div>

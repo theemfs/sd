@@ -43,7 +43,7 @@ class CasesController extends Controller
 		$cases_author 		= Auth::user()->cases;
 		$cases_performer 	= Auth::user()->performerOf;
 		$cases_member		= Auth::user()->memberOf;
-		$cases_all			= Cases::orderBy('updated_at','desc')->get();
+		$cases_all			= Cases::where('status_id','<>','5')->orderBy('updated_at','desc')->get();
 		$cases_not_assigned = collect(DB::select(DB::raw("SELECT * FROM cases WHERE cases.id NOT IN (SELECT case_id FROM case_performers)")));
 		// dd($cases_all);
 		// $cases_not_assigned = Cases::whereNotIn('book_price', DB::select(DB::raw("SELECT * FROM cases WHERE cases.id NOT IN (SELECT case_id FROM case_performers)")))->get();

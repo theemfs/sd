@@ -58,6 +58,8 @@ return [
 	'File' 									=> 'Файл',
 	'File From Case' 						=> 'Файл из кейса',
 	'Download' 								=> 'Скачать',
+	'User Contacts'							=> 'Контакты',
+	'User Cases' 							=> 'Кейсы',
 	// 'Go To Case' 							=> 'Вернуться к кейсу',
 	// 'About' 								=> 'О системе',
 	// 'Add Phone' 							=> 'Добавить номер',
