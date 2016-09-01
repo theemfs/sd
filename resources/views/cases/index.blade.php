@@ -53,7 +53,7 @@
 
 
 
-						<div role="tabpanel" class="tab-pane fade {!! !Auth::user()->can_be_performer ? 'in active' : '' !!}" id="author">
+						<div role="tabpanel" class="tab-pane {!! !Auth::user()->can_be_performer ? 'in active' : '' !!}" id="author">
 							@foreach ($cases_author as $case_author)
 								<div class="snippet" style="background-color: {{ $case_author->status->color }}">
 									<span class="small">
@@ -79,7 +79,7 @@
 
 
 
-						<div role="tabpanel" class="tab-pane fade {!! Auth::user()->can_be_performer ? 'in active' : '' !!}" id="performer">
+						<div role="tabpanel" class="tab-pane {!! Auth::user()->can_be_performer ? 'in active' : '' !!}" id="performer">
 							@foreach ($cases_performer as $case_performer)
 								<div class="snippet" style="background-color: {{ $case_performer->status->color }}">
 									<span class="small">
@@ -105,7 +105,7 @@
 
 
 
-						<div role="tabpanel" class="tab-pane fade" id="member">
+						<div role="tabpanel" class="tab-pane" id="member">
 							@foreach ($cases_member as $case_member)
 								<div class="snippet" style="background-color: {{ $case_member->status->color }}">
 									<span class="small">
@@ -132,7 +132,7 @@
 
 
 						@can('show-new-cases')
-						<div role="tabpanel" class="tab-pane fade" id="not_assigned">
+						<div role="tabpanel" class="tab-pane" id="not_assigned">
 							@foreach ($cases_not_assigned as $case_not_assigned)
 								<div class="snippet">
 									<span class="small">
@@ -157,7 +157,7 @@
 						</div>
 						@endcan
 						@can('show-admin')
-						<div role="tabpanel" class="tab-pane fade" id="all">
+						<div role="tabpanel" class="tab-pane" id="all">
 							@foreach ($cases_all as $case_all)
 								<div class="snippet" style="background-color: {{ $case_all->status->color }}">
 									<span class="small">
