@@ -14,6 +14,16 @@
 
 @section('content')
 
+
+
+{{-- BREADCRUMBS --}}
+<ol class="breadcrumb">
+	<li><a href="{{ url('/') }}">{{ trans('app.Home') }}</a></li>
+	<li class="active">{{ trans('app.Cases') }}</li>
+</ol>
+
+
+
 	{{-- LEFT BLOCK --}}
 	<div class="col-md-2">
 		<div class="row">

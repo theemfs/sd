@@ -16,8 +16,19 @@
 
 @section('content')
 
+
+
+{{-- BREADCRUMBS --}}
+<ol class="breadcrumb">
+	<li><a href="{{ url('/') }}">{{ trans('app.Home') }}</a></li>
+	<li><a href="{{ action('CasesController@index') }}">{{ trans('app.Cases') }}</a></li>
+	<li class="active">#{{ $case->id }}. {{ $case->name }}</li>
+</ol>
+
+
+
 	{{-- TOP BLOCK --}}
-	<div class="col-md-8 col-md-offset-2">
+	<div class="col-md-10 col-md-offset-1">
 
 
 
@@ -50,11 +61,11 @@
 												{{-- {!! Form::select('members[]', $users, $membersIds, ['id' => 'users_list_members', 'class' => 'form-control selectpicker', 'multiple', 'autocomplete' => 'off', 'size' => '1']) !!} --}}
 												<select id="users_list_members" class="form-control selectpicker" multiple="multiple" autocomplete="off" size="1" name="members[]">
 													@foreach($users_members as $user_member)
-														<option value="{{ $user_member->id }}" selected="selected">{{ $user_member->name }}</option>
+														<option value="{{ $user_member->id }}" selected="selected" data-subtext="({{ $user_member->department }} / {{ $user_member->title }})">{{ $user_member->name }}</option>
 													@endforeach
 														<option data-divider="true"></option>
 													@foreach($users_can_be_members as $user_can_be_member)
-														<option value="{{ $user_can_be_member->id }}">{{ $user_can_be_member->name }}</option>
+														<option value="{{ $user_can_be_member->id }}" data-subtext="({{ $user_can_be_member->department }} / {{ $user_can_be_member->title }})">{{ $user_can_be_member->name }}</option>
 													@endforeach
 												</select>
 											</div>
@@ -201,7 +212,10 @@
 									</div>
 
 									<div class="col-xs-11">
-										<span class="small">{{ $message->user->name }} | {{ $message->created_at }}</span>
+										<span class="small">
+											<a href="{{ action('UsersController@show', $message->user->id) }}">{{ $message->user->name }}</a> |
+											{{ $message->created_at }}
+										</span>
 										<div class="message-body small">{{ $message->text }}</div>
 									</div>
 								</div>
@@ -215,7 +229,10 @@
 
 								<div class="col-xs-11">
 									<div class="form-group">
-										<span class="small">{{ $message->user->name }} | {{ $message->created_at }}</span>
+										<span class="small">
+											<a href="{{ action('UsersController@show', $message->user->id) }}">{{ $message->user->name }}</a> |
+											{{ $message->created_at }}
+										</span>
 										<hr>
 
 										<div class="message-body">{{ $message->text }}</div>
