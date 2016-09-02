@@ -96,33 +96,22 @@ class PagesController extends Controller
 			$r[$i] = $ldapuser->mail[0];
 
 			if ( User::where('email', $ldapuser->mail[0])->exists() ) {
-
 				$user = User::where('email', $ldapuser->mail[0])->first();
-					$user->name 			= $ldapuser->name[0];
-					$user->email 			= $ldapuser->mail[0];
-					$user->mobile 			= $ldapuser->mobile[0];
-					$user->telephonenumber 	= $ldapuser->telephonenumber[0];
-					$user->homephone 		= $ldapuser->homephone[0];
-					$user->title 			= $ldapuser->title[0];
-					$user->department 		= $ldapuser->department[0];
-				$user->update();
 				$r[$i] = $r[$i] . ' - EXISTS! updated!';
-
 			} else {
-
 				$r[$i] = $r[$i] . '';
 				$user = new User;
-					$user->name 			= $ldapuser->name[0];
-					$user->email 			= $ldapuser->mail[0];
-					$user->mobile 			= $ldapuser->mobile[0];
-					$user->telephonenumber 	= $ldapuser->telephonenumber[0];
-					$user->homephone 		= $ldapuser->homephone[0];
-					$user->title 			= $ldapuser->title[0];
-					$user->department 		= $ldapuser->department[0];
-				$user->save();
 				$r[$i] = $r[$i] . ' - CREATED!';
-
 			}
+
+			$user->name 			= $ldapuser->name[0];
+			$user->email 			= $ldapuser->mail[0];
+			$user->mobile 			= $ldapuser->mobile[0];
+			$user->telephonenumber 	= $ldapuser->telephonenumber[0];
+			$user->homephone 		= $ldapuser->homephone[0];
+			$user->title 			= $ldapuser->title[0];
+			$user->department 		= $ldapuser->department[0];
+			$user->save();
 
 			$i++;
 		}
