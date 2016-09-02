@@ -61,11 +61,11 @@
 												{{-- {!! Form::select('members[]', $users, $membersIds, ['id' => 'users_list_members', 'class' => 'form-control selectpicker', 'multiple', 'autocomplete' => 'off', 'size' => '1']) !!} --}}
 												<select id="users_list_members" class="form-control selectpicker" multiple="multiple" autocomplete="off" size="1" name="members[]">
 													@foreach($users_members as $user_member)
-														<option value="{{ $user_member->id }}" selected="selected" data-subtext="({{ $user_member->department }} / {{ $user_member->title }})">{{ $user_member->name }}</option>
+														<option value="{{ $user_member->id }}" selected="selected" data-subtext="({{ $user_member->department }}/{{ $user_member->title }})">{{ $user_member->name }}</option>
 													@endforeach
 														<option data-divider="true"></option>
 													@foreach($users_can_be_members as $user_can_be_member)
-														<option value="{{ $user_can_be_member->id }}" data-subtext="({{ $user_can_be_member->department }} / {{ $user_can_be_member->title }})">{{ $user_can_be_member->name }}</option>
+														<option value="{{ $user_can_be_member->id }}" data-subtext="({{ $user_can_be_member->department }}/{{ $user_can_be_member->title }})">{{ $user_can_be_member->name }}</option>
 													@endforeach
 												</select>
 											</div>

@@ -60,7 +60,7 @@ class PagesController extends Controller
 
 	public function adminUsersShow(Request $request)
 	{
-		$users = User::all();
+		$users = User::where('is_active', '1')->get();
 		return view('pages.admin.users')
 			->with('users', $users)
 		;
@@ -85,6 +85,11 @@ class PagesController extends Controller
 	public function syncUsersFromLdap(Request $request)
 	{
 
+		$users = User::all();
+		foreach($users as $user) {
+			$user->is_active = 0;
+		}
+
 		$filter = '(&(objectClass=user)(objectCategory=person)(!(objectCategory=group))(mail=*@*)(!(cn=_*))(!(userAccountControl:1.2.840.113556.1.4.803:=2)))';
 		$ldapusers = Adldap::search()->rawFilter($filter)->get();
 
@@ -95,8 +100,8 @@ class PagesController extends Controller
 
 			$r[$i] = $ldapuser->mail[0];
 
-			if ( User::where('email', $ldapuser->mail[0])->exists() ) {
-				$user = User::where('email', $ldapuser->mail[0])->first();
+			if ( User::withTrashed()->where('email', $ldapuser->mail[0])->exists() ) {
+				$user = User::withTrashed()->where('email', $ldapuser->mail[0])->first();
 				$r[$i] = $r[$i] . ' - EXISTS! updated!';
 			} else {
 				$r[$i] = $r[$i] . '';
@@ -111,6 +116,7 @@ class PagesController extends Controller
 			$user->homephone 		= $ldapuser->homephone[0];
 			$user->title 			= $ldapuser->title[0];
 			$user->department 		= $ldapuser->department[0];
+			$user->is_active 		= 1;
 			$user->save();
 
 			$i++;

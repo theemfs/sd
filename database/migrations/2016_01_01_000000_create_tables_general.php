@@ -33,6 +33,7 @@ class CreateTablesGeneral extends Migration
 			$table->string('department')->nullable();
 			$table->integer('can_be_performer')->nullable();
 			$table->integer('is_admin')->nullable();
+			$table->integer('is_active')->nullable();
 		});
 
 

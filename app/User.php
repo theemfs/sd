@@ -28,7 +28,11 @@ class User extends Model implements AuthenticatableContract,
 		'title',
 		'mobile',
 		'telephonenumber',
+		'department',
 		'last_login_at',
+		'is_admin',
+		'can_be_performer',
+		'is_active'
 	];
 
 	protected $hidden = [

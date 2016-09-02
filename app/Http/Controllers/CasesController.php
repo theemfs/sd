@@ -200,14 +200,14 @@ class CasesController extends Controller
 		$message_first 			 	= Messages::where('case_id', $case->id)->orderby('created_at', 'asc')->first();
 		$messages 					= Messages::where('case_id', $case->id)->orderby('created_at', 'desc')->get();
 		//$messages 				= Messages::where('case_id', $case->id)->orderby('created_at', 'desc')->get()->splice(1);
-		$users 						= User::orderby('name', 'asc')->lists('name', 'id');
+		$users 						= User::where('is_active', '1')->orderby('name', 'asc')->lists('name', 'id');
 		//$users_can_be_performers 	= User::where('can_be_performer', '1')->orderby('name', 'asc')->lists('name', 'id');
-		$users_can_be_performers 	= User::where('can_be_performer', '1')->orderby('name', 'asc')->lists('name', 'id');
+		$users_can_be_performers 	= User::where('can_be_performer', '1')->where('is_active', '1')->orderby('name', 'asc')->lists('name', 'id');
 		$membersIds 				= $case->members->lists('id')->toArray();
 		$performersIds 				= $case->performers->lists('id')->toArray();
 		$statuses 					= Statuses::orderby('id', 'asc')->lists('name', 'id');
 		$users_members				= User::whereIn('id', $membersIds)->orderby('name', 'asc')->get();
-		$users_can_be_members		= User::whereNotIn('id', $membersIds)->orderby('name', 'asc')->get();
+		$users_can_be_members		= User::whereNotIn('id', $membersIds)->where('is_active', '1')->orderby('name', 'asc')->get();
 
 
 		//return([$users_members, $users]);
