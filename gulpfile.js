@@ -35,9 +35,10 @@ elixir(function(mix) {
 	mix.copy('vendor/moment/moment/min/moment-with-locales.min.js', 								'public/js/');//not mixed
 
 	mix.scripts([
-		// 'jquery.min.js',
-		// 'bootstrap.min.js',
-		// 'bootstrap-select.min.js',
+	// 	// 'jquery.min.js',
+	// 	// 'bootstrap.min.js',
+	// 	// 'bootstrap-select.min.js',
+		'custom.js',
 	]);
 
 
@@ -61,6 +62,7 @@ elixir(function(mix) {
 	// //IMAGES
 	// mix.copy('/resources/assets/mimetypes/', 'public/build/mimetypes/');
 	// mix.copy('/resources/assets/images/', 'public/build/images/');
+	mix.copy('resources/assets/images/briefcase.png', 'public/favicon.ico');
 
 
 

@@ -43,9 +43,17 @@ class CasesController extends Controller
 		$cases_author 		= Auth::user()->cases;
 		$cases_performer 	= Auth::user()->performerOf;
 		$cases_member		= Auth::user()->memberOf;
-		$cases_all			= Cases::where('status_id','<>','5')->orderBy('updated_at','desc')->get();
-		$cases_not_assigned = collect(DB::select(DB::raw("SELECT * FROM cases WHERE cases.id NOT IN (SELECT case_id FROM case_performers)")));
-		// dd($cases_all);
+		$cases_open			= Cases::where('status_id','<>','5')->orderBy('updated_at','desc')->get();
+
+		//$cases_not_assigned = collect(DB::select(DB::raw("SELECT * FROM cases WHERE cases.id NOT IN (SELECT case_id FROM case_performers)")));
+		$cases_new_ids 		= array_column( DB::select(DB::raw("SELECT id FROM cases WHERE cases.id NOT IN (SELECT case_id FROM case_performers)")), "id");
+		$cases_new 			= Cases::whereIn('id',$cases_new_ids)->orderBy('updated_at','desc')->get();
+
+		$cases_closed		= Cases::where('status_id','5')->orderBy('updated_at','desc')->get();
+
+
+
+		// dd($cases_new_ids);
 		// $cases_not_assigned = Cases::whereNotIn('book_price', DB::select(DB::raw("SELECT * FROM cases WHERE cases.id NOT IN (SELECT case_id FROM case_performers)")))->get();
 
 		//$cases = new Paginator($cases, $cases->count(), 2, $request);
@@ -60,14 +68,27 @@ class CasesController extends Controller
 
 
 
-		return view('cases.index')
-			->with('cases_author',		$cases_author)
-			->with('cases_performer',	$cases_performer)
-			->with('cases_member',		$cases_member)
-			->with('cases_all',			$cases_all)
-			->with('cases_not_assigned',$cases_not_assigned)
-			// ->with('filter',			$filter)
-		;
+		if (Auth::user()->is_admin) {
+			return view('cases.index_table')
+				->with('cases_author',		$cases_author)
+				->with('cases_closed',		$cases_closed)
+				->with('cases_member',		$cases_member)
+				->with('cases_new',			$cases_new)
+				->with('cases_open',		$cases_open)
+				->with('cases_performer',	$cases_performer)
+			;
+		} else {
+			return view('cases.index_snippets')
+				->with('cases_author',		$cases_author)
+				->with('cases_member',		$cases_member)
+				->with('cases_new',			$cases_new)
+				->with('cases_open',		$cases_open)
+				->with('cases_performer',	$cases_performer)
+			;
+		}
+
+
+
 	}
 
 
@@ -168,10 +189,10 @@ class CasesController extends Controller
 		$subscribers = User::where('is_admin', true)->get();
 
 		foreach ($subscribers as $subscriber) {
-			Mail::send('emails.notification_newcase', $data, function($email) use ($case, $message, $subscriber) {
+			Mail::queue('emails.notification_newcase', $data, function($email) use ($case, $message, $subscriber) {
 				$email->from( env('MAIL_USERNAME') );
 				$email->to($subscriber->email);
-				$email->subject("[Case #$case->id]: " . trans('app.New case'));
+				$email->subject("[Case #$case->id]: " . trans('app.New case') . " \"$case->name\"");
 				$email->priority(2);
 			});
 		}

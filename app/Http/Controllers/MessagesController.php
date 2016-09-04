@@ -144,7 +144,7 @@ class MessagesController extends Controller
 		$subscribers = $case->members->merge($case->performers)->merge($case->user())->push($case->user)->unique();
 
 		foreach ($subscribers as $subscriber) {
-			Mail::send('emails.notification_reply', $data, function($email) use ($case, $message, $subscriber) {
+			Mail::queue('emails.notification_reply', $data, function($email) use ($case, $message, $subscriber) {
 
 				$email->from( env('MAIL_USERNAME') );
 				// $email->sender('', '');
@@ -153,7 +153,7 @@ class MessagesController extends Controller
 				// $email->cc('');
 				// $email->bcc('');
 				// $email->replyTo('');
-				$email->subject("[Case #$case->id]: " . trans('app.New reply'));
+				$email->subject("[" . trans('app.Case') . " #$case->id]: \"$case->name\". " . trans('app.New reply') );
 				$email->priority(2);
 				// $email->attach("https://www.facebook.com/images/fb_icon_325x325.png");
 				// $email->attach($pathToFile, array $options = []);

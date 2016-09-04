@@ -64,6 +64,8 @@
 		{{-- @include('layouts.footer') --}}
 
 		{{-- JS --}}
+		<script src="{{ url('/') }}/js/jquery.min.js"></script>
+		<script src="{{ url('/') }}/js/bootstrap.min.js"></script>
 		<script src="{{ url('/') . elixir('js/all.js') }}"></script>
 		{{-- <script src="{{ url('/') }}/js/bootstrap-datepicker.min.js"></script>
 		<script src="{{ url('/') }}/js/ckeditor.js"></script>

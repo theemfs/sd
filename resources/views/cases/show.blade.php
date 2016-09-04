@@ -131,9 +131,9 @@
 										</div>
 								@endcan
 								</div>
-								<div class="col-xs-12">
+								{{-- <div class="col-xs-12">
 									<small>Изменение параметров доступно только автору или исполнителю кейса.</small>
-								</div>
+								</div> --}}
 							</div>
 
 						</div>
@@ -310,40 +310,43 @@
 
 @section('js')
 
-@can('update-case', $case)
-	<script src="{{ url('/') }}/js/moment-with-locales.min.js"></script>
-	<script src="{{ url('/') }}/js/bootstrap-datetimepicker.min.js"></script>
-	<script>
-		$('#users_list_performers, #users_list_members').selectpicker({
-			size: '10',
-			showTick: 'true',
-			selectOnTab: 'true',
-			selectedTextFormat: 'count > 10',
-			liveSearch: 'true',
-			actionsBox: 'true',
-			liveSearchPlaceholder: '',
-			noneSelectedText: "{{ trans('app.Nothing Selected') }}",
-		});
+	<script src="{{ url('/') }}/js/bootstrap-select.min.js"></script>
 
-		$('#statuses_list').selectpicker({
-			size: '10',
-			showTick: 'true',
-			selectOnTab: 'true',
-			selectedTextFormat: 'count > 10',
-			actionsBox: 'true',
-			liveSearchPlaceholder: '',
-			noneSelectedText: "{{ trans('app.Nothing Selected') }}",
-		});
+	@can('update-case', $case)
+		<script src="{{ url('/') }}/js/moment-with-locales.min.js"></script>
+		<script src="{{ url('/') }}/js/bootstrap-datetimepicker.min.js"></script>
 
-		$(function () {
-			$('#due_to').datetimepicker({
-				defaultDate: '{{ $case->due_to > date("Y-m-d H:i", mktime(0, 0, 0, 1, 1, 1971)) ? date("Y-m-d H:i", strtotime($case->due_to)) : "" }}',
-				locale: 'ru',
-				showTodayButton: true,
-				showClear: true,
+		<script>
+			$('#users_list_performers, #users_list_members').selectpicker({
+				size: '10',
+				showTick: 'true',
+				selectOnTab: 'true',
+				selectedTextFormat: 'count > 10',
+				liveSearch: 'true',
+				actionsBox: 'true',
+				liveSearchPlaceholder: '',
+				noneSelectedText: "{{ trans('app.Nothing Selected') }}",
 			});
-		});
-	</script>
-@endcan
+
+			$('#statuses_list').selectpicker({
+				size: '10',
+				showTick: 'true',
+				selectOnTab: 'true',
+				selectedTextFormat: 'count > 10',
+				actionsBox: 'true',
+				liveSearchPlaceholder: '',
+				noneSelectedText: "{{ trans('app.Nothing Selected') }}",
+			});
+
+			$(function () {
+				$('#due_to').datetimepicker({
+					defaultDate: '{{ $case->due_to > date("Y-m-d H:i", mktime(0, 0, 0, 1, 1, 1971)) ? date("Y-m-d H:i", strtotime($case->due_to)) : "" }}',
+					locale: 'ru',
+					showTodayButton: true,
+					showClear: true,
+				});
+			});
+		</script>
+	@endcan
 
 @endsection

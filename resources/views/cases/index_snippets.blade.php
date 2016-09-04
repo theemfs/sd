@@ -49,10 +49,10 @@
 						<li role="presentation" {!! Auth::user()->can_be_performer ? 'class="active"' : '' !!}><a href="#performer" aria-controls="profile" role="tab" data-toggle="tab">{{ trans('app.As Performer') }}<span class="badge">{{ $cases_performer->count() }}</span></a></li>
 						<li role="presentation"><a href="#member" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.As Member') }}<span class="badge">{{ $cases_member->count() }}</span></a></li>
 						@can('show-new-cases')
-							<li role="presentation"><a href="#not_assigned" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.Not assigned') }}<span class="badge">{{ $cases_not_assigned->count() }}</span></a></li>
+							<li role="presentation"><a href="#new" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.New Cases') }}<span class="badge">{{ $cases_new->count() }}</span></a></li>
 						@endcan
 						@can('show-admin')
-							<li role="presentation"><a href="#all" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.All') }}<span class="badge">{{ $cases_all->count() }}</span></a></li>
+							<li role="presentation"><a href="#open" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.All') }}<span class="badge">{{ $cases_open->count() }}</span></a></li>
 						@endcan
 					</ul>
 					<hr>
@@ -63,6 +63,7 @@
 
 
 
+						{{-- I AM AUTHOR --}}
 						<div role="tabpanel" class="tab-pane {!! !Auth::user()->can_be_performer ? 'in active' : '' !!}" id="author">
 							@foreach ($cases_author as $case_author)
 								<div class="snippet" style="background-color: {{ $case_author->status->color }}">
@@ -89,6 +90,7 @@
 
 
 
+						{{-- I AM PERFORMER --}}
 						<div role="tabpanel" class="tab-pane {!! Auth::user()->can_be_performer ? 'in active' : '' !!}" id="performer">
 							@foreach ($cases_performer as $case_performer)
 								<div class="snippet" style="background-color: {{ $case_performer->status->color }}">
@@ -115,6 +117,7 @@
 
 
 
+						{{-- I AM MEMBER --}}
 						<div role="tabpanel" class="tab-pane" id="member">
 							@foreach ($cases_member as $case_member)
 								<div class="snippet" style="background-color: {{ $case_member->status->color }}">
@@ -141,51 +144,56 @@
 
 
 
+						{{-- NEW CASES --}}
 						@can('show-new-cases')
-						<div role="tabpanel" class="tab-pane" id="not_assigned">
-							@foreach ($cases_not_assigned as $case_not_assigned)
+						<div role="tabpanel" class="tab-pane" id="new">
+							@foreach ($cases_new as $case_new)
 								<div class="snippet">
 									<span class="small">
 										<i class="fa fa-fw fa-btn fa-user"></i>
-										{{-- {{ $case_not_assigned->user->name }} | --}}
-										{{ $case_not_assigned->created_at }} - {{ $case_not_assigned->due_to }} |
-										{{-- {{ $case_not_assigned->status->name }} | --}}
-										{{ $case_not_assigned->last_reply_at }}
+										{{ $case_new->user->name }} |
+										{{ $case_new->created_at }} - {{ $case_new->due_to }} |
+										{{ $case_new->status->name }} |
+										{{ $case_new->last_reply_at }}
 									</span>
 									<hr>
 									<h4 class="snippet-heading">
 										<p class="pull-right small">
 											{{-- {{ $case_not_assigned->id }} --}}
 										</p>
-										<a href="{{ action('CasesController@show', $case_not_assigned->id) }}">[#{{ $case_not_assigned->id }}] {{ $case_not_assigned->name }}</a>
+										<a href="{{ action('CasesController@show', $case_new->id) }}">[#{{ $case_new->id }}] {{ $case_new->name }}</a>
 									</h4>
 									<div class="snippet-body">
-										<p>{{ mb_substr($case_not_assigned->text, 0, 100)."..." }}</p>
+										<p>{{ mb_substr($case_new->text, 0, 100)."..." }}</p>
 									</div>
 								</div>
 							@endforeach
 						</div>
 						@endcan
+
+
+
+						{{-- ALL CASES --}}
 						@can('show-admin')
-						<div role="tabpanel" class="tab-pane" id="all">
-							@foreach ($cases_all as $case_all)
-								<div class="snippet" style="background-color: {{ $case_all->status->color }}">
+						<div role="tabpanel" class="tab-pane" id="open">
+							@foreach ($cases_open as $case_open)
+								<div class="snippet" style="background-color: {{ $case_open->status->color }}">
 									<span class="small">
 										<i class="fa fa-fw fa-btn fa-user"></i>
-										<a href="{{ action('UsersController@show', $case_all->user->id) }}">{{ $case_all->user->name }}</a> |
-										{{ $case_all->created_at }} - {{ $case_all->due_to }} |
-										{{ $case_all->status->name }} |
-										{{ $case_all->last_reply_at }}
+										<a href="{{ action('UsersController@show', $case_open->user->id) }}">{{ $case_open->user->name }}</a> |
+										{{ $case_open->created_at }} - {{ $case_open->due_to }} |
+										{{ $case_open->status->name }} |
+										{{ $case_open->last_reply_at }}
 									</span>
 									<hr>
 									<h4 class="snippet-heading">
 										<p class="pull-right small">
-											{{-- {{ $case_all->id }} --}}
+											{{-- {{ $case_open->id }} --}}
 										</p>
-										<a href="{{ action('CasesController@show', $case_all->id) }}">[#{{ $case_all->id }}] {{ $case_all->name }}</a>
+										<a href="{{ action('CasesController@show', $case_open->id) }}">[#{{ $case_open->id }}] {{ $case_open->name }}</a>
 									</h4>
 									<div class="snippet-body">
-										<p>{{ mb_substr($case_all->text, 0, 100)."..." }}</p>
+										<p>{{ mb_substr($case_open->text, 0, 100)."..." }}</p>
 									</div>
 								</div>
 							@endforeach

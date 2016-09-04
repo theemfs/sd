@@ -88,4 +88,36 @@ class User extends Model implements AuthenticatableContract,
 
 
 
+	public function getSurname()
+	{
+		$fio = explode(' ',$this->name);
+		return $fio[0];
+	}
+
+	public function getName()
+	{
+		$fio = explode(' ',$this->name);
+		return $fio[1];
+	}
+
+	public function getThirdName()
+	{
+		$fio = explode(' ',$this->name);
+		return $fio[2];
+	}
+
+	public function getSurnameWithInitials()
+	{
+		$fio = explode(' ',$this->name);
+		$r = "";
+		$r .= array_key_exists("0", $fio) ? $fio[0] : "";
+		$r .= array_key_exists("1", $fio) ? " " . mb_substr($fio[1],0,1) : "";
+		$r .= array_key_exists("2", $fio) ? "." . mb_substr($fio[2],0,1) ."." : "";
+		return $r;
+	}
+
+
+
+
+
 }
