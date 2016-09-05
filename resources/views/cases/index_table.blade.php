@@ -81,13 +81,13 @@
 													<small class="text-muted col-md-11 col-md-offset-1">{{ mb_substr($case_author->text, 0, 300)."..." }}</small>
 												</a>
 											</td>
-											<td class="text-center">{{ $case_author->created_at }}</td>
-											<td class="text-center">{{ $case_author->due_to }}</td>
-											<td class="text-center">{{ $case_author->status->name }}</td>
-											<td class="text-center">{{ $case_author->last_reply_at }}</td>
+											<td class="text-center"><small>{{ $case_author->created_at }}</small></td>
+											<td class="text-center"><small>{{ $case_author->due_to }}</small></td>
+											<td class="text-center"><small>{{ $case_author->status->name }}</small></td>
+											<td class="text-center"><small>{{ $case_author->last_reply_at }}</small></td>
 											<td class="text-center">
 												@foreach($case_author->performers as $performer)
-													<a href="{{ action('UsersController@show', $performer->id) }}">{{ $performer->getSurnameWithInitials() }}</a>
+													<small><a href="{{ action('UsersController@show', $performer->id) }}">{{ $performer->getSurnameWithInitials() }}</a></small>
 												@endforeach
 											</td>
 										</tr>
@@ -121,11 +121,11 @@
 													<small class="text-muted col-md-11 col-md-offset-1">{{ mb_substr($case_performer->text, 0, 300)."..." }}</small>
 												</a>
 											</td>
-											<td><a href="{{ action('UsersController@show', $case_performer->user->id) }}">{{ $case_performer->user->getSurnameWithInitials() }}</a></td>
-											<td class="text-center">{{ $case_performer->created_at }}</td>
-											<td class="text-center">{{ $case_performer->due_to }}</td>
-											<td class="text-center">{{ $case_performer->status->name }}</td>
-											<td class="text-center">{{ $case_performer->last_reply_at }}</td>
+											<td><small><a href="{{ action('UsersController@show', $case_performer->user->id) }}">{{ $case_performer->user->getSurnameWithInitials() }}</a></small></td>
+											<td class="text-center"><small>{{ $case_performer->created_at }}</small></td>
+											<td class="text-center"><small>{{ $case_performer->due_to }}</small></td>
+											<td class="text-center"><small>{{ $case_performer->status->name }}</small></td>
+											<td class="text-center"><small>{{ $case_performer->last_reply_at }}</small></td>
 										</tr>
 									@endforeach
 								</table>
@@ -158,14 +158,14 @@
 													<small class="text-muted col-md-11 col-md-offset-1">{{ mb_substr($case_member->text, 0, 300)."..." }}</small>
 												</a>
 											</td>
-											<td><a href="{{ action('UsersController@show', $case_member->user->id) }}">{{ $case_member->user->getSurnameWithInitials() }}</a></td>
-											<td class="text-center">{{ $case_member->created_at }}</td>
-											<td class="text-center">{{ $case_member->due_to }}</td>
-											<td class="text-center">{{ $case_member->status->name }}</td>
-											<td class="text-center">{{ $case_member->last_reply_at }}</td>
+											<td><small><a href="{{ action('UsersController@show', $case_member->user->id) }}">{{ $case_member->user->getSurnameWithInitials() }}</a></small></td>
+											<td class="text-center"><small>{{ $case_member->created_at }}</small></td>
+											<td class="text-center"><small>{{ $case_member->due_to }}</small></td>
+											<td class="text-center"><small>{{ $case_member->status->name }}</small></td>
+											<td class="text-center"><small>{{ $case_member->last_reply_at }}</small></td>
 											<td class="text-center">
 												@foreach($case_member->performers as $performer)
-													<a href="{{ action('UsersController@show', $performer->id) }}">{{ $performer->getSurnameWithInitials() }}</a>
+													<small><a href="{{ action('UsersController@show', $performer->id) }}">{{ $performer->getSurnameWithInitials() }}</a></small>
 												@endforeach
 											</td>
 										</tr>
@@ -200,11 +200,11 @@
 													<small class="text-muted col-md-11 col-md-offset-1">{{ mb_substr($case_new->text, 0, 300)."..." }}</small>
 												</a>
 											</td>
-											<td><a href="{{ action('UsersController@show', $case_new->user->id) }}">{{ $case_new->user->getSurnameWithInitials() }}</a></td>
-											<td class="text-center">{{ $case_new->created_at }}</td>
-											<td class="text-center">{{ $case_new->due_to }}</td>
-											<td class="text-center">{{ $case_new->status->name }}</td>
-											<td class="text-center">{{ $case_new->last_reply_at }}</td>
+											<td><small><a href="{{ action('UsersController@show', $case_new->user->id) }}">{{ $case_new->user->getSurnameWithInitials() }}</a></small></td>
+											<td class="text-center"><small>{{ $case_new->created_at }}</small></td>
+											<td class="text-center"><small>{{ $case_new->due_to }}</small></td>
+											<td class="text-center"><small>{{ $case_new->status->name }}</small></td>
+											<td class="text-center"><small>{{ $case_new->last_reply_at }}</small></td>
 										</tr>
 									@endforeach
 								</table>
@@ -214,7 +214,7 @@
 
 
 
-							{{-- ALL CASES --}}
+							{{-- OPEN CASES --}}
 							@can('show-admin')
 							<div role="tabpanel" class="tab-pane" id="open">
 								<table class="table table-condensed table-bordered">
@@ -241,15 +241,15 @@
 												</a>
 											</td>
 											<td>
-												<a href="{{ action('UsersController@show', $case_open->user->id) }}">{{ $case_open->user->getSurnameWithInitials() }}</a>
+												<small><a href="{{ action('UsersController@show', $case_open->user->id) }}">{{ $case_open->user->getSurnameWithInitials() }}</a></small>
 											</td>
-											<td class="text-center">{{ $case_open->created_at }}</td>
-											<td class="text-center">{{ $case_open->due_to }}</td>
-											<td class="text-center">{{ $case_open->status->name }}</td>
-											<td class="text-center">{{ $case_open->last_reply_at }}</td>
+											<td class="text-center"><small>{{ $case_open->created_at }}</small></td>
+											<td class="text-center"><small>{{ $case_open->due_to }}</small></td>
+											<td class="text-center"><small>{{ $case_open->status->name }}</small></td>
+											<td class="text-center"><small>{{ $case_open->last_reply_at }}</small></td>
 											<td class="text-center">
 												@foreach($case_open->performers as $performer)
-													<a href="{{ action('UsersController@show', $performer->id) }}">{{ $performer->getSurnameWithInitials() }}</a>
+													<small><a href="{{ action('UsersController@show', $performer->id) }}">{{ $performer->getSurnameWithInitials() }}</a></small>
 												@endforeach
 											</td>
 										</tr>
@@ -260,7 +260,7 @@
 
 
 
-							{{-- ALL CASES --}}
+							{{-- CLOSED CASES --}}
 							@can('show-admin')
 							<div role="tabpanel" class="tab-pane" id="closed">
 								<table class="table table-condensed table-bordered">
@@ -287,15 +287,15 @@
 												</a>
 											</td>
 											<td>
-												<a href="{{ action('UsersController@show', $case_closed->user->id) }}">{{ $case_closed->user->getSurnameWithInitials() }}</a>
+												<small><a href="{{ action('UsersController@show', $case_closed->user->id) }}">{{ $case_closed->user->getSurnameWithInitials() }}</a></small>
 											</td>
-											<td class="text-center">{{ $case_closed->created_at }}</td>
-											<td class="text-center">{{ $case_closed->due_to }}</td>
-											<td class="text-center">{{ $case_closed->status->name }}</td>
-											<td class="text-center">{{ $case_closed->last_reply_at }}</td>
+											<td class="text-center"><small>{{ $case_closed->created_at }}</small></td>
+											<td class="text-center"><small>{{ $case_closed->due_to }}</small></td>
+											<td class="text-center"><small>{{ $case_closed->status->name }}</small></td>
+											<td class="text-center"><small>{{ $case_closed->last_reply_at }}</small></td>
 											<td class="text-center">
 												@foreach($case_closed->performers as $performer)
-													<a href="{{ action('UsersController@show', $performer->id) }}">{{ $performer->getSurnameWithInitials() }}</a>
+													<small><a href="{{ action('UsersController@show', $performer->id) }}">{{ $performer->getSurnameWithInitials() }}</a></small>
 												@endforeach
 											</td>
 										</tr>
