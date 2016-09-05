@@ -51,7 +51,7 @@ class User extends Model implements AuthenticatableContract,
 
 	public function performerOf()
 	{
-		return $this->belongsToMany('App\Cases', 'case_performers', 'user_id', 'case_id')->where('status_id', '<>', '5')->orderBy('last_reply_at', 'desc');
+		return $this->belongsToMany('App\Cases', 'case_performers', 'user_id', 'case_id')->where('status_id', '<>', '5')->orderBy('last_reply_at', 'desc');;
 	}
 
 

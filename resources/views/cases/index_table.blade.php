@@ -181,12 +181,11 @@
 								<table class="table table-condensed table-bordered">
 									<thead>
 										<td class="text-center">#</td>
-										<td class="text-center col-xs-7">{{ trans('app.Case') }}</td>
+										<td class="text-center col-xs-8">{{ trans('app.Case') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Author') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Created At') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Due To') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Status') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Last Reply At') }}</td>
 									</thead>
 
 									@foreach ($cases_new as $case_new)
@@ -204,7 +203,6 @@
 											<td class="text-center"><small>{{ $case_new->created_at }}</small></td>
 											<td class="text-center"><small>{{ $case_new->due_to }}</small></td>
 											<td class="text-center"><small>{{ $case_new->status->name }}</small></td>
-											<td class="text-center"><small>{{ $case_new->last_reply_at }}</small></td>
 										</tr>
 									@endforeach
 								</table>

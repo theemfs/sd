@@ -1,59 +1,90 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Number #'.$number->id )
+
+
+@section('title', trans("app.Create Case"))
+
+
 
 @section('content')
-	<div class="panel panel-default">
 
-		<div class="panel-heading">
-			{{ 'Edit Number #'.$number->id }}
-			<div class="btn-group pull-right" role="group" aria-label="...">
+
+
+{{-- BREADCRUMBS --}}
+<ol class="breadcrumb">
+	<li><a href="{{ url('/') }}">{{ trans('app.Home') }}</a></li>
+	<li><a href="{{ action('CasesController@index') }}">{{ trans('app.Cases') }}</a></li>
+	<li class="active">{{ trans('app.Case Editing') }}</li>
+</ol>
+
+
+
+	<!-- LEFT BLOCK -->
+	<div class="col-md-2">
+	</div>
+
+
+
+	<!-- CENTER BLOCK -->
+	<div class="col-md-8">
+		<div class="panel panel-default">
+
+			<div class="panel-heading">
+				{{ trans("app.Case Editing") }}
 			</div>
-		</div>
 
-		<div class="panel-body">
+			<div class="panel-body">
 
-			<div class="btn-group btn-group-justified" role="group" aria-label="...">
-				{{ Form::open(['action' => ['NumbersController@destroy', $number->id], 'method' => 'DELETE', 'class' => 'pull-right form-horizontal']) }}
-					<button type="submit" type="button" class="btn btn-danger">Destroy</button>
-				{{ Form::close() }}
+				{{-- {!! Form::open(['url'=>'cases', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!} --}}
+				{!! Form::model($case, ['method' => 'PATCH', 'action' => ['CasesController@update', $case->id], 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
 
-				{{ Form::open(['action' => ['NumbersController@show', $number->id], 'method' => 'GET', 'class' => 'pull-right form-horizontal']) }}
-					<button type="submit" type="button" class="btn btn-default">Cancel</button>
-				{{ Form::close() }}
-			</div>
-			<hr>
-
-			{!! Form::model($number, ['method' => 'PATCH', 'action' => ['NumbersController@update', $number->id], 'class' => 'form-horizontal']) !!}
-
-				<div class="form-group">
-					<div class="col-sm-10 col-sm-offset-2">
-						{!! Form::submit('Update', ['class' => 'btn btn-primary form-control']) !!}
+					<div class="form-group">
+						<div class="col-sm-12">
+							{!! Form::text('name', null, ['class' => 'form-control', 'autocomplete' => 'off', 'autofocus' => 'on', 'placeholder' => trans('app.Case Title')]) !!}
+						</div>
 					</div>
-				</div>
 
-				<div class="form-group">
-					{!! Form::label('id', null, ['class' => 'control-label col-xs-2']) !!}
-					<div class="col-sm-10">
-						{!! Form::text('id', null, ['class' => 'form-control', 'autocomplete' => 'off', 'disabled']) !!}
+					<div class="form-group">
+						{{-- {!! Form::label( trans('app.Text'), null, ['class' => 'control-label col-xs-2']) !!} --}}
+						<div class="col-sm-12">
+							{!! Form::textarea('text', null, ['class' => 'form-control', 'rows' => '10', 'autocomplete' => 'off', 'placeholder' => trans('app.Case Text')]) !!}
+							{{-- <p class="text-muted">{{ trans('app.Text Hint') }}</p> --}}
+						</div>
 					</div>
-				</div>
 
-				<div class="form-group">
-					{!! Form::label( trans('app.Comment') , null, ['class' => 'control-label col-xs-2']) !!}
-					<div class="col-sm-10">
-						{!! Form::textarea('comment', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+					<div class="form-group">
+						<div class="col-sm-12">
+							{!! Form::file( 'attachments[]', ['class' => '', 'multiple' => 'true']) !!}
+						</div>
 					</div>
-				</div>
 
-				{{-- <div class="form-group">
-					{!! Form::label( trans('app.Groups') , null, ['class' => 'control-label col-xs-2']) !!}
-					<div class="col-sm-10">
-						{!! Form::select('sets[]', $sets, $setsIds, ['id' => 'sets_list', 'class' => 'form-control', 'multiple', 'autocomplete' => 'off', 'size' => '5']) !!}
+					<div class="form-group">
+						<div class="col-xs-12 pull-right">
+							{!! Form::submit( trans('app.Update'), ['class' => 'btn btn-primary form-control']) !!}
+						</div>
 					</div>
+
+				{!! Form::close() !!}
+
+				{{-- <div class="btn-group btn-group-justified" role="group" aria-label="...">
+					{{ Form::open(['action' => ['CasesController@index'], 'method' => 'GET', 'class' => 'pull-right form-horizontal']) }}
+						<button type="submit" type="button" class="btn btn-default">{{ trans('app.Cancel') }}</button>
+					{{ Form::close() }}
 				</div> --}}
 
-			{!! Form::close() !!}
+			</div>
 		</div>
 	</div>
-@stop
+
+
+
+	<!-- RIGHT BLOCK -->
+	<div class="col-md-2">
+	</div>
+
+@endsection
+
+
+
+@section('js')
+@endsection

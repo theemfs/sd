@@ -8,6 +8,17 @@
 
 @section('content')
 
+
+
+{{-- BREADCRUMBS --}}
+<ol class="breadcrumb">
+	<li><a href="{{ url('/') }}">{{ trans('app.Home') }}</a></li>
+	<li><a href="{{ action('CasesController@index') }}">{{ trans('app.Cases') }}</a></li>
+	<li class="active">{{ trans('app.Case Creating') }}</li>
+</ol>
+
+
+
 	<!-- LEFT BLOCK -->
 	<div class="col-md-2">
 	</div>
@@ -19,7 +30,7 @@
 		<div class="panel panel-default">
 
 			<div class="panel-heading">
-				{{ trans("app.Create Case") }}
+				{{ trans("app.Case Creating") }}
 			</div>
 
 			<div class="panel-body">

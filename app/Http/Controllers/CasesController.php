@@ -18,6 +18,7 @@ use DB;
 use Storage;
 use Image;
 use Mail;
+use Carbon\Carbon;
 // use CloudConvert\Api;
 // use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 // use App\Policies\CasesPolicy;
@@ -121,6 +122,7 @@ class CasesController extends Controller
 		Auth::user()->cases()->save($case);
 		$case->members()->sync( array(Auth::user()->id) );
 		$case->status_id = 1; //status = new
+		$case->last_reply_at = Carbon::now();
 		$case->save();
 
 
@@ -293,7 +295,7 @@ class CasesController extends Controller
 		// $sets 			= Sets::lists('name', 'id');
 		// $performersIds	= $phone->performers->lists('id')->toArray();
 		return view('cases.edit')
-		->with('case',				$case)
+			->with('case',				$case)
 				// ->with('sets',					$sets)
 				// ->with('performersIds', 	$performersIds)
 		;

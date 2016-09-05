@@ -20,6 +20,7 @@ return [
 	'Case' 									=> 'Кейс',
 	'Cases' 								=> 'Кейсы',
 	'Create Case' 							=> 'Создать кейс',
+	'Case Creating' 						=> 'Создание кейса',
 	'Created At' 							=> 'Создано',
 	'Create' 								=> 'Создать',
 	'Dashboard' 							=> 'Монитор',
