@@ -192,8 +192,8 @@ class CasesController extends Controller
 			Mail::queue('emails.notification_newcase', $data, function($email) use ($case, $message, $subscriber) {
 				$email->from( env('MAIL_USERNAME') );
 				$email->to($subscriber->email);
-				$email->subject("[Case #$case->id]: " . trans('app.New case') . " \"$case->name\"");
-				$email->priority(2);
+				$email->subject("[" . trans('app.Case') . " #$case->id]: \"$case->name\". " . trans('app.New case') );
+				$email->priority(2); //high
 			});
 		}
 
