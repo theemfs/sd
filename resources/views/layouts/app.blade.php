@@ -11,6 +11,7 @@
 {{-- CSS --}}
 		<link href="{{ url('/') }}/css/bootstrap.min.css" rel="stylesheet">
 		<link href="{{ url('/') }}/css/font-awesome.min.css" rel="stylesheet">
+		<link href="{{ url('/') }}/css/font-awesome-animation.min.css" rel="stylesheet">
 		{{-- <link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet"> --}}
 @yield('css')
 		<link href="{{ url('/') . elixir('css/all.css') }}" rel="stylesheet">

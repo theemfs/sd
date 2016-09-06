@@ -42,23 +42,75 @@ class User extends Model implements AuthenticatableContract,
 
 
 
-	public function cases()
+
+	public function authorOf()
 	{
-		return $this->hasMany('App\Cases', 'user_id')->where('status_id', '<>', '5')->orderBy('last_reply_at', 'desc');
+		return $this->hasMany('App\Cases', 'user_id')->orderBy('last_reply_at', 'desc');
+
 	}
+	public function authorOfOpen()
+	{
+		//dd($this->hasMany('App\Cases', 'user_id')->orderBy('last_reply_at', 'desc'));
+		return $this->hasMany('App\Cases', 'user_id')->where('status_id', '<>', 5)->orderBy('last_reply_at', 'desc');
+	}
+	public function authorOfClosed()
+	{
+		return $this->hasMany('App\Cases', 'user_id')->where('status_id', 5)->orderBy('last_reply_at', 'desc');
+	}
+	// public function cases()
+	// {
+	// 	//return $this->hasMany('App\Cases', 'user_id')->orderBy('last_reply_at', 'desc');
+	// 	//return $this->hasMany('App\Cases', 'user_id')->where('status_id', '<>', '5')->orderBy('last_reply_at', 'desc');
+	// 	return $this->hasMany('App\Cases', 'user_id')->orderBy('last_reply_at', 'desc');
+	// }
 
 
 
 	public function performerOf()
 	{
-		return $this->belongsToMany('App\Cases', 'case_performers', 'user_id', 'case_id')->where('status_id', '<>', '5')->orderBy('last_reply_at', 'desc');;
+		return $this->belongsToMany('App\Cases', 'case_performers', 'user_id', 'case_id')->orderBy('last_reply_at', 'desc');;
+	}
+	public function performerOfOpen()
+	{
+		return $this->belongsToMany('App\Cases', 'case_performers', 'user_id', 'case_id')->where('status_id', '<>', 5)->orderBy('last_reply_at', 'desc');;
+	}
+	public function performerOfClosed()
+	{
+		return $this->belongsToMany('App\Cases', 'case_performers', 'user_id', 'case_id')->where('status_id', 5)->orderBy('last_reply_at', 'desc');;
 	}
 
 
 
 	public function memberOf()
 	{
-		return $this->belongsToMany('App\Cases', 'case_members', 'user_id', 'case_id')->where('status_id', '<>', '5')->orderBy('last_reply_at', 'desc');
+		return $this->belongsToMany('App\Cases', 'case_members', 'user_id', 'case_id')->orderBy('last_reply_at', 'desc');
+	}
+	public function memberOfOpen()
+	{
+		return $this->belongsToMany('App\Cases', 'case_members', 'user_id', 'case_id')->where('status_id', '<>', 5)->orderBy('last_reply_at', 'desc');
+	}
+	public function memberOfClosed()
+	{
+		return $this->belongsToMany('App\Cases', 'case_members', 'user_id', 'case_id')->where('status_id', 5)->orderBy('last_reply_at', 'desc');
+	}
+
+
+
+	public function casesAll()
+	{
+		$cases0 = $this->authorOf->toBase();
+		$cases1 = $this->performerOf->toBase();
+		$cases2 = $this->memberOf->toBase();
+		//dd($cases0->merge($cases1)->merge($cases2));
+		return $cases0->merge($cases1)->merge($cases2);
+	}
+	public function casesAllOpen()
+	{
+		return $this->casesAll()->where('status_id', '<>', 5);
+	}
+	public function casesAllClosed()
+	{
+		return $this->casesAll()->where('status_id', 5);
 	}
 
 
@@ -77,14 +129,7 @@ class User extends Model implements AuthenticatableContract,
 
 
 
-	public function getAllMyCases()
-	{
-		$cases0 = $this->cases->toBase();
-		$cases1 = $this->performerOf->toBase();
-		$cases2 = $this->memberOf->toBase();
 
-		return $cases0->merge($cases1)->merge($cases2);
-	}
 
 
 
@@ -111,7 +156,7 @@ class User extends Model implements AuthenticatableContract,
 		$fio = explode(' ',$this->name);
 		$r = "";
 		$r .= array_key_exists("0", $fio) ? $fio[0] : "";
-		$r .= array_key_exists("1", $fio) ? " " . mb_substr($fio[1],0,1) : "";
+		$r .= array_key_exists("1", $fio) ? "&nbsp;" . mb_substr($fio[1],0,1) : "";
 		$r .= array_key_exists("2", $fio) ? "." . mb_substr($fio[2],0,1) ."." : "";
 		return $r;
 	}

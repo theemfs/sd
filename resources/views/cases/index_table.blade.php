@@ -3,6 +3,7 @@
 
 
 @section('css')
+	<link href="{{ url('/') }}/css/jquery.dataTables.min.css" rel="stylesheet">
 {{-- <META HTTP-EQUIV="refresh" CONTENT="60"> --}}
 @endsection
 
@@ -38,16 +39,30 @@
 
 					<div> {{-- TABS --}}
 						<ul class="nav nav-pills nav-justified" role="tablist">
+
 							<li role="presentation" {!! !Auth::user()->can_be_performer ? 'class="active"' : '' !!}><a href="#author" aria-controls="home" role="tab" data-toggle="tab">{{ trans('app.As Author') }}<span class="badge">{{ $cases_author->count() }}</span></a></li>
+
+							@if (Auth::user()->can_be_performer)
 							<li role="presentation" {!! Auth::user()->can_be_performer ? 'class="active"' : '' !!}><a href="#performer" aria-controls="profile" role="tab" data-toggle="tab">{{ trans('app.As Performer') }}<span class="badge">{{ $cases_performer->count() }}</span></a></li>
+							@endif
+
 							<li role="presentation"><a href="#member" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.As Member') }}<span class="badge">{{ $cases_member->count() }}</span></a></li>
+
 							@can('show-new-cases')
 								<li role="presentation"><a href="#new" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.New Cases') }}<span class="badge">{{ $cases_new->count() }}</span></a></li>
 							@endcan
+
 							@can('show-admin')
-								<li role="presentation"><a href="#open" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.Open Cases') }}<span class="badge">{{ $cases_open->count() }}</span></a></li>
-								<li role="presentation"><a href="#closed" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.Closed Cases') }}<span class="badge">{{ $cases_closed->count() }}</span></a></li>
+								<li role="presentation">
+									<a href="#open" aria-controls="messages" role="tab" data-toggle="tab">
+										{{ trans('app.Open Cases') }}
+										<span class="badge">{{ $cases_open->count() }}</span>
+									</a>
+								</li>
 							@endcan
+
+							<li role="presentation"><a href="#closed" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.Closed Cases') }}<span class="badge">{{ $cases_closed->count() }}</span></a></li>
+
 						</ul>
 						<hr>
 
@@ -77,8 +92,9 @@
 											</td>
 											<td>
 												<a href="{{ action('CasesController@show', $case_author->id) }}">
+													<i class="fa fa-fw fa-btn fa-briefcase"></i>
 													<strong>{{ $case_author->name }}</strong>
-													<small class="text-muted col-md-11 col-md-offset-1">{{ mb_substr($case_author->text, 0, 300)."..." }}</small>
+													<small class="text-muted col-md-11 col-md-offset-1 hidden-xs">{{ mb_substr($case_author->text, 0, 300)."..." }}</small>
 												</a>
 											</td>
 											<td class="text-center"><small>{{ $case_author->created_at }}</small></td>
@@ -87,7 +103,12 @@
 											<td class="text-center"><small>{{ $case_author->last_reply_at }}</small></td>
 											<td class="text-center">
 												@foreach($case_author->performers as $performer)
-													<small><a href="{{ action('UsersController@show', $performer->id) }}">{{ $performer->getSurnameWithInitials() }}</a></small>
+													<small>
+														<a href="{{ action('UsersController@show', $performer->id) }}">
+															{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
+															{{ $performer->getSurnameWithInitials() }}
+														</a><br>
+													</small>
 												@endforeach
 											</td>
 										</tr>
@@ -102,12 +123,14 @@
 								<table class="table table-condensed table-bordered">
 									<thead>
 										<td class="text-center">#</td>
-										<td class="text-center col-xs-7">{{ trans('app.Case') }}</td>
+										<td class="text-center col-xs-5">{{ trans('app.Case') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Author') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Created At') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Due To') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Status') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Last Reply At') }}</td>
+										<td class="text-center col-xs-1">{{ trans('app.Performers') }}</td>
+										<td class="text-center col-xs-1">{{ trans('app.Members') }}</td>
 									</thead>
 
 									@foreach ($cases_performer as $case_performer)
@@ -117,15 +140,47 @@
 											</td>
 											<td>
 												<a href="{{ action('CasesController@show', $case_performer->id) }}">
+													<i class="fa fa-fw fa-btn fa-briefcase"></i>
 													<strong>{{ $case_performer->name }}</strong>
-													<small class="text-muted col-md-11 col-md-offset-1">{{ mb_substr($case_performer->text, 0, 300)."..." }}</small>
+													<small class="text-muted col-md-11 col-md-offset-1 hidden-xs">{{ mb_substr($case_performer->text, 0, 300)."..." }}</small>
 												</a>
 											</td>
-											<td><small><a href="{{ action('UsersController@show', $case_performer->user->id) }}">{{ $case_performer->user->getSurnameWithInitials() }}</a></small></td>
+											<td>
+												<small>
+													<a href="{{ action('UsersController@show', $case_performer->user->id) }}">
+														{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
+														{{ $case_performer->user->getSurnameWithInitials() }}
+													</a>
+												</small>
+											</td>
 											<td class="text-center"><small>{{ $case_performer->created_at }}</small></td>
 											<td class="text-center"><small>{{ $case_performer->due_to }}</small></td>
 											<td class="text-center"><small>{{ $case_performer->status->name }}</small></td>
 											<td class="text-center"><small>{{ $case_performer->last_reply_at }}</small></td>
+											<td class="text-left">
+												@foreach($case_performer->performers as $performer)
+													<small>
+														<a href="{{ action('UsersController@show', $performer->id) }}">
+															{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
+															{{ $performer->getSurnameWithInitials() }}
+														</a>
+													</small>
+												@endforeach
+											</td>
+											<td class="text-left text-overflow">
+												@if($case_performer->members->count()<=5)
+													@foreach($case_performer->members as $member)
+														<small>
+															<a href="{{ action('UsersController@show', $member->id) }}">
+																{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
+																{{ $member->getSurnameWithInitials() }}
+															</a>
+														</small><br>
+													@endforeach
+												@else
+													<small>{{ trans('app.Members Count') }}: {{ $case_performer->members->count() }}</small>
+												@endif
+											</td>
 										</tr>
 									@endforeach
 								</table>
@@ -138,13 +193,14 @@
 								<table class="table table-condensed table-bordered">
 									<thead>
 										<td class="text-center">#</td>
-										<td class="text-center col-xs-7">{{ trans('app.Case') }}</td>
+										<td class="text-center col-xs-5">{{ trans('app.Case') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Author') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Created At') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Due To') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Status') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Last Reply At') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Performers') }}</td>
+										<td class="text-center col-xs-1">{{ trans('app.Members') }}</td>
 									</thead>
 
 									@foreach ($cases_member as $case_member)
@@ -154,19 +210,46 @@
 											</td>
 											<td>
 												<a href="{{ action('CasesController@show', $case_member->id) }}">
+													<i class="fa fa-fw fa-btn fa-briefcase"></i>
 													<strong>{{ $case_member->name }}</strong>
-													<small class="text-muted col-md-11 col-md-offset-1">{{ mb_substr($case_member->text, 0, 300)."..." }}</small>
+													<small class="text-muted col-md-11 col-md-offset-1 hidden-xs">{{ mb_substr($case_member->text, 0, 300)."..." }}</small>
 												</a>
 											</td>
-											<td><small><a href="{{ action('UsersController@show', $case_member->user->id) }}">{{ $case_member->user->getSurnameWithInitials() }}</a></small></td>
+											<td>
+												<small>
+													<a href="{{ action('UsersController@show', $case_member->user->id) }}">
+														{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
+														{{ $case_member->user->getSurnameWithInitials() }}
+													</a>
+												</small>
+											</td>
 											<td class="text-center"><small>{{ $case_member->created_at }}</small></td>
 											<td class="text-center"><small>{{ $case_member->due_to }}</small></td>
 											<td class="text-center"><small>{{ $case_member->status->name }}</small></td>
 											<td class="text-center"><small>{{ $case_member->last_reply_at }}</small></td>
-											<td class="text-center">
+											<td class="text-left">
 												@foreach($case_member->performers as $performer)
-													<small><a href="{{ action('UsersController@show', $performer->id) }}">{{ $performer->getSurnameWithInitials() }}</a></small>
+													<small>
+														<a href="{{ action('UsersController@show', $performer->id) }}">
+															{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
+															{{ $performer->getSurnameWithInitials() }}
+														</a>
+													</small>
 												@endforeach
+											</td>
+											<td class="text-left text-overflow">
+												@if($case_member->members->count()<=5)
+													@foreach($case_member->members as $member)
+														<small>
+															<a href="{{ action('UsersController@show', $member->id) }}">
+																{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
+																{{ $member->getSurnameWithInitials() }}
+															</a>
+														</small><br>
+													@endforeach
+												@else
+													<small>{{ trans('app.Members Count') }}: {{ $case_member->members->count() }}</small>
+												@endif
 											</td>
 										</tr>
 									@endforeach
@@ -195,8 +278,9 @@
 											</td>
 											<td>
 												<a href="{{ action('CasesController@show', $case_new->id) }}">
+													<i class="fa fa-fw fa-btn fa-briefcase"></i>
 													<strong>{{ $case_new->name }}</strong>
-													<small class="text-muted col-md-11 col-md-offset-1">{{ mb_substr($case_new->text, 0, 300)."..." }}</small>
+													<small class="text-muted col-md-11 col-md-offset-1 hidden-xs">{{ mb_substr($case_new->text, 0, 300)."..." }}</small>
 												</a>
 											</td>
 											<td><small><a href="{{ action('UsersController@show', $case_new->user->id) }}">{{ $case_new->user->getSurnameWithInitials() }}</a></small></td>
@@ -214,17 +298,18 @@
 
 							{{-- OPEN CASES --}}
 							@can('show-admin')
-							<div role="tabpanel" class="tab-pane" id="open">
+							<div role="tabpanel" class="table-responsive tab-pane" id="open">
 								<table class="table table-condensed table-bordered">
 									<thead>
 										<td class="text-center">#</td>
-										<td class="text-center col-xs-7">{{ trans('app.Case') }}</td>
+										<td class="text-center col-xs-5">{{ trans('app.Case') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Author') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Created At') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Due To') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Status') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Last Reply At') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Performers') }}</td>
+										<td class="text-center col-xs-1">{{ trans('app.Members') }}</td>
 									</thead>
 
 									@foreach ($cases_open as $case_open)
@@ -234,21 +319,46 @@
 											</td>
 											<td>
 												<a href="{{ action('CasesController@show', $case_open->id) }}">
+													<i class="fa fa-fw fa-btn fa-briefcase"></i>
 													<strong>{{ $case_open->name }}</strong>
-													<small class="text-muted col-md-11 col-md-offset-1">{{ mb_substr($case_open->text, 0, 300)."..." }}</small>
+													<small class="text-muted col-md-11 col-md-offset-1 hidden-xs">{{ mb_substr($case_open->text, 0, 300)."..." }}</small>
 												</a>
 											</td>
 											<td>
-												<small><a href="{{ action('UsersController@show', $case_open->user->id) }}">{{ $case_open->user->getSurnameWithInitials() }}</a></small>
+												<small>
+													<a href="{{ action('UsersController@show', $case_open->user->id) }}">
+														{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
+														{{ $case_open->user->getSurnameWithInitials() }}
+													</a>
+												</small>
 											</td>
 											<td class="text-center"><small>{{ $case_open->created_at }}</small></td>
 											<td class="text-center"><small>{{ $case_open->due_to }}</small></td>
 											<td class="text-center"><small>{{ $case_open->status->name }}</small></td>
 											<td class="text-center"><small>{{ $case_open->last_reply_at }}</small></td>
-											<td class="text-center">
+											<td class="text-left">
 												@foreach($case_open->performers as $performer)
-													<small><a href="{{ action('UsersController@show', $performer->id) }}">{{ $performer->getSurnameWithInitials() }}</a></small>
+													<small>
+														<a href="{{ action('UsersController@show', $performer->id) }}">
+															{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
+															{{ $performer->getSurnameWithInitials() }}
+														</a>
+													</small>
 												@endforeach
+											</td>
+											<td class="text-left text-overflow">
+												@if($case_open->members->count()<=5)
+													@foreach($case_open->members as $member)
+														<small>
+															<a href="{{ action('UsersController@show', $member->id) }}">
+																{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
+																{{ $member->getSurnameWithInitials() }}
+															</a>
+														</small><br>
+													@endforeach
+												@else
+													<small>{{ trans('app.Members Count') }}: {{ $case_open->members->count() }}</small>
+												@endif
 											</td>
 										</tr>
 									@endforeach
@@ -259,18 +369,19 @@
 
 
 							{{-- CLOSED CASES --}}
-							@can('show-admin')
-							<div role="tabpanel" class="tab-pane" id="closed">
+							{{-- @can('show-admin') --}}
+							<div role="tabpanel" class="table-responsive tab-pane" id="closed">
 								<table class="table table-condensed table-bordered">
 									<thead>
 										<td class="text-center">#</td>
-										<td class="text-center col-xs-7">{{ trans('app.Case') }}</td>
+										<td class="text-center col-xs-5">{{ trans('app.Case') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Author') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Created At') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Due To') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Status') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Last Reply At') }}</td>
 										<td class="text-center col-xs-1">{{ trans('app.Performers') }}</td>
+										<td class="text-center col-xs-1">{{ trans('app.Members') }}</td>
 									</thead>
 
 									@foreach ($cases_closed as $case_closed)
@@ -280,27 +391,52 @@
 											</td>
 											<td>
 												<a href="{{ action('CasesController@show', $case_closed->id) }}">
+													<i class="fa fa-fw fa-btn fa-briefcase"></i>
 													<strong>{{ $case_closed->name }}</strong>
-													<small class="text-muted col-md-11 col-md-offset-1">{{ mb_substr($case_closed->text, 0, 300)."..." }}</small>
+													<small class="text-muted col-md-11 col-md-offset-1 hidden-xs">{{ mb_substr($case_closed->text, 0, 300)."..." }}</small>
 												</a>
 											</td>
 											<td>
-												<small><a href="{{ action('UsersController@show', $case_closed->user->id) }}">{{ $case_closed->user->getSurnameWithInitials() }}</a></small>
+												<small>
+													<a href="{{ action('UsersController@show', $case_closed->user->id) }}">
+														{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
+														{{ $case_closed->user->getSurnameWithInitials() }}
+													</a>
+												</small>
 											</td>
 											<td class="text-center"><small>{{ $case_closed->created_at }}</small></td>
 											<td class="text-center"><small>{{ $case_closed->due_to }}</small></td>
 											<td class="text-center"><small>{{ $case_closed->status->name }}</small></td>
 											<td class="text-center"><small>{{ $case_closed->last_reply_at }}</small></td>
-											<td class="text-center">
+											<td class="text-left">
 												@foreach($case_closed->performers as $performer)
-													<small><a href="{{ action('UsersController@show', $performer->id) }}">{{ $performer->getSurnameWithInitials() }}</a></small>
+													<small>
+														<a href="{{ action('UsersController@show', $performer->id) }}">
+															{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
+															{{ $performer->getSurnameWithInitials() }}
+														</a>
+													</small>
 												@endforeach
+											</td>
+											<td class="text-left text-overflow">
+												@if($case_closed->members->count()<=5)
+													@foreach($case_closed->members as $member)
+														<small>
+															<a href="{{ action('UsersController@show', $member->id) }}">
+																{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
+																{{ $member->getSurnameWithInitials() }}
+															</a>
+														</small><br>
+													@endforeach
+												@else
+													<small>{{ trans('app.Members Count') }}: {{ $case_closed->members->count() }}</small>
+												@endif
 											</td>
 										</tr>
 									@endforeach
 								</table>
 							</div>
-							@endcan
+							{{-- @endcan --}}
 
 
 
@@ -317,4 +453,27 @@
 
 
 @section('js')
+	<script src="{{ url('/') }}/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('table').DataTable({
+				// "sDom": '<"top"i>rt<"bottom"flp><"clear">',
+				"bFilter": false,
+				"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Все"]],
+				"paging":   false,
+				"ordering": true,
+				"info":     false,
+				"search":     false,
+				"stateSave": true,
+				"pagingType": "full_numbers",
+				// "scrollY": 200,
+				// "scrollX": true
+				"language": {
+				// 	"decimal": ",",
+				// 	"thousands": "."
+					"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Russian.json"
+				}
+			});
+		} );
+	</script>
 @endsection

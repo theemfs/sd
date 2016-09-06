@@ -13,7 +13,9 @@ elixir(function(mix) {
 	mix.copy('vendor/components/font-awesome/css/font-awesome.min.css', 							'public/css/');//not mixed
 	mix.copy('vendor/bootstrap-select/bootstrap-select/dist/css/bootstrap-select.min.css', 			'public/css/');//not mixed
 	mix.copy('vendor/eonasdan/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css', 'public/css/');//not mixed
-	mix.copy('vendor/datatables/datatables/media/css/jquery.dataTables.min.css', 					'public/css/');//not mixed
+	// mix.copy('vendor/datatables/datatables/media/css/jquery.dataTables.min.css', 					'public/css/');//not mixed
+	mix.copy('vendor/datatables/datatables/media/css/dataTables.bootstrap.min.css', 				'public/css/');//not mixed
+	mix.copy('bower_components/font-awesome-animation/dist/font-awesome-animation.min.css',			'public/css/');//not mixed
 
 	mix.styles([
 		// 'bootstrap.min.css',
@@ -62,7 +64,8 @@ elixir(function(mix) {
 	// //IMAGES
 	// mix.copy('/resources/assets/mimetypes/', 'public/build/mimetypes/');
 	// mix.copy('/resources/assets/images/', 'public/build/images/');
-	mix.copy('resources/assets/images/briefcase.png', 'public/favicon.ico');
+	mix.copy('resources/assets/images/briefcase.png', 												'public/favicon.ico');
+	mix.copy('vendor/datatables/datatables/media/images', 											'public/images');
 
 
 

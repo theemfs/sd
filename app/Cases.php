@@ -37,14 +37,14 @@ class Cases extends Model
 
 	public function members()
 	{
-		return $this->belongsToMany('App\User', 'case_members', 'case_id');
+		return $this->belongsToMany('App\User', 'case_members', 'case_id')->orderBy('name', 'asc');
 	}
 
 
 
 	public function performers()
 	{
-		return $this->belongsToMany('App\User', 'case_performers', 'case_id');
+		return $this->belongsToMany('App\User', 'case_performers', 'case_id')->orderBy('name', 'asc');
 	}
 
 

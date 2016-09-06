@@ -42,6 +42,7 @@ return [
 	'Logout' 								=> 'Выход',
 	'Members' 								=> 'Участники',
 	'Message' 								=> 'Сообщение',
+	'Members Count'							=> 'Количество участников',
 	'My profile' 							=> 'Мой профиль',
 	'New reply' 							=> 'Новый ответ',
 	'New case' 								=> 'Новый кейс',

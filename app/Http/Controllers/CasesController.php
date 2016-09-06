@@ -28,51 +28,39 @@ class CasesController extends Controller
 
 	public function __construct()
 	{
-		//$this->middleware('auth');
 	}
 
 
 
 	public function index(Request $request)
 	{
-		// filered version
-		//$filter = trim($request->input('filter'));
 
-		// $cases 	= Cases::orderBy('updated_at', 'desc');
-		// dd($cases->paginate(10));
+		// FOR USERS
+		$cases_author 		= Auth::user()->authorOfOpen;									// where I am an author
+		$cases_performer 	= Auth::user()->performerOfOpen;								// where I am a performer
+		$cases_member		= Auth::user()->memberOfOpen;									// where I am a member
+		$cases_closed		= Auth::user()->casesAllClosed();									// closed AND where I am author || performer || member
 
-		$cases_author 		= Auth::user()->cases;
-		$cases_performer 	= Auth::user()->performerOf;
-		$cases_member		= Auth::user()->memberOf;
+		$user = Auth::user();
+
+		// dd($user->authorOfOpen());
+		// dd($cases_author);
+
+		//return(Auth::user()->getAllClosedMyCases);
+
+		// ONLY FOR ADMIN
 		$cases_open			= Cases::where('status_id','<>','5')->orderBy('updated_at','desc')->get();
-
 		//$cases_not_assigned = collect(DB::select(DB::raw("SELECT * FROM cases WHERE cases.id NOT IN (SELECT case_id FROM case_performers)")));
 		$cases_new_ids 		= array_column( DB::select(DB::raw("SELECT id FROM cases WHERE cases.id NOT IN (SELECT case_id FROM case_performers)")), "id");
 		$cases_new 			= Cases::whereIn('id',$cases_new_ids)->orderBy('updated_at','desc')->get();
-
-		$cases_closed		= Cases::where('status_id','5')->orderBy('updated_at','desc')->get();
-
-
-
-		// dd($cases_new_ids);
-		// $cases_not_assigned = Cases::whereNotIn('book_price', DB::select(DB::raw("SELECT * FROM cases WHERE cases.id NOT IN (SELECT case_id FROM case_performers)")))->get();
-
-		//$cases = new Paginator($cases, $cases->count(), 2, $request);
-
-		// if (strlen($filter)==0) {
-		// 	$cases 	= Cases::orderBy('updated_at', 'desc')->paginate(50);
-		// } else {
-		// 	$cases 	= Cases::where('id', 'LIKE', '%'.$filter.'%')
-		// 		->orWhere('text', 'LIKE', '%'.$filter.'%')
-		// 		->paginate(50);
-		// }
+		$cases_closed_all	= Cases::where('status_id','5')->orderBy('updated_at','desc')->get();
 
 
 
 		if (Auth::user()->is_admin) {
 			return view('cases.index_table')
 				->with('cases_author',		$cases_author)
-				->with('cases_closed',		$cases_closed)
+				->with('cases_closed',		$cases_closed_all)
 				->with('cases_member',		$cases_member)
 				->with('cases_new',			$cases_new)
 				->with('cases_open',		$cases_open)
@@ -81,6 +69,7 @@ class CasesController extends Controller
 		} else {
 			return view('cases.index_snippets')
 				->with('cases_author',		$cases_author)
+				->with('cases_closed',		$cases_closed)
 				->with('cases_member',		$cases_member)
 				->with('cases_new',			$cases_new)
 				->with('cases_open',		$cases_open)
@@ -88,19 +77,13 @@ class CasesController extends Controller
 			;
 		}
 
-
-
 	}
 
 
 
 	public function create()
 	{
-		//$types = DB::table('types')->orderBy('id', 'asc')->get();
-		return view('cases.create')
-				// ->with('types',		$types)
-				// ->with('typesIds',	'[]')
-		;
+		return view('cases.create');
 	}
 
 
