@@ -29,10 +29,12 @@
 
 
 
-	@include('layouts.nav')
+	{{-- TOP NAVIGATION BAR --}}
+	@include('layouts.nav_top')
 
 
 
+	{{-- TOP SUCCESS FLASH MESSAGES --}}
 	<div class="container">
 		@if ( Session::has('flash_success') )
 			<div class="alert alert-success">{{ Session::get('flash_success') }}</div>
@@ -41,6 +43,7 @@
 
 
 
+	{{-- MAIN CONTENT BLOCK --}}
 	<div class="container">
 		<div class="row">
 			@yield('content')
@@ -49,6 +52,7 @@
 
 
 
+	{{-- BOTTOM ERROR BLOCK --}}
 	<div class="container">
 		@if ($errors->any())
 			<ul class="alert alert-danger">
@@ -62,32 +66,35 @@
 
 
 
-		{{-- @include('layouts.footer') --}}
-
-		{{-- JS --}}
-		<script src="{{ url('/') }}/js/jquery.min.js"></script>
-		<script src="{{ url('/') }}/js/bootstrap.min.js"></script>
-		<script src="{{ url('/') . elixir('js/all.js') }}"></script>
-		{{-- <script src="{{ url('/') }}/js/bootstrap-datepicker.min.js"></script>
-		<script src="{{ url('/') }}/js/ckeditor.js"></script>
-		<script src="{{ url('/') }}/js/jquery.dataTables.min.js"></script> --}}
+	{{-- JS --}}
+	<script src="{{ url('/') }}/js/jquery.min.js"></script>
+	<script src="{{ url('/') }}/js/bootstrap.min.js"></script>
+	<script src="{{ url('/') . elixir('js/all.js') }}"></script>
+	{{-- <script src="{{ url('/') }}/js/bootstrap-datepicker.min.js"></script>
+	<script src="{{ url('/') }}/js/ckeditor.js"></script>
+	<script src="{{ url('/') }}/js/jquery.dataTables.min.js"></script> --}}
 
 
 
-		<footer>
+	{{-- FOOTER --}}
+	<footer>
+		{{-- @yield('footer') --}}
+		@yield('js')
+		@if (Auth::user())
+			<div class="container">
+				{{-- <p class="text-muted small">&copy / &reg;</p> --}}
+				{{-- <p class="text-muted small">@</p> --}}
+				{{-- <p class="text-muted small">&copy Идея и разработка - Антон Хамаев</p> --}}
+				{{-- <p class="text-muted small">По всем вопросам пишите <a href="mailto:">anton@grandbaikal.ru</a></p> --}}
+			</div>
+		@endif
 
-			{{-- @yield('footer') --}}
-			@yield('js')
-			@if (Auth::user())
-				<div class="container">
-					{{-- <p class="text-muted small">&copy / &reg;</p> --}}
-					<p class="text-muted small">@</p>
-					{{-- <p class="text-muted small">&copy Идея и разработка - Антон Хамаев</p> --}}
-					<p class="text-muted small">По всем вопросам пишите <a href="mailto:">anton@grandbaikal.ru</a></p>
-				</div>
-			@endif
 
-		</footer>
+	</footer>
+
+
+	{{-- BOTTOM NAVIGATION BAR --}}
+	@include('layouts.nav_bottom')
 
 
 

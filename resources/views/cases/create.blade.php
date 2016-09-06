@@ -59,7 +59,7 @@
 
 					<div class="form-group">
 						<div class="col-xs-12 pull-right">
-							{!! Form::submit( trans('app.Create'), ['class' => 'btn btn-primary form-control']) !!}
+							{!! Form::button( '<i class="fa fa-fw fa-btn fa-check"></i>' . trans('app.Create'), ['type' => 'submit', 'class' => 'btn btn-primary form-control']) !!}
 						</div>
 					</div>
 

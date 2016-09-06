@@ -75,8 +75,11 @@ img {
 	vertical-align: baseline;
 }
 
-/*padding for fixed top nav*/
-body { padding-top: 70px; }
+/*padding for fixed top and bottom nav*/
+body {
+	padding-top: 70px;
+	padding-bottom: 20px;
+}
 
 hr {
     margin-top: 15px;

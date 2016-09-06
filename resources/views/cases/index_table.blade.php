@@ -32,7 +32,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					{{ trans('app.Cases') }}
-					<a class="btn btn-default btn-success pull-right btn-xs" href="{{ action('CasesController@create') }}" role="button">{{ trans('app.Create') }}</a>
+					<a class="btn btn-default btn-success pull-right btn-xs" href="{{ action('CasesController@create') }}" role="button"><i class="fa fa-fw fa-btn fa-plus"></i> {{ trans('app.Create') }}</a>
 				</div>
 
 				<div class="panel-body">
@@ -40,28 +40,65 @@
 					<div> {{-- TABS --}}
 						<ul class="nav nav-pills nav-justified" role="tablist">
 
-							<li role="presentation" {!! !Auth::user()->can_be_performer ? 'class="active"' : '' !!}><a href="#author" aria-controls="home" role="tab" data-toggle="tab">{{ trans('app.As Author') }}<span class="badge">{{ $cases_author->count() }}</span></a></li>
+							{{-- I AM AUTHOR --}}
+							<li role="presentation" {!! !Auth::user()->can_be_performer ? 'class="active"' : '' !!}>
+								<a href="#author" aria-controls="home" role="tab" data-toggle="tab">
+									<i class="fa fa-fw fa-btn fa-hand-o-up"></i>
+									{{ trans('app.As Author') }}
+									<span class="badge">{{ $cases_author->count() }}</span>
+								</a>
+							</li>
 
+							{{-- I AM PERFORMER --}}
 							@if (Auth::user()->can_be_performer)
-							<li role="presentation" {!! Auth::user()->can_be_performer ? 'class="active"' : '' !!}><a href="#performer" aria-controls="profile" role="tab" data-toggle="tab">{{ trans('app.As Performer') }}<span class="badge">{{ $cases_performer->count() }}</span></a></li>
+								<li role="presentation" {!! Auth::user()->can_be_performer ? 'class="active"' : '' !!}>
+									<a href="#performer" aria-controls="profile" role="tab" data-toggle="tab">
+										<i class="fa fa-fw fa-btn fa-user"></i>
+										{{ trans('app.As Performer') }}
+										<span class="badge">{{ $cases_performer->count() }}</span>
+									</a>
+								</li>
 							@endif
 
-							<li role="presentation"><a href="#member" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.As Member') }}<span class="badge">{{ $cases_member->count() }}</span></a></li>
+							{{-- I AM MEMBER --}}
+							<li role="presentation">
+								<a href="#member" aria-controls="messages" role="tab" data-toggle="tab">
+									<i class="fa fa-fw fa-btn fa-users"></i>
+									{{ trans('app.As Member') }}
+									<span class="badge">{{ $cases_member->count() }}</span>
+								</a>
+							</li>
 
+							{{-- NEW CASES --}}
 							@can('show-new-cases')
-								<li role="presentation"><a href="#new" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.New Cases') }}<span class="badge">{{ $cases_new->count() }}</span></a></li>
+								<li role="presentation">
+									<a href="#new" aria-controls="messages" role="tab" data-toggle="tab">
+										<i class="fa fa-fw fa-btn fa-file"></i>
+										{{ trans('app.New Cases') }}
+										<span class="badge">{{ $cases_new->count() }}</span>
+									</a>
+								</li>
 							@endcan
 
+							{{-- OPEN CASES --}}
 							@can('show-admin')
 								<li role="presentation">
 									<a href="#open" aria-controls="messages" role="tab" data-toggle="tab">
+										<i class="fa fa-fw fa-btn fa-unlock"></i>
 										{{ trans('app.Open Cases') }}
 										<span class="badge">{{ $cases_open->count() }}</span>
 									</a>
 								</li>
 							@endcan
 
-							<li role="presentation"><a href="#closed" aria-controls="messages" role="tab" data-toggle="tab">{{ trans('app.Closed Cases') }}<span class="badge">{{ $cases_closed->count() }}</span></a></li>
+							{{-- CLOSED CASES --}}
+							<li role="presentation">
+								<a href="#closed" aria-controls="messages" role="tab" data-toggle="tab">
+									<i class="fa fa-fw fa-btn fa-lock"></i>
+									{{ trans('app.Closed Cases') }}
+									<span class="badge">{{ $cases_closed->count() }}</span>
+								</a>
+							</li>
 
 						</ul>
 						<hr>
@@ -76,13 +113,13 @@
 							<div role="tabpanel" class="table-responsive tab-pane {!! !Auth::user()->can_be_performer ? 'in active' : '' !!}" id="author">
 								<table class="table table-condensed table-bordered">
 									<thead>
-										<td class="text-center">#</td>
-										<td class="text-center col-xs-7">{{ trans('app.Case') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Last Reply At') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Created At') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Due To') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Status') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Performers') }}</td>
+										<td class="text-center"><strong>#</strong></td>
+										<td class="text-center col-xs-7"><strong>{{ trans('app.Case') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Last Reply At') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Created At') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Due To') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Status') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Performers') }}</strong></td>
 									</thead>
 
 									@foreach ($cases_author as $case_author)
@@ -122,15 +159,15 @@
 							<div role="tabpanel" class="table-responsive tab-pane {!! Auth::user()->can_be_performer ? 'in active' : '' !!}" id="performer">
 								<table class="table table-condensed table-bordered">
 									<thead>
-										<td class="text-center">#</td>
-										<td class="text-center col-xs-5">{{ trans('app.Case') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Last Reply At') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Author') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Created At') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Due To') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Status') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Performers') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Members') }}</td>
+										<td class="text-center"><strong>#</strong></td>
+										<td class="text-center col-xs-5"><strong>{{ trans('app.Case') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Last Reply At') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Author') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Created At') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Due To') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Status') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Performers') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Members') }}</strong></td>
 									</thead>
 
 									@foreach ($cases_performer as $case_performer)
@@ -192,15 +229,15 @@
 							<div role="tabpanel" class="table-responsive tab-pane" id="member">
 								<table class="table table-condensed table-bordered">
 									<thead>
-										<td class="text-center">#</td>
-										<td class="text-center col-xs-5">{{ trans('app.Case') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Last Reply At') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Author') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Created At') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Due To') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Status') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Performers') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Members') }}</td>
+										<td class="text-center"><strong>#</strong></td>
+										<td class="text-center col-xs-5"><strong>{{ trans('app.Case') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Last Reply At') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Author') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Created At') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Due To') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Status') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Performers') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Members') }}</strong></td>
 									</thead>
 
 									@foreach ($cases_member as $case_member)
@@ -263,12 +300,12 @@
 							<div role="tabpanel" class="table-responsive tab-pane" id="new">
 								<table class="table table-condensed table-bordered">
 									<thead>
-										<td class="text-center">#</td>
-										<td class="text-center col-xs-8">{{ trans('app.Case') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Author') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Created At') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Due To') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Status') }}</td>
+										<td class="text-center"><strong>#</strong></td>
+										<td class="text-center col-xs-8"><strong>{{ trans('app.Case') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Author') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Created At') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Due To') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Status') }}</strong></td>
 									</thead>
 
 									@foreach ($cases_new as $case_new)
@@ -301,15 +338,15 @@
 							<div role="tabpanel" class="table-responsive tab-pane" id="open">
 								<table class="table table-condensed table-bordered">
 									<thead>
-										<td class="text-center">#</td>
-										<td class="text-center col-xs-5">{{ trans('app.Case') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Last Reply At') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Author') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Created At') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Due To') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Status') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Performers') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Members') }}</td>
+										<td class="text-center"><strong>#</strong></td>
+										<td class="text-center col-xs-5"><strong>{{ trans('app.Case') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Last Reply At') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Author') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Created At') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Due To') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Status') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Performers') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Members') }}</strong></td>
 									</thead>
 
 									@foreach ($cases_open as $case_open)
@@ -373,15 +410,15 @@
 							<div role="tabpanel" class="table-responsive tab-pane" id="closed">
 								<table class="table table-condensed table-bordered">
 									<thead>
-										<td class="text-center">#</td>
-										<td class="text-center col-xs-5">{{ trans('app.Case') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Last Reply At') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Author') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Created At') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Due To') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Status') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Performers') }}</td>
-										<td class="text-center col-xs-1">{{ trans('app.Members') }}</td>
+										<td class="text-center"><strong>#</strong></td>
+										<td class="text-center col-xs-5"><strong>{{ trans('app.Case') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Last Reply At') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Author') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Created At') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Due To') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Status') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Performers') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Members') }}</strong></td>
 									</thead>
 
 									@foreach ($cases_closed as $case_closed)

@@ -82,10 +82,11 @@ class MessagesController extends Controller
 		//MESSAGE
 		$message = new Messages($request->all());
 		$message->case_id = $case->id;
-			Auth::user()->messages()->save($message);
+		Auth::user()->messages()->save($message);
 
 
 
+		//dd($request->attachments);
 		//FILES
 		if (!is_null($request->attachments[0])) {
 			foreach ($request->attachments as $attachment) {

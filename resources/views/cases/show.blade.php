@@ -36,6 +36,7 @@
 				<div class="row">
 					<div class="panel panel-primary">
 						<div class="panel-heading" role="tab" id="headingOne">
+							<i class="fa fa-fw fa-btn fa-briefcase"></i>
 							{{ trans('app.Case') }}
 							#{{ $case->id }}.
 							"{{ $case->name }}"
@@ -90,7 +91,7 @@
 
 										<div class="form-group">
 											<div class="col-xs-12">
-												{!! Form::submit( trans('app.Update'), ['class' => 'btn btn-primary form-control col-xs-12']) !!}
+												{!! Form::button( '<i class="fa fa-fw fa-btn fa-check"></i>' . trans('app.Update'), ['type' => 'submit', 'class' => 'btn btn-primary form-control']) !!}
 											</div>
 										</div>
 
@@ -178,7 +179,7 @@
 									</div>
 									<div class="form-group">
 										<div class="col-xs-12 pull-right">
-											{!! Form::submit( trans('app.Reply'), ['class' => 'btn btn-info form-control col-xs-12']) !!}
+										{!! Form::button( '<i class="fa fa-fw fa-btn fa-paper-plane"></i>' . trans('app.Reply'), ['type' => 'submit', 'class' => 'btn btn-info form-control']) !!}
 										</div>
 									</div>
 								</div>

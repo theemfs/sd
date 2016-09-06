@@ -109,10 +109,12 @@ class CasesController extends Controller
 		$case->save();
 
 
+
 		//MESSAGE
 		$message = new Messages($request->all());
 		$message->case_id = $case->id;
 		Auth::user()->messages()->save($message);
+
 
 
 		//FILES
