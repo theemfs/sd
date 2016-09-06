@@ -145,7 +145,7 @@ class MessagesController extends Controller
 		$subscribers = $case->members->merge($case->performers)->merge($case->user())->push($case->user)->unique();
 
 		foreach ($subscribers as $subscriber) {
-			Mail::queues('emails.notification_reply', $data, function($email) use ($case, $message, $subscriber) {
+			Mail::queue('emails.notification_reply', $data, function($email) use ($case, $message, $subscriber) {
 
 				$email->from( env('MAIL_USERNAME') );
 				// $email->sender('', '');
