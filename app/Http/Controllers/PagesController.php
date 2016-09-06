@@ -25,6 +25,13 @@ class PagesController extends Controller
 
 
 
+	public function test()
+	{
+		return view('pages.test');
+	}
+
+
+
 	public function settingsShow(Request $request)
 	{
 		$settings = Settings::all();

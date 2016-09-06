@@ -20,7 +20,10 @@
 					{{-- <li><a href="{{ url('/about') }}"><i class="fa fa-fw fa-btn fa-question"></i></a></li> --}}
 				@else
 					<li><a href="{{ action('CasesController@index') }}"><i class="fa fa-fw fa-btn fa-briefcase"></i> {{ trans('app.Cases') }}</a></li>
-					{{-- <li><a href="{{ action('PagesController@adminShow') }}"><i class="fa fa-fw fa-btn fa-cogs"></i> {{ trans('app.Admin panel') }}</a></li> --}}
+					@can('view-admin')
+						<li><a href="{{ action('PagesController@test') }}"><i class="fa fa-fw fa-btn fa-facebook"></i> {{ trans('app.Test') }}</a></li>
+						<li><a href="{{ action('PagesController@adminShow') }}"><i class="fa fa-fw fa-btn fa-cogs"></i> {{ trans('app.Admin panel') }}</a></li>
+					@endcan
 				@endif
 			</ul>
 
@@ -38,6 +41,10 @@
 				</ul>
 			@else
 			@endif
+
+			@can('view-admin')
+
+			@endcan
 		</div>{{-- /.navbar-collapse --}}
 	</div>{{-- /.container-fluid --}}
 </nav>
