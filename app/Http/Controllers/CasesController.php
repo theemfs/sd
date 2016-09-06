@@ -102,7 +102,7 @@ class CasesController extends Controller
 
 		//CASE
 		$case = new Cases($request->all());
-		Auth::user()->cases()->save($case);
+		Auth::user()->authorOf()->save($case);
 		$case->members()->sync( array(Auth::user()->id) );
 		$case->status_id = 1; //status = new
 		$case->last_reply_at = Carbon::now();
@@ -177,7 +177,7 @@ class CasesController extends Controller
 			Mail::queue('emails.notification_newcase', $data, function($email) use ($case, $message, $subscriber) {
 				$email->from( env('MAIL_USERNAME') );
 				$email->to($subscriber->email);
-				$email->subject("[" . trans('app.Case') . " #$case->id]: \"$case->name\". " . trans('app.New case') );
+				//$email->subject("[" . trans('app.Case') . " #$case->id]: \"$case->name\". " . trans('app.New case') );
 				$email->priority(2); //high
 			});
 		}
