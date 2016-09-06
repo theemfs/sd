@@ -98,11 +98,11 @@ class User extends Model implements AuthenticatableContract,
 
 	public function casesAll()
 	{
-		$cases0 = $this->authorOf->toBase();
-		$cases1 = $this->performerOf->toBase();
-		$cases2 = $this->memberOf->toBase();
+		$cases0 = $this->authorOf;
+		$cases1 = $this->performerOf;
+		$cases2 = $this->memberOf;
 		//dd($cases0->merge($cases1)->merge($cases2));
-		return $cases0->merge($cases1)->merge($cases2);
+		return $cases0->merge($cases1)->merge($cases2)->unique();
 	}
 	public function casesAllOpen()
 	{

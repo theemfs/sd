@@ -35,18 +35,15 @@ class CasesController extends Controller
 	public function index(Request $request)
 	{
 
+
+
 		// FOR USERS
-		$cases_author 		= Auth::user()->authorOfOpen;		// where I am an author
-		$cases_performer 	= Auth::user()->performerOfOpen;	// where I am a performer
-		$cases_member		= Auth::user()->memberOfOpen;		// where I am a member
-		$cases_closed		= Auth::user()->casesAllClosed();	// closed AND where I am author || performer || member
+		$cases_author 		= Auth::user()->authorOfOpen;				// where I am an author
+		$cases_performer 	= Auth::user()->performerOfOpen;			// where I am a performer
+		$cases_member		= Auth::user()->memberOfOpen;				// where I am a member
+		$cases_closed		= Auth::user()->casesAllClosed();			// closed AND where I am author || performer || member
 
-		$user = Auth::user();
 
-		// dd($user->authorOfOpen());
-		// dd($cases_author);
-
-		//return(Auth::user()->getAllClosedMyCases);
 
 		// ONLY FOR ADMIN
 		$cases_open			= Cases::where('status_id','<>','5')->orderBy('updated_at','desc')->get();
@@ -67,7 +64,8 @@ class CasesController extends Controller
 				->with('cases_performer',	$cases_performer)
 			;
 		} else {
-			return view('cases.index_snippets')
+			//return view('cases.index_snippets')
+			return view('cases.index_table')
 				->with('cases_author',		$cases_author)
 				->with('cases_closed',		$cases_closed)
 				->with('cases_member',		$cases_member)
@@ -76,6 +74,8 @@ class CasesController extends Controller
 				->with('cases_performer',	$cases_performer)
 			;
 		}
+
+
 
 	}
 
@@ -97,7 +97,6 @@ class CasesController extends Controller
 			// 'attachments' 	=> 'max:1',
 		]);
 
-		//return($request->all());
 
 
 		//CASE
@@ -178,7 +177,7 @@ class CasesController extends Controller
 			Mail::queue('emails.notification_newcase', $data, function($email) use ($case, $message, $subscriber) {
 				$email->from( env('MAIL_USERNAME') );
 				$email->to($subscriber->email);
-				//$email->subject("[" . trans('app.Case') . " #$case->id]: \"$case->name\". " . trans('app.New case') );
+				$email->subject("[" . trans('app.Case') . " #$case->id]: \"$case->name\". " . trans('app.New case') );
 				$email->priority(2); //high
 			});
 		}
@@ -186,8 +185,6 @@ class CasesController extends Controller
 
 
 		// REDIRECT
-		//$this->validate($request, ['id' => 'unique:cases|required|regex:/^89\d{9}$/']);
-		// Messages::create($request->all());
 		return redirect()->action('CasesController@show', [$case->id]);
 
 
