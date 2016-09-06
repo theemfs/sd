@@ -1,7 +1,5 @@
 <?php echo $user->name; ?> создал(а) новый кейс <a href="<?php echo action('CasesController@show', $case->id);?>">[# <?php echo $case->id; ?>] <?php echo $case->name; ?></a>:
 
-<strong><?php echo action('CasesController@show', $case->id); ?></strong>
-
 <hr>
 
 <pre>
