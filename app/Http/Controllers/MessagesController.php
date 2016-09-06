@@ -72,6 +72,7 @@ class MessagesController extends Controller
 		//CASE
 		$case = Cases::findOrFail($request->case);
 		$case->last_reply_at = new Carbon();
+		$case->last_replier_id = Auth::user()->id;
 		$case->save();
 
 

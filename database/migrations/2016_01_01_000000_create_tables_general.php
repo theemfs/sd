@@ -51,6 +51,7 @@ class CreateTablesGeneral extends Migration
 				$table->foreign('user_id')->references('id')->on('users');
 			$table->integer('status_id')->unsigned()->index();
 			$table->dateTime('last_reply_at')->nullable();
+			$table->integer('last_replier')->nullable();
 				//$table->foreign('status_id')->references('id')->on('statuses');
 		});
 

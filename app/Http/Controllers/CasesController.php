@@ -36,10 +36,10 @@ class CasesController extends Controller
 	{
 
 		// FOR USERS
-		$cases_author 		= Auth::user()->authorOfOpen;									// where I am an author
-		$cases_performer 	= Auth::user()->performerOfOpen;								// where I am a performer
-		$cases_member		= Auth::user()->memberOfOpen;									// where I am a member
-		$cases_closed		= Auth::user()->casesAllClosed();									// closed AND where I am author || performer || member
+		$cases_author 		= Auth::user()->authorOfOpen;		// where I am an author
+		$cases_performer 	= Auth::user()->performerOfOpen;	// where I am a performer
+		$cases_member		= Auth::user()->memberOfOpen;		// where I am a member
+		$cases_closed		= Auth::user()->casesAllClosed();	// closed AND where I am author || performer || member
 
 		$user = Auth::user();
 
@@ -106,6 +106,7 @@ class CasesController extends Controller
 		$case->members()->sync( array(Auth::user()->id) );
 		$case->status_id = 1; //status = new
 		$case->last_reply_at = Carbon::now();
+		$case->last_replier_id = Auth::user()->id;
 		$case->save();
 
 

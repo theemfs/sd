@@ -49,6 +49,13 @@ class Cases extends Model
 
 
 
+	public function last_replier()
+	{
+		return $this->belongsTo('App\User', 'last_replier_id');
+	}
+
+
+
 	public function messages()
 	{
 		return $this->hasMany('App\Messages', 'message_id');
