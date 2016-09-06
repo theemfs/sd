@@ -97,7 +97,7 @@
 													<small class="text-muted col-md-11 col-md-offset-1 hidden-xs">{{ mb_substr($case_author->text, 0, 300)."..." }}</small>
 												</a>
 											</td>
-											<td class="text-center"><small>{{ $case_author->last_reply_at }}</small></td>
+											<td class="text-center"><small>{{ $case_author->last_reply_at }} ({{ $case_author->last_replier->getSurnameWithInitials() }})</small></td>
 											<td class="text-center"><small>{{ $case_author->created_at }}</small></td>
 											<td class="text-center"><small>{{ $case_author->due_to }}</small></td>
 											<td class="text-center"><small>{{ $case_author->status->name }}</small></td>
@@ -215,7 +215,7 @@
 													<small class="text-muted col-md-11 col-md-offset-1 hidden-xs">{{ mb_substr($case_member->text, 0, 300)."..." }}</small>
 												</a>
 											</td>
-											<td class="text-center"><small>{{ $case_member->last_reply_at }}</small></td>
+											<td class="text-center"><small>{{ $case_member->last_reply_at }} ({{ $case_member->last_replier->getSurnameWithInitials() }})</small></td>
 											<td>
 												<small>
 													<a href="{{ action('UsersController@show', $case_member->user->id) }}">
@@ -324,7 +324,7 @@
 													<small class="text-muted col-md-11 col-md-offset-1 hidden-xs">{{ mb_substr($case_open->text, 0, 300)."..." }}</small>
 												</a>
 											</td>
-											<td class="text-center"><small>{{ $case_open->last_reply_at }}</small></td>
+											<td class="text-center"><small>{{ $case_open->last_reply_at }} ({{ $case_open->last_replier->getSurnameWithInitials() }})</small></td>
 											<td>
 												<small>
 													<a href="{{ action('UsersController@show', $case_open->user->id) }}">
@@ -396,7 +396,7 @@
 													<small class="text-muted col-md-11 col-md-offset-1 hidden-xs">{{ mb_substr($case_closed->text, 0, 300)."..." }}</small>
 												</a>
 											</td>
-											<td class="text-center"><small>{{ $case_closed->last_reply_at }}</small></td>
+											<td class="text-center"><small>{{ $case_closed->last_reply_at }} ({{ $case_closed->last_replier->getSurnameWithInitials() }})</small></td>
 											<td>
 												<small>
 													<a href="{{ action('UsersController@show', $case_closed->user->id) }}">
