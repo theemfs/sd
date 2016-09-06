@@ -4,14 +4,14 @@
 	<div class="container">
 		<div class="col-md-8 col-md-offset-2">
 
-			<ul class="nav navbar-nav">
+			{{-- <ul class="nav navbar-nav">
 				<li>
 					<p class="navbar-text small">
 						<i class="fa fa-fw fa-btn fa-copyright"></i>
 						<span class="text-muted">Идея и разработка - Антон Хамаев</span>
 					</p>
 				</li>
-			</ul>
+			</ul> --}}
 
 			<ul class="nav navbar-nav navbar-right">
 				<li>
