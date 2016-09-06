@@ -62,12 +62,14 @@ class MessagesController extends Controller
 	public function store(Request $request)
 	{
 
+
+
 		$this->validate($request, [
 			'text' 			=> 'required|min:1',
 			// 'attachments' 	=> 'max:1',
 		]);
 
-		//dd($request);
+
 
 		//CASE
 		$case = Cases::findOrFail($request->case);
@@ -76,14 +78,15 @@ class MessagesController extends Controller
 		$case->save();
 
 
+
 		//MESSAGE
 		$message = new Messages($request->all());
 		$message->case_id = $case->id;
 			Auth::user()->messages()->save($message);
 
 
-		//FILES
 
+		//FILES
 		if (!is_null($request->attachments[0])) {
 			foreach ($request->attachments as $attachment) {
 
@@ -129,6 +132,8 @@ class MessagesController extends Controller
 			}
 		}
 
+
+
 		//$this->validate($request, ['id' => 'unique:cases|required|regex:/^89\d{9}$/']);
 		// Messages::create($request->all());
 		//return redirect()->back();
@@ -146,7 +151,6 @@ class MessagesController extends Controller
 
 		foreach ($subscribers as $subscriber) {
 			Mail::queue('emails.notification_reply', $data, function($email) use ($case, $message, $subscriber) {
-
 				$email->from( env('MAIL_USERNAME') );
 				// $email->sender('', '');
 				// $email->to('');
@@ -160,7 +164,6 @@ class MessagesController extends Controller
 				// $email->attach($pathToFile, array $options = []);
 				// $email->attachData($data, '', []);
 				// $email->getSwiftMessage();
-
 			});
 		}
 
