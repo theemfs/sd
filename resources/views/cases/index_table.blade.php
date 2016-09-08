@@ -141,7 +141,7 @@
 											<td class="text-center">
 												@foreach($case_author->performers as $performer)
 													<small>
-														<a href="{{ action('UsersController@show', $performer->id) }}">
+														<a href="{{ action('UsersController@show', $performer->id) }}" data-toggle="tooltip" data-placement="auto" data-container="body" title="{{ $performer->department }}/{{ $performer->title }}: {{ $performer->telephonenumber }}, {{ $performer->mobile }}">
 															{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
 															{{ $performer->getSurnameWithInitials() }}
 														</a><br>
@@ -208,7 +208,7 @@
 												@if($case_performer->members->count()<=5)
 													@foreach($case_performer->members as $member)
 														<small>
-															<a href="{{ action('UsersController@show', $member->id) }}">
+															<a href="{{ action('UsersController@show', $member->id) }}" data-toggle="tooltip" data-placement="auto" data-container="body" title="{{ $member->department }}/{{ $member->title }}: {{ $member->telephonenumber }}, {{ $member->mobile }}">
 																{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
 																{{ $member->getSurnameWithInitials() }}
 															</a>
@@ -255,7 +255,7 @@
 											<td class="text-center"><small>{{ $case_member->last_reply_at }} ({{ $case_member->last_replier->getSurnameWithInitials() }})</small></td>
 											<td>
 												<small>
-													<a href="{{ action('UsersController@show', $case_member->user->id) }}">
+													<a href="{{ action('UsersController@show', $case_member->user->id) }}" data-toggle="tooltip" data-placement="auto" data-container="body" title="{{ $case_member->user->department }}/{{ $case_member->user->title }}: {{ $case_member->user->telephonenumber }}, {{ $case_member->user->mobile }}">
 														{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
 														{{ $case_member->user->getSurnameWithInitials() }}
 													</a>
@@ -267,7 +267,7 @@
 											<td class="text-left">
 												@foreach($case_member->performers as $performer)
 													<small>
-														<a href="{{ action('UsersController@show', $performer->id) }}">
+														<a href="{{ action('UsersController@show', $performer->id) }}" data-toggle="tooltip" data-placement="auto" data-container="body" title="{{ $performer->department }}/{{ $performer->title }}: {{ $performer->telephonenumber }}, {{ $performer->mobile }}">
 															{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
 															{{ $performer->getSurnameWithInitials() }}
 														</a>
@@ -278,7 +278,7 @@
 												@if($case_member->members->count()<=5)
 													@foreach($case_member->members as $member)
 														<small>
-															<a href="{{ action('UsersController@show', $member->id) }}">
+															<a href="{{ action('UsersController@show', $member->id) }}" data-toggle="tooltip" data-placement="auto" data-container="body" title="{{ $member->department }}/{{ $member->title }}: {{ $member->telephonenumber }}, {{ $member->mobile }}">
 																{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
 																{{ $member->getSurnameWithInitials() }}
 															</a>
@@ -513,5 +513,9 @@
 				}
 			});
 		} );
+
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+		})
 	</script>
 @endsection
