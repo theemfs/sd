@@ -100,7 +100,7 @@ class CasesController extends Controller
 		//CASE
 		$case = new Cases($request->all());
 		Auth::user()->authorOf()->save($case);
-		$case->members()->sync( array(Auth::user()->id) );
+		//$case->members()->sync( array(Auth::user()->id) );
 		$case->status_id = 1; //status = new
 		$case->last_reply_at = Carbon::now();
 		$case->last_replier_id = Auth::user()->id;
