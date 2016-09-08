@@ -232,7 +232,7 @@ class CasesController extends Controller
 			->with('messages',					$messages)
 			// ->with('message_first',				$message_first)
 			->with('users',						$users)
-			// ->with('membersIds',				$membersIds)
+			->with('membersIds',				$membersIds)
 			->with('users_performers',			$users_performers)
 			->with('users_can_be_performers',	$users_can_be_performers)
 			->with('performersIds',				$performersIds)
