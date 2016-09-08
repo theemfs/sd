@@ -47,9 +47,9 @@ class AuthServiceProvider extends ServiceProvider
 		});
 
 		$gate->define('update-case', function ($user, $case) {
-			return $case->user->id === $user->id
+			return $user->is_admin
+				// $case->user->id === $user->id
 				|| $case->performers->contains($user->id)
-				|| $user->is_admin
 				// || $case->members->contains($user->id)
 			;
 		});

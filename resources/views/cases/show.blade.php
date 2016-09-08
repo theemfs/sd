@@ -90,7 +90,6 @@
 														<option value="{{ $status->id }}" {!! $status->id == $case->status_id ? "selected=\"selected\"" : '' !!} style="background: {{ $status->color }}">{{ $status->name }}</option>
 													@endforeach
 												</select>
-
 											</div>
 										</div>
 
@@ -113,16 +112,35 @@
 									{!! Form::close() !!}
 								@else
 										<div class="col-xs-12">
+
 											{!! Form::label('users_list_performers', trans('app.Performers'), ['class' => 'control-label']) !!}
 											<div class="form-group">
-												{!! Form::select('performers[]', $users_can_be_performers, $performersIds, ['id' => 'users_list_performers', 'class' => 'form-control selectpicker', 'multiple', 'autocomplete' => 'off', 'size' => '1']) !!}
+												{{-- {!! Form::select('performers[]', $users_can_be_performers, $performersIds, ['id' => 'users_list_performers', 'class' => 'form-control selectpicker', 'multiple', 'autocomplete' => 'off', 'size' => '1']) !!} --}}
+												<select id="users_list_performers" class="form-control selectpicker" multiple="multiple" autocomplete="off" size="1" name="performers[]" disabled>
+													@foreach($users_performers as $user_performer)
+														<option value="{{ $user_performer->id }}" selected="selected" data-subtext="({{ $user_performer->department }}/{{ $user_performer->title }})">{{ $user_performer->getSurnameWithInitials() }}</option>
+													@endforeach
+														<option data-divider="true"></option>
+													@foreach($users_can_be_performers as $user_can_be_performer)
+														<option value="{{ $user_can_be_performer->id }}" data-subtext="({{ $user_can_be_performer->department }}/{{ $user_can_be_performer->title }})">{{ $user_can_be_performer->getSurnameWithInitials() }}</option>
+													@endforeach
+												</select>
 											</div>
 										</div>
 
 										<div class="col-xs-12">
 											{!! Form::label('users_list_members', trans('app.Members'), ['class' => 'control-label']) !!}
 											<div class="form-group">
-												{!! Form::select('members[]', $case->members->lists('name', 'id'), $membersIds, ['id' => 'users_list_members', 'class' => 'form-control selectpicker', 'multiple', 'autocomplete' => 'off', 'size' => '1']) !!}
+												{{-- {!! Form::select('members[]', $case->members->lists('name', 'id'), $membersIds, ['id' => 'users_list_members', 'class' => 'form-control selectpicker', 'multiple', 'autocomplete' => 'off', 'size' => '1']) !!} --}}
+												<select id="users_list_members" class="form-control selectpicker" multiple="multiple" autocomplete="off" size="1" name="members[]">
+													@foreach($users_members as $user_member)
+														<option value="{{ $user_member->id }}" selected="selected" data-subtext="({{ $user_member->department }}/{{ $user_member->title }})">{{ $user_member->getSurnameWithInitials() }}</option>
+													@endforeach
+														<option data-divider="true"></option>
+													@foreach($users_can_be_members as $user_can_be_member)
+														<option value="{{ $user_can_be_member->id }}" data-subtext="({{ $user_can_be_member->department }}/{{ $user_can_be_member->title }})">{{ $user_can_be_member->getSurnameWithInitials() }}</option>
+													@endforeach
+												</select>
 												{{-- <select id="statuses_list" class="form-control selectpicker" autocomplete="off" size="1" name="status_id">
 												@foreach($statuses as $status)
 													<option value="1" selected="selected" disabled>new</option>
@@ -131,14 +149,19 @@
 										</div>
 
 										<div class="col-sm-6 col-xs-12">
-											{!! Form::label('users_list_members', trans('app.Status'), ['class' => 'control-label']) !!}
+											{!! Form::label('statuses_list', trans('app.Status'), ['class' => 'control-label']) !!}
 											<div class="form-group">
-												{!! Form::select('status_id', $statuses, $case->status_id, ['id' => 'statuses_list', 'class' => 'form-control selectpicker', 'autocomplete' => 'off', 'size' => '1', 'disabled']) !!}
+												{{-- {!! Form::select('status_id', $statuses, $case->status_id, ['id' => 'statuses_list', 'class' => 'form-control selectpicker', 'autocomplete' => 'off', 'size' => '1', 'disabled']) !!} --}}
+												<select id="statuses_list" class="form-control selectpicker" autocomplete="off" size="1" name="status_id" disabled>
+													@foreach($statuses as $status)
+														<option value="{{ $status->id }}" {!! $status->id == $case->status_id ? "selected=\"selected\"" : '' !!} style="background: {{ $status->color }}">{{ $status->name }}</option>
+													@endforeach
+												</select>
 											</div>
 										</div>
 
 										<div class="col-sm-6 col-xs-12">
-											{!! Form::label('users_list_members', trans('app.Due To'), ['class' => 'control-label']) !!}
+											{!! Form::label('due_to', trans('app.Due To'), ['class' => 'control-label']) !!}
 											<div class="form-group">
 												<input type='text' name="due_to" id='due_to' class="form-control date" readonly value="
 													{{ ($case->due_to)>1 ? date("Y-m-d H:i", strtotime($case->due_to)) : "" }}
