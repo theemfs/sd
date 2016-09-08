@@ -48,6 +48,12 @@ Route::group(['middleware' => 'web'], function () {
 
 				//cases
 				Route::resource('/cases',			'CasesController');
+				// Route::get('/cases/author',			'CasesController@casesAuthorOf');
+				// Route::get('/cases/performer',		'CasesController@casesPerformerOf');
+				// Route::get('/cases/member',			'CasesController@casesMemberOf');
+				// Route::get('/cases/new',			'CasesController@casesNew');
+				// Route::get('/cases/open',			'CasesController@casesOpen');
+				// Route::get('/cases/closed',			'CasesController@casesClosed');
 					//Route::patch('/cases/{cases}/updatePerformers', 'CasesController@updatePerformers')->name('cases.updatePerformers');
 					//Route::patch('/cases/{cases}/updateMembers', 	'CasesController@updateMembers')->name('cases.updateMembers');
 

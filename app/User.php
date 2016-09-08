@@ -101,7 +101,6 @@ class User extends Model implements AuthenticatableContract,
 		$cases0 = $this->authorOf;
 		$cases1 = $this->performerOf;
 		$cases2 = $this->memberOf;
-		//dd($cases0->merge($cases1)->merge($cases2));
 		return $cases0->merge($cases1)->merge($cases2)->unique();
 	}
 	public function casesAllOpen()
@@ -153,11 +152,23 @@ class User extends Model implements AuthenticatableContract,
 
 	public function getSurnameWithInitials()
 	{
-		$fio = explode(' ',$this->name);
+		$chars = "АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя";
+		$fio = str_word_count($this->name, 1, $chars);
+
 		$r = "";
-		$r .= array_key_exists("0", $fio) ? $fio[0] : "";
-		$r .= array_key_exists("1", $fio) ? "&nbsp;" . mb_substr($fio[1],0,1) : "";
-		$r .= array_key_exists("2", $fio) ? "." . mb_substr($fio[2],0,1) ."." : "";
+
+		if (str_word_count($this->name, 0, $chars) == 1) {
+			$r = $this->name;
+		}
+
+		if (str_word_count($this->name, 0, $chars) == 2) {
+			$r = $fio[0] . " " . $fio[1];
+		}
+
+		if (str_word_count($this->name, 0, $chars) == 3) {
+			$r = $fio[0] . "&nbsp;" . mb_substr($fio[1],0,1) . "." . mb_substr($fio[2],0,1) . ".";
+		}
+
 		return $r;
 	}
 

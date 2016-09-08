@@ -27,6 +27,24 @@ class PagesController extends Controller
 
 	public function test()
 	{
+		$name = "Surname Name";
+		$fio = str_word_count($name, 1);
+
+		$r = "";
+		if (str_word_count($name) == 1) {
+			$r = $this->name;
+		}
+
+		if (str_word_count($name) == 2) {
+			$r = $fio[0] . " " . $fio[1];
+		}
+
+		if (str_word_count($name) == 3) {
+			$r = $fio[0] . " " . mb_substr($fio[1],0,1) . "." . mb_substr($fio[2],0,1) . ".";
+		}
+
+		return $r;
+
 		return view('pages.test');
 	}
 
