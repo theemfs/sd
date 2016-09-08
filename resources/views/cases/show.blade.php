@@ -354,7 +354,6 @@
 	@can('update-case', $case)
 		<script src="{{ url('/') }}/js/moment-with-locales.min.js"></script>
 		<script src="{{ url('/') }}/js/bootstrap-datetimepicker.min.js"></script>
-
 		<script>
 			$('#users_list_performers, #users_list_members').selectpicker({
 				size: '10',
