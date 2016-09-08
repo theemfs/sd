@@ -351,45 +351,42 @@
 
 	<script src="{{ url('/') }}/js/bootstrap-select.min.js"></script>
 
-	@can('update-case', $case)
-		<script src="{{ url('/') }}/js/moment-with-locales.min.js"></script>
-		<script src="{{ url('/') }}/js/bootstrap-datetimepicker.min.js"></script>
-		<script>
-			$('#users_list_performers, #users_list_members').selectpicker({
-				size: '10',
-				showTick: 'true',
-				selectOnTab: 'true',
-				selectedTextFormat: 'count > 10',
-				liveSearch: 'true',
-				actionsBox: 'true',
-				liveSearchPlaceholder: '',
-				noneSelectedText: "{{ trans('app.Nothing Selected') }}",
+	<script src="{{ url('/') }}/js/moment-with-locales.min.js"></script>
+	<script src="{{ url('/') }}/js/bootstrap-datetimepicker.min.js"></script>
+	<script>
+		$('#users_list_performers, #users_list_members').selectpicker({
+			size: '10',
+			showTick: 'true',
+			selectOnTab: 'true',
+			selectedTextFormat: 'count > 10',
+			liveSearch: 'true',
+			actionsBox: 'true',
+			liveSearchPlaceholder: '',
+			noneSelectedText: "{{ trans('app.Nothing Selected') }}",
+		});
+
+		$('#statuses_list').selectpicker({
+			size: '10',
+			showTick: 'true',
+			selectOnTab: 'true',
+			selectedTextFormat: 'count > 10',
+			actionsBox: 'true',
+			liveSearchPlaceholder: '',
+			noneSelectedText: "{{ trans('app.Nothing Selected') }}",
+		});
+
+		$(function () {
+			$('#due_to').datetimepicker({
+				defaultDate: '{{ $case->due_to > date("Y-m-d H:i", mktime(0, 0, 0, 1, 1, 1971)) ? date("Y-m-d H:i", strtotime($case->due_to)) : "" }}',
+				locale: 'ru',
+				showTodayButton: true,
+				showClear: true,
 			});
+		});
 
-			$('#statuses_list').selectpicker({
-				size: '10',
-				showTick: 'true',
-				selectOnTab: 'true',
-				selectedTextFormat: 'count > 10',
-				actionsBox: 'true',
-				liveSearchPlaceholder: '',
-				noneSelectedText: "{{ trans('app.Nothing Selected') }}",
-			});
-
-			$(function () {
-				$('#due_to').datetimepicker({
-					defaultDate: '{{ $case->due_to > date("Y-m-d H:i", mktime(0, 0, 0, 1, 1, 1971)) ? date("Y-m-d H:i", strtotime($case->due_to)) : "" }}',
-					locale: 'ru',
-					showTodayButton: true,
-					showClear: true,
-				});
-			});
-
-			$(function () {
-				$('[data-toggle="tooltip"]').tooltip()
-			})
-
-		</script>
-	@endcan
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+		})
+	</script>
 
 @endsection
