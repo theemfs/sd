@@ -37,7 +37,7 @@ class UsersController extends Controller
 
 		$users 	= User::orderBy('name')->get();
 
-		return view('users.index')
+		return view('users.index_table')
 				->with('users', 			$users)
 				// ->with('filter', 			$filter)
 		;

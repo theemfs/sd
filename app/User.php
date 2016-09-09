@@ -13,12 +13,13 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-use Caffeinated\Shinobi\Traits\ShinobiTrait;
+// use Caffeinated\Shinobi\Traits\ShinobiTrait;
 
 class User extends Model implements AuthenticatableContract,
 									CanResetPasswordContract
 {
-	use Authenticatable, CanResetPassword, ShinobiTrait;
+	use Authenticatable, CanResetPassword;
+	// use ShinobiTrait;
 	use SoftDeletes;
 
 	protected $fillable = [

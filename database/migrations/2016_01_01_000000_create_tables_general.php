@@ -34,6 +34,7 @@ class CreateTablesGeneral extends Migration
 			$table->integer('can_be_performer')->nullable();
 			$table->integer('is_admin')->nullable();
 			$table->integer('is_active')->nullable();
+			$table->dateTime('last_activity_at')->nullable();
 		});
 
 
