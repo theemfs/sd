@@ -160,7 +160,7 @@
 														</small><br>
 													@endforeach
 												@else
-													<small>{{ trans('app.Members Count') }}: {{ $case_performer->members->count() }}</small>
+													<small>{{ trans('app.Members Count') }}: {{ $case_author->members->count() }}</small>
 												@endif
 											</td>
 										</tr>
