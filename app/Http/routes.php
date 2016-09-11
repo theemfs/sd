@@ -22,12 +22,13 @@ Route::group(['middleware' => 'web'], function () {
 
 
 			//PAGES
-			Route::get('/', 		'CasesController@index');
-			Route::get('/about', 	'PagesController@about');
-			Route::get('/test', 	'PagesController@test');//test
-			Route::get('/send', 	'PagesController@send');
-			Route::get('/settings',	'PagesController@settingsShow');
-			Route::post('/settings','PagesController@settingsSave');
+			Route::get('/', 						'CasesController@index');
+			Route::get('/about', 					'PagesController@about');
+			Route::get('/test', 					'PagesController@test');//test
+			Route::get('/regenerateThumbnails', 	'PagesController@regenerateThumbnails');
+			Route::get('/send', 					'PagesController@send');
+			Route::get('/settings',					'PagesController@settingsShow');
+			Route::post('/settings',				'PagesController@settingsSave');
 
 
 

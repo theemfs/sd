@@ -15,11 +15,7 @@
         "nesbot/carbon": "^1.21",
         "intervention/image": "^2.3",
         "cloudconvert/cloudconvert-php": "^2.2",
-        "components/font-awesome": "^4.6",
-        "components/jquery": "<3.0",
         "adldap2/adldap2-laravel": "^2.1",
-        "datatables/datatables": "^1.10",
-        "eonasdan/bootstrap-datetimepicker": "^4.17",
         "barryvdh/laravel-debugbar": "^2.2",
         "predis/predis": "^1.1"
     },

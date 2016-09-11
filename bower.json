@@ -2,10 +2,13 @@
   "name": "Cool application",
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "bootstrap-select": "^1.11.2",
     "ckeditor": "^4.5.11",
-    "jquery": "^3.1.0",
-    "font-awesome-animation": "^0.0.9",
     "datatables": "^1.10.12",
-    "bootstrap-select": "^1.11.2"
+    "font-awesome": "^4.6.3",
+    "font-awesome-animation": "^0.0.9",
+    "jquery": "^3.1.0",
+    "eonasdan-bootstrap-datetimepicker": "eonasdan/bootstrap-datetimepicker#^4.17.42",
+    "moment": "^2.14.1"
   }
 }

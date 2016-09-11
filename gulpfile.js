@@ -8,14 +8,12 @@ elixir(function(mix) {
 
 
 	//CSS
-	// mix.copy('vendor/twbs/bootstrap/dist/css/bootstrap.min.css', 									'resources/assets/css/');//if need mix
-	mix.copy('bower_components/bootstrap/dist/css/bootstrap.min.css',								'public/css/');//not mixed
-	mix.copy('vendor/components/font-awesome/css/font-awesome.min.css', 							'public/css/');//not mixed
-	mix.copy('bower_components/bootstrap-select/dist/css/bootstrap-select.min.css', 				'public/css/');//not mixed
-	mix.copy('vendor/eonasdan/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css', 'public/css/');//not mixed
-	// mix.copy('vendor/datatables/datatables/media/css/jquery.dataTables.min.css', 					'public/css/');//not mixed
-	mix.copy('vendor/datatables/datatables/media/css/dataTables.bootstrap.min.css', 				'public/css/');//not mixed
-	mix.copy('bower_components/font-awesome-animation/dist/font-awesome-animation.min.css',			'public/css/');//not mixed
+	mix.copy('bower_components/bootstrap-select/dist/css/bootstrap-select.min.css', 							'public/css/');
+	mix.copy('bower_components/bootstrap/dist/css/bootstrap.min.css',											'public/css/');
+	mix.copy('bower_components/datatables/media/css/dataTables.bootstrap.min.css',								'public/css/');
+	mix.copy('bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css', 	'public/css/');
+	mix.copy('bower_components/font-awesome-animation/dist/font-awesome-animation.min.css',						'public/css/');
+	mix.copy('bower_components/font-awesome/css/font-awesome.min.css', 											'public/css/');
 
 	mix.styles([
 		// 'bootstrap.min.css',
@@ -27,14 +25,13 @@ elixir(function(mix) {
 
 
 	//JS
-	//mix.copy('vendor/components/jquery/jquery.min.js', 												'resources/assets/js/');//if need mix
-	mix.copy('vendor/components/jquery/jquery.min.js', 												'public/js/');//not mixed
-	mix.copy('vendor/twbs/bootstrap/dist/js/bootstrap.min.js', 										'public/js/');//not mixed
-	mix.copy('vendor/bootstrap-select/bootstrap-select/dist/js/bootstrap-select.min.js',			'public/js/');//not mixed
-	mix.copy('vendor/eonasdan/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',	'public/js/');//not mixed
-	mix.copy('vendor/ckeditor/ckeditor/ckeditor.js', 												'public/js/');//not mixed
-	mix.copy('vendor/datatables/datatables/media/js/jquery.dataTables.min.js', 						'public/js/');//not mixed
-	mix.copy('vendor/moment/moment/min/moment-with-locales.min.js', 								'public/js/');//not mixed
+	mix.copy('bower_components/bootstrap-select/dist/js/bootstrap-select.min.js',								'public/js/');
+	mix.copy('bower_components/bootstrap/dist/js/bootstrap.min.js',												'public/js/');
+	mix.copy('bower_components/ckeditor/ckeditor.js', 															'public/js/');
+	mix.copy('bower_components/datatables/media/js/jquery.dataTables.min.js', 									'public/js/');
+	mix.copy('bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',		'public/js/');
+	mix.copy('bower_components/jquery/dist/jquery.min.js',														'public/js/');
+	mix.copy('bower_components/moment/min/moment-with-locales.min.js', 											'public/js/');
 
 	mix.scripts([
 	// 	// 'jquery.min.js',
@@ -46,10 +43,8 @@ elixir(function(mix) {
 
 
 	//FONTS
-	// mix.copy('vendor/components/font-awesome/fonts/', 												'public/build/fonts/');
-	// mix.copy('vendor/twbs/bootstrap/dist/fonts/', 													'public/build/fonts/');
-	mix.copy('vendor/components/font-awesome/fonts/', 												'public/fonts/');//not mixed
-	mix.copy('vendor/twbs/bootstrap/dist/fonts/', 													'public/fonts/');//not mixed
+	mix.copy('bower_components/bootstrap/dist/fonts/', 															'public/fonts/');
+	mix.copy('bower_components/font-awesome/fonts/', 															'public/fonts/');
 
 
 
@@ -62,10 +57,8 @@ elixir(function(mix) {
 
 
 	// //IMAGES
-	// mix.copy('/resources/assets/mimetypes/', 'public/build/mimetypes/');
-	// mix.copy('/resources/assets/images/', 'public/build/images/');
-	mix.copy('resources/assets/images/briefcase.png', 												'public/favicon.ico');
-	mix.copy('vendor/datatables/datatables/media/images', 											'public/images');
+	mix.copy('resources/assets/images/briefcase.png', 															'public/favicon.ico');
+	mix.copy('vendor/datatables/datatables/media/images', 														'public/images');
 
 
 

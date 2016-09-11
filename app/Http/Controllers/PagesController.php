@@ -6,6 +6,9 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use Adldap\Laravel\Facades\Adldap;
 use App\User;
+use App\Files;
+use Storage;
+use Image;
 
 class PagesController extends Controller
 {
@@ -135,4 +138,19 @@ class PagesController extends Controller
 
 
 
+	public function regenerateThumbnails()
+	{
+
+		$files = Files::all();
+		//return($files);
+
+		foreach ($files as $file){
+
+			if ( substr($file->mimetype, 0, 5) == 'image' ) {
+				Storage::disk('thumbnails')->put($file->thumbnail,Image::make('/var/www/sd-dev.nyzix.com/storage/uploads/'.$file->original)->fit(100, 100, function($callback){$callback->upsize();})->stream($file->sext, 75));
+			}
+
+		}
+
+	}
 }
