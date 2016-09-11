@@ -46,6 +46,9 @@ Route::group(['middleware' => 'web'], function () {
 				Route::resource('/users',			'UsersController');
 				Route::get('/profile',				'UsersController@profile');
 
+				//wiki
+				Route::resource('/articles',		'ArticlesController');
+
 				//cases
 				Route::resource('/cases',			'CasesController');
 				// Route::get('/cases/author',			'CasesController@casesAuthorOf');

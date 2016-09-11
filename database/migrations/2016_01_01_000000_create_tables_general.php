@@ -52,8 +52,7 @@ class CreateTablesGeneral extends Migration
 				$table->foreign('user_id')->references('id')->on('users');
 			$table->integer('status_id')->unsigned()->index();
 			$table->dateTime('last_reply_at')->nullable();
-			$table->integer('last_replier')->nullable();
-				//$table->foreign('status_id')->references('id')->on('statuses');
+			$table->integer('last_replier_id')->nullable();
 		});
 
 
@@ -170,6 +169,19 @@ class CreateTablesGeneral extends Migration
 		});
 
 
+
+		Schema::create('articles', function (Blueprint $table) {
+			$table->increments('id')->index();
+			$table->nullableTimestamps();
+			$table->softDeletes();
+			$table->string('comment')->nullable();
+
+			$table->string('name')->nullable();
+			$table->string('text')->unique();
+			$table->integer('is_published')->nullable();
+		});
+
+
 	}
 
 
@@ -188,6 +200,7 @@ class CreateTablesGeneral extends Migration
 		Schema::drop('types');
 		Schema::drop('files');
 		Schema::drop('jobs');
+		Schema::drop('articles');
 
 		DB::statement('SET FOREIGN_KEY_CHECKS = 1');
 	}

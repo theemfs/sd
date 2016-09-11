@@ -114,12 +114,13 @@
 								<table class="table table-condensed table-bordered">
 									<thead>
 										<td class="text-center"><strong>#</strong></td>
-										<td class="text-center col-xs-7"><strong>{{ trans('app.Case') }}</strong></td>
+										<td class="text-center col-xs-6"><strong>{{ trans('app.Case') }}</strong></td>
 										<td class="text-center col-xs-1"><strong>{{ trans('app.Last Reply At') }}</strong></td>
 										<td class="text-center col-xs-1"><strong>{{ trans('app.Created At') }}</strong></td>
 										<td class="text-center col-xs-1"><strong>{{ trans('app.Due To') }}</strong></td>
 										<td class="text-center col-xs-1"><strong>{{ trans('app.Status') }}</strong></td>
 										<td class="text-center col-xs-1"><strong>{{ trans('app.Performers') }}</strong></td>
+										<td class="text-center col-xs-1"><strong>{{ trans('app.Members') }}</strong></td>
 									</thead>
 
 									@foreach ($cases_author as $case_author)
@@ -147,6 +148,20 @@
 														</a><br>
 													</small>
 												@endforeach
+											</td>
+											<td class="text-left text-overflow">
+												@if($case_author->members->count()<=5)
+													@foreach($case_author->members as $member)
+														<small>
+															<a href="{{ action('UsersController@show', $member->id) }}" data-toggle="tooltip" data-placement="auto" data-container="body" title="{{ $member->department }}/{{ $member->title }}: {{ $member->telephonenumber }}, {{ $member->mobile }}">
+																{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
+																{{ $member->getSurnameWithInitials() }}
+															</a>
+														</small><br>
+													@endforeach
+												@else
+													<small>{{ trans('app.Members Count') }}: {{ $case_performer->members->count() }}</small>
+												@endif
 											</td>
 										</tr>
 									@endforeach

@@ -9,9 +9,9 @@ elixir(function(mix) {
 
 	//CSS
 	// mix.copy('vendor/twbs/bootstrap/dist/css/bootstrap.min.css', 									'resources/assets/css/');//if need mix
-	mix.copy('vendor/twbs/bootstrap/dist/css/bootstrap.min.css', 									'public/css/');//not mixed
+	mix.copy('bower_components/bootstrap/dist/css/bootstrap.min.css',								'public/css/');//not mixed
 	mix.copy('vendor/components/font-awesome/css/font-awesome.min.css', 							'public/css/');//not mixed
-	mix.copy('vendor/bootstrap-select/bootstrap-select/dist/css/bootstrap-select.min.css', 			'public/css/');//not mixed
+	mix.copy('bower_components/bootstrap-select/dist/css/bootstrap-select.min.css', 				'public/css/');//not mixed
 	mix.copy('vendor/eonasdan/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css', 'public/css/');//not mixed
 	// mix.copy('vendor/datatables/datatables/media/css/jquery.dataTables.min.css', 					'public/css/');//not mixed
 	mix.copy('vendor/datatables/datatables/media/css/dataTables.bootstrap.min.css', 				'public/css/');//not mixed

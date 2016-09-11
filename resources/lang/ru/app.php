@@ -13,6 +13,8 @@ return [
 	'As Member' 							=> 'Я - участник',
 	'As Performer' 							=> 'Я - исполнитель',
 	'Author' 								=> 'Автор',
+	'Articles' 								=> 'Статьи',
+	'Article Creating' 						=> 'Новая статья (инструкция)',
 	'Cancel' 								=> 'Отмена',
 	'Case Settings' 						=> 'Параметры кейса',
 	'Case Text' 							=> 'Текст',

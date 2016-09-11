@@ -22,6 +22,7 @@
 					<li><a href="{{ action('CasesController@index') }}"><i class="fa fa-fw fa-btn fa-briefcase"></i> {{ trans('app.Cases') }}</a></li>
 					<li><a href="{{ action('UsersController@index') }}"><i class="fa fa-fw fa-btn fa-users"></i> {{ trans('app.Users') }}</a></li>
 					@can('view-admin')
+						<li><a href="{{ action('ArticlesController@index') }}"><i class="fa fa-fw fa-btn fa-wikipedia"></i> {{ trans('app.Articles') }}</a></li>
 						<li><a href="{{ action('PagesController@test') }}"><i class="fa fa-fw fa-btn fa-facebook"></i> {{ trans('app.Test') }}</a></li>
 						<li><a href="{{ action('PagesController@adminShow') }}"><i class="fa fa-fw fa-btn fa-cogs"></i> {{ trans('app.Admin panel') }}</a></li>
 					@endcan
