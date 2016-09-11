@@ -6,6 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 class CreateArticles2 extends Migration
 {
 
+
+
     public function up()
     {
         Schema::create('articles', function (Blueprint $table) {
@@ -20,9 +22,13 @@ class CreateArticles2 extends Migration
         });
     }
 
+
+
     public function down()
     {
         Schema::drop('articles');
     }
+
+
 
 }
