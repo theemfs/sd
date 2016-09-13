@@ -14,6 +14,7 @@ elixir(function(mix) {
 	mix.copy('bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css', 	'public/css/');
 	mix.copy('bower_components/font-awesome-animation/dist/font-awesome-animation.min.css',						'public/css/');
 	mix.copy('bower_components/font-awesome/css/font-awesome.min.css', 											'public/css/');
+	mix.copy('bower_components/pnotify/dist/pnotify.css',			 											'public/css/');
 
 	mix.styles([
 		// 'bootstrap.min.css',
@@ -32,6 +33,8 @@ elixir(function(mix) {
 	mix.copy('bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',		'public/js/');
 	mix.copy('bower_components/jquery/dist/jquery.min.js',														'public/js/');
 	mix.copy('bower_components/moment/min/moment-with-locales.min.js', 											'public/js/');
+	mix.copy('bower_components/pnotify/dist/pnotify.desktop.js', 												'public/js/');
+	mix.copy('bower_components/pnotify/dist/pnotify.js', 														'public/js/');
 
 	mix.scripts([
 	// 	// 'jquery.min.js',

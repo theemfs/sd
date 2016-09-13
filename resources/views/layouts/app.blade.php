@@ -12,6 +12,7 @@
 		<link href="{{ url('/') }}/css/bootstrap.min.css" rel="stylesheet">
 		<link href="{{ url('/') }}/css/font-awesome.min.css" rel="stylesheet">
 		<link href="{{ url('/') }}/css/font-awesome-animation.min.css" rel="stylesheet">
+		{{-- <link href="{{ url('/') }}/css/pnotify.css" rel="stylesheet"> --}}
 		{{-- <link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet"> --}}
 @yield('css')
 		<link href="{{ url('/') . elixir('css/all.css') }}" rel="stylesheet">
@@ -69,6 +70,8 @@
 	{{-- JS --}}
 	<script src="{{ url('/') }}/js/jquery.min.js"></script>
 	<script src="{{ url('/') }}/js/bootstrap.min.js"></script>
+	{{-- <script src="{{ url('/') }}/js/pnotify.js"></script>
+	<script src="{{ url('/') }}/js/pnotify.desktop.js"></script> --}}
 	<script src="{{ url('/') . elixir('js/all.js') }}"></script>
 	{{-- <script src="{{ url('/') }}/js/bootstrap-datepicker.min.js"></script>
 	<script src="{{ url('/') }}/js/ckeditor.js"></script>
@@ -80,6 +83,25 @@
 	<footer>
 		{{-- @yield('footer') --}}
 		@yield('js')
+
+{{-- <script type="text/javascript">
+
+	$(function(){
+        PNotify.desktop.permission();
+		(new PNotify({
+		    title: 'Desktop Notice',
+		    text: 'If you\'ve given me permission, I\'ll appear as a desktop notification. If you haven\'t, I\'ll still appear as a regular PNotify notice.',
+		    desktop: {
+		        desktop: true
+		    }
+		})).get().click(function(e) {
+		    if ($('.ui-pnotify-closer, .ui-pnotify-sticker, .ui-pnotify-closer *, .ui-pnotify-sticker *').is(e.target)) return;
+		    alert('Hey! You clicked the desktop notification!');
+		});
+    });
+
+</script> --}}
+
 		@if (Auth::user())
 			<div class="container">
 				{{-- <p class="text-muted small">&copy / &reg;</p> --}}

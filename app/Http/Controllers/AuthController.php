@@ -132,10 +132,10 @@ class AuthController extends Controller
 				$email 				= $credentials['email'];
 			}
 
-			if (array_key_exists('telephonenumber', $ldap->user) ) {
-				$telephonenumber 	= $ldap->user['telephonenumber'][0];
+			if (array_key_exists('phone', $ldap->user) ) {
+				$phone 	= $ldap->user['phone'][0];
 			} else {
-				$telephonenumber 	= '';
+				$phone 	= '';
 			}
 
 			if (array_key_exists('mobile', $ldap->user) ) {
@@ -157,7 +157,7 @@ class AuthController extends Controller
 				$user = User::where('email', $email)->firstOrFail();
 				$user->name 			= $fullname;
 				$user->password 		= $password;
-				$user->telephonenumber 	= $telephonenumber;
+				$user->phone 	= $phone;
 				$user->mobile 			= $mobile;
 				$user->title 			= $title;
 				$user->last_login_at 	= Carbon::now();
@@ -169,7 +169,7 @@ class AuthController extends Controller
 					'password'=>$password,
 					'title'=>$title,
 					'mobile'=>$mobile,
-					'telephonenumber'=>$telephonenumber,
+					'phone'=>$phone,
 					'last_login_at'=>Carbon::now(),
 				] );
 			}

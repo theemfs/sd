@@ -49,7 +49,7 @@
 						<div role="tabpanel" class="tab-pane in active" id="user_contacts">
 							<p>{{ $user->department }} / {{ $user->title }}</p>
 							<p>{{ $user->email }}</p>
-							<p>{{ $user->telephonenumber }}</p>
+							<p>{{ $user->phone }}</p>
 							<p>{{ $user->mobile }}</p>
 							<p>{{ $user->homephone }}</p>
 							{{-- <p>{{ $user->last_login_at }}</p> --}}

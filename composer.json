@@ -17,7 +17,8 @@
         "cloudconvert/cloudconvert-php": "^2.2",
         "adldap2/adldap2-laravel": "^2.1",
         "barryvdh/laravel-debugbar": "^2.2",
-        "predis/predis": "^1.1"
+        "predis/predis": "^1.1",
+        "yarri/link-finder": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -122,7 +122,7 @@ class PagesController extends Controller
 			$user->name 			= $ldapuser->name[0];
 			$user->email 			= $ldapuser->mail[0];
 			$user->mobile 			= $ldapuser->mobile[0];
-			$user->telephonenumber 	= $ldapuser->telephonenumber[0];
+			$user->phone 			= $ldapuser->phone[0];
 			$user->homephone 		= $ldapuser->homephone[0];
 			$user->title 			= $ldapuser->title[0];
 			$user->department 		= $ldapuser->department[0];

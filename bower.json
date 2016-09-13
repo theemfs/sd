@@ -5,10 +5,11 @@
     "bootstrap-select": "^1.11.2",
     "ckeditor": "^4.5.11",
     "datatables": "^1.10.12",
+    "eonasdan-bootstrap-datetimepicker": "eonasdan/bootstrap-datetimepicker#^4.17.42",
     "font-awesome": "^4.6.3",
     "font-awesome-animation": "^0.0.9",
     "jquery": "^3.1.0",
-    "eonasdan-bootstrap-datetimepicker": "eonasdan/bootstrap-datetimepicker#^4.17.42",
-    "moment": "^2.14.1"
+    "moment": "^2.14.1",
+    "pnotify": "^3.0.0"
   }
 }

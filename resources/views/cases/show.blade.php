@@ -274,7 +274,7 @@
 										</span>
 										<hr>
 
-										<div class="message-body">{{ $message->text }}</div>
+										<div class="message-body">{!! link_it($message->text) !!}</div>
 
 										@foreach ($message->files as $file)
 											@if ( substr($file->mimetype, 0, 5) == 'image')

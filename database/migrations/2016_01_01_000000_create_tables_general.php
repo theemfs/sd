@@ -26,7 +26,7 @@ class CreateTablesGeneral extends Migration
 			$table->string('hash')->nullable();
 			$table->dateTime('last_login_at')->nullable();
 			$table->rememberToken();
-			$table->string('telephonenumber')->nullable();
+			$table->string('phone')->nullable();
 			$table->string('mobile')->nullable();
 			$table->string('homephone')->nullable();
 			$table->string('title')->nullable();

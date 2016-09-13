@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4537737d384bd66ef80bc0090ea53d45",
-    "content-hash": "635fa3aef9dec3c821d8851ee11e7df4",
+    "hash": "e84875bdaf1d2254696a8b00958c7ff6",
+    "content-hash": "9740ec324743dde97d39eb0351dafbf3",
     "packages": [
         {
             "name": "adldap2/adldap2",
@@ -2781,6 +2781,51 @@
                 "environment"
             ],
             "time": "2016-09-01 10:05:43"
+        },
+        {
+            "name": "yarri/link-finder",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yarri/LinkFinder.git",
+                "reference": "703d1e7f7506f60c1bbaf8cd1906a65a45bdc57f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yarri/LinkFinder/zipball/703d1e7f7506f60c1bbaf8cd1906a65a45bdc57f",
+                "reference": "703d1e7f7506f60c1bbaf8cd1906a65a45bdc57f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jaromir Tomek",
+                    "homepage": "https://github.com/yarri"
+                }
+            ],
+            "description": "In a plain text document searches for URLs and emails and makes them clickable",
+            "homepage": "https://github.com/yarri/LinkFinder",
+            "keywords": [
+                "e-mail",
+                "email",
+                "link",
+                "url",
+                "urlize",
+                "urlizer"
+            ],
+            "time": "2016-06-02 13:30:59"
         }
     ],
     "packages-dev": [
@@ -4351,7 +4396,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "yarri/link-finder": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
