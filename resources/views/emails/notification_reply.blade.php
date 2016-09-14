@@ -24,11 +24,6 @@
 
 <hr>
 
-<p><?php echo $user->title; / echo $user->department; ?></p>
-<p><?php echo $user->phone; / echo $user->mobile; ?></p>
-
-<hr>
-
 <p>Это письмо было сформировано автоматически, пожалуйста, не отвечайте на него.</p>
 <p>Для ответа перейдите в личный кабинет по <a href="<?php echo action('CasesController@show', $case->id);?>">ссылке</a></p>
 <p>С уважением, ИТ отдел.</p>
