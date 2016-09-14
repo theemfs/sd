@@ -57,7 +57,7 @@
 										</a>
 									</td>
 									<td class="text-center"><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
-									<td class="text-center">{{ $user->telephonenumber }}</td>
+									<td class="text-center">{{ $user->phone }}</td>
 									<td class="text-center">{{ $user->mobile }}</td>
 									<td class="text-center">{{ $user->department }}</td>
 									<td class="text-center">{{ $user->title }}</td>
