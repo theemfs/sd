@@ -129,6 +129,14 @@ class PagesController extends Controller
 			$user->is_active 		= 1;
 			$user->save();
 
+			$r[$i] = $r[$i] . $ldapuser->name[0]. ' | ';
+			$r[$i] = $r[$i] . $ldapuser->mail[0]. ' | ';
+			$r[$i] = $r[$i] . $ldapuser->mobile[0]. ' | ';
+			$r[$i] = $r[$i] . $ldapuser->telephonenumber[0]. ' | ';
+			$r[$i] = $r[$i] . $ldapuser->homephone[0]. ' | ';
+			$r[$i] = $r[$i] . $ldapuser->title[0]. ' | ';
+			$r[$i] = $r[$i] . $ldapuser->department[0]. ' | ';
+
 			$i++;
 		}
 

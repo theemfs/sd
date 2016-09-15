@@ -269,7 +269,7 @@
 								<div class="col-xs-11">
 									<div class="form-group">
 										<span class="small">
-											<a href="{{ action('UsersController@show', $message->user->id) }}" data-toggle="tooltip" data-placement="auto" data-container="body" title="{{ $message->user->department }}/{{ $message->user->title }}: {{ $message->user->telephonenumber }}, {{ $message->user->mobile }}">{{ $message->user->name }}</a> |
+											<a href="{{ action('UsersController@show', $message->user->id) }}" data-toggle="tooltip" data-placement="auto" data-container="body" title="{{ $message->user->department }}/{{ $message->user->title }}: {{ $message->user->phone }}, {{ $message->user->mobile }}">{{ $message->user->name }}</a> |
 											{{ $message->created_at }}
 										</span>
 										<hr>
