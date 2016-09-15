@@ -200,8 +200,7 @@
 											<td class="text-center"><small>{{ $case_performer->last_reply_at }} ({{ $case_performer->last_replier->getSurnameWithInitials() }})</small></td>
 											<td>
 												<small>
-													<a href="{{ action('UsersController@show', $case_performer->user->id) }}">
-														{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
+													<a href="{{ action('UsersController@show', $case_performer->user->id) }}" data-toggle="tooltip" data-placement="auto" data-container="body" title="{{ $case_performer->user->department }}/{{ $case_performer->user->title }}: {{ $case_performer->user->phone }}, {{ $case_performer->user->mobile }}">
 														{{ $case_performer->user->getSurnameWithInitials() }}
 													</a>
 												</small>
@@ -212,7 +211,7 @@
 											<td class="text-left">
 												@foreach($case_performer->performers as $performer)
 													<small>
-														<a href="{{ action('UsersController@show', $performer->id) }}">
+														<a href="{{ action('UsersController@show', $performer->id) }}" data-toggle="tooltip" data-placement="auto" data-container="body" title="{{ $performer->department }}/{{ $performer->title }}: {{ $performer->phone }}, {{ $performer->mobile }}">
 															{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
 															{{ $performer->getSurnameWithInitials() }}
 														</a>
@@ -267,7 +266,14 @@
 													<small class="text-muted col-md-11 col-md-offset-1 hidden-xs">{{ mb_substr($case_member->text, 0, 100)."..." }}</small>
 												</a>
 											</td>
-											<td class="text-center"><small>{{ $case_member->last_reply_at }} ({{ $case_member->last_replier->getSurnameWithInitials() }})</small></td>
+											<td class="text-center">
+												<small>
+													{{ $case_member->last_reply_at }} ({{ $case_member->last_replier->getSurnameWithInitials() }})
+												</small>
+												{{-- <small class="text-muted col-md-11 col-md-offset-1 hidden-xs">
+													{{ mb_substr($case_member->text, 0, 100)."..." }}
+												</small> --}}
+											</td>
 											<td>
 												<small>
 													<a href="{{ action('UsersController@show', $case_member->user->id) }}" data-toggle="tooltip" data-placement="auto" data-container="body" title="{{ $case_member->user->department }}/{{ $case_member->user->title }}: {{ $case_member->user->phone }}, {{ $case_member->user->mobile }}">
@@ -379,8 +385,7 @@
 											<td class="text-center"><small>{{ $case_open->last_reply_at }} ({{ $case_open->last_replier->getSurnameWithInitials() }})</small></td>
 											<td>
 												<small>
-													<a href="{{ action('UsersController@show', $case_open->user->id) }}">
-														{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
+													<a href="{{ action('UsersController@show', $case_open->user->id) }}" data-toggle="tooltip" data-placement="auto" data-container="body" title="{{ $case_open->user->department }}/{{ $case_open->user->title }}: {{ $case_open->user->phone }}, {{ $case_open->user->mobile }}">
 														{{ $case_open->user->getSurnameWithInitials() }}
 													</a>
 												</small>
@@ -391,8 +396,7 @@
 											<td class="text-left">
 												@foreach($case_open->performers as $performer)
 													<small>
-														<a href="{{ action('UsersController@show', $performer->id) }}">
-															{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
+														<a href="{{ action('UsersController@show', $performer->id) }}" data-toggle="tooltip" data-placement="auto" data-container="body" title="{{ $performer->department }}/{{ $performer->title }}: {{ $performer->phone }}, {{ $performer->mobile }}">
 															{{ $performer->getSurnameWithInitials() }}
 														</a>
 													</small>
@@ -402,8 +406,7 @@
 												@if($case_open->members->count()<=5)
 													@foreach($case_open->members as $member)
 														<small>
-															<a href="{{ action('UsersController@show', $member->id) }}">
-																{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
+															<a href="{{ action('UsersController@show', $member->id) }}" data-toggle="tooltip" data-placement="auto" data-container="body" title="{{ $member->department }}/{{ $member->title }}: {{ $member->phone }}, {{ $member->mobile }}">
 																{{ $member->getSurnameWithInitials() }}
 															</a>
 														</small><br>
@@ -451,8 +454,7 @@
 											<td class="text-center"><small>{{ $case_closed->last_reply_at }} ({{ $case_closed->last_replier->getSurnameWithInitials() }})</small></td>
 											<td>
 												<small>
-													<a href="{{ action('UsersController@show', $case_closed->user->id) }}">
-														{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
+													<a href="{{ action('UsersController@show', $case_closed->user->id) }}" data-toggle="tooltip" data-placement="auto" data-container="body" title="{{ $case_closed->user->department }}/{{ $case_closed->user->title }}: {{ $case_closed->user->phone }}, {{ $case_closed->user->mobile }}">
 														{{ $case_closed->user->getSurnameWithInitials() }}
 													</a>
 												</small>
@@ -463,8 +465,7 @@
 											<td class="text-left">
 												@foreach($case_closed->performers as $performer)
 													<small>
-														<a href="{{ action('UsersController@show', $performer->id) }}">
-															{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
+														<a href="{{ action('UsersController@show', $performer->id) }}" data-toggle="tooltip" data-placement="auto" data-container="body" title="{{ $performer->department }}/{{ $performer->title }}: {{ $performer->phone }}, {{ $performer->mobile }}">
 															{{ $performer->getSurnameWithInitials() }}
 														</a>
 													</small>
@@ -474,8 +475,7 @@
 												@if($case_closed->members->count()<=5)
 													@foreach($case_closed->members as $member)
 														<small>
-															<a href="{{ action('UsersController@show', $member->id) }}">
-																{{-- <i class="fa fa-fw fa-btn fa-user"></i> --}}
+															<a href="{{ action('UsersController@show', $member->id) }}" data-toggle="tooltip" data-placement="auto" data-container="body" title="{{ $member->department }}/{{ $member->title }}: {{ $member->phone }}, {{ $member->mobile }}">
 																{{ $member->getSurnameWithInitials() }}
 															</a>
 														</small><br>
