@@ -132,7 +132,7 @@
 												<a href="{{ action('CasesController@show', $case_author->id) }}">
 													<i class="fa fa-fw fa-btn fa-briefcase"></i>
 													<strong>{{ $case_author->name }}</strong>
-													<small class="text-muted col-md-11 col-md-offset-1 hidden-xs">{{ mb_substr($case_author->text, 0, 300)."..." }}</small>
+													<small class="text-muted col-md-11 col-md-offset-1 hidden-xs">{{ mb_substr($case_author->text, 0, 200)."..." }}</small>
 												</a>
 											</td>
 											<td class="text-center"><small>{{ $case_author->last_reply_at }} ({{ $case_author->last_replier->getSurnameWithInitials() }})</small></td>
@@ -194,7 +194,7 @@
 												<a href="{{ action('CasesController@show', $case_performer->id) }}">
 													<i class="fa fa-fw fa-btn fa-briefcase"></i>
 													<strong>{{ $case_performer->name }}</strong>
-													<small class="text-muted col-md-11 col-md-offset-1 hidden-xs">{{ mb_substr($case_performer->text, 0, 300)."..." }}</small>
+													<small class="text-muted col-md-11 col-md-offset-1 hidden-xs">{{ mb_substr($case_performer->text, 0, 200)."..." }}</small>
 												</a>
 											</td>
 											<td class="text-center"><small>{{ $case_performer->last_reply_at }} ({{ $case_performer->last_replier->getSurnameWithInitials() }})</small></td>
@@ -264,7 +264,7 @@
 												<a href="{{ action('CasesController@show', $case_member->id) }}">
 													<i class="fa fa-fw fa-btn fa-briefcase"></i>
 													<strong>{{ $case_member->name }}</strong>
-													<small class="text-muted col-md-11 col-md-offset-1 hidden-xs">{{ mb_substr($case_member->text, 0, 300)."..." }}</small>
+													<small class="text-muted col-md-11 col-md-offset-1 hidden-xs">{{ mb_substr($case_member->text, 0, 200)."..." }}</small>
 												</a>
 											</td>
 											<td class="text-center"><small>{{ $case_member->last_reply_at }} ({{ $case_member->last_replier->getSurnameWithInitials() }})</small></td>
@@ -332,7 +332,7 @@
 												<a href="{{ action('CasesController@show', $case_new->id) }}">
 													<i class="fa fa-fw fa-btn fa-briefcase"></i>
 													<strong>{{ $case_new->name }}</strong>
-													<small class="text-muted col-md-11 col-md-offset-1 hidden-xs">{{ mb_substr($case_new->text, 0, 300)."..." }}</small>
+													<small class="text-muted col-md-11 col-md-offset-1 hidden-xs">{{ mb_substr($case_new->text, 0, 200)."..." }}</small>
 												</a>
 											</td>
 											<td><small><a href="{{ action('UsersController@show', $case_new->user->id) }}">{{ $case_new->user->getSurnameWithInitials() }}</a></small></td>
@@ -373,7 +373,7 @@
 												<a href="{{ action('CasesController@show', $case_open->id) }}">
 													<i class="fa fa-fw fa-btn fa-briefcase"></i>
 													<strong>{{ $case_open->name }}</strong>
-													<small class="text-muted col-md-11 col-md-offset-1 hidden-xs">{{ mb_substr($case_open->text, 0, 300)."..." }}</small>
+													<small class="text-muted col-md-11 col-md-offset-1 hidden-xs">{{ mb_substr($case_open->text, 0, 200)."..." }}</small>
 												</a>
 											</td>
 											<td class="text-center"><small>{{ $case_open->last_reply_at }} ({{ $case_open->last_replier->getSurnameWithInitials() }})</small></td>
@@ -445,7 +445,7 @@
 												<a href="{{ action('CasesController@show', $case_closed->id) }}">
 													<i class="fa fa-fw fa-btn fa-briefcase"></i>
 													<strong>{{ $case_closed->name }}</strong>
-													<small class="text-muted col-md-11 col-md-offset-1 hidden-xs">{{ mb_substr($case_closed->text, 0, 300)."..." }}</small>
+													<small class="text-muted col-md-11 col-md-offset-1 hidden-xs">{{ mb_substr($case_closed->text, 0, 200)."..." }}</small>
 												</a>
 											</td>
 											<td class="text-center"><small>{{ $case_closed->last_reply_at }} ({{ $case_closed->last_replier->getSurnameWithInitials() }})</small></td>
