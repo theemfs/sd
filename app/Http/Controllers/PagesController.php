@@ -32,6 +32,10 @@ class PagesController extends Controller
 	{
 		return view('pages.test');
 	}
+	public function test2()
+	{
+		return view('pages.test2');
+	}
 
 
 
@@ -161,4 +165,14 @@ class PagesController extends Controller
 		}
 
 	}
+
+
+
+	public function react()
+	{
+		return view('pages.react');
+	}
+
+
+
 }

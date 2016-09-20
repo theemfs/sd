@@ -12,7 +12,8 @@
 		<link href="{{ url('/') }}/css/bootstrap.min.css" rel="stylesheet">
 		<link href="{{ url('/') }}/css/font-awesome.min.css" rel="stylesheet">
 		<link href="{{ url('/') }}/css/font-awesome-animation.min.css" rel="stylesheet">
-		{{-- <link href="{{ url('/') }}/css/pnotify.css" rel="stylesheet"> --}}
+		<link href="{{ url('/') }}/css/pnotify.css" rel="stylesheet">
+		<link href="{{ url('/') }}/css/animate.min.css" rel="stylesheet">
 		{{-- <link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet"> --}}
 @yield('css')
 		<link href="{{ url('/') . elixir('css/all.css') }}" rel="stylesheet">
@@ -70,12 +71,10 @@
 	{{-- JS --}}
 	<script src="{{ url('/') }}/js/jquery.min.js"></script>
 	<script src="{{ url('/') }}/js/bootstrap.min.js"></script>
-	{{-- <script src="{{ url('/') }}/js/pnotify.js"></script>
-	<script src="{{ url('/') }}/js/pnotify.desktop.js"></script> --}}
+	<script src="{{ url('/') }}/js/pnotify.js"></script>
+	<script src="https://js.pusher.com/3.2/pusher.min.js"></script>
+	<script src='https://cdn.rawgit.com/admsev/jquery-play-sound/master/jquery.playSound.js'></script>
 	<script src="{{ url('/') . elixir('js/all.js') }}"></script>
-	{{-- <script src="{{ url('/') }}/js/bootstrap-datepicker.min.js"></script>
-	<script src="{{ url('/') }}/js/ckeditor.js"></script>
-	<script src="{{ url('/') }}/js/jquery.dataTables.min.js"></script> --}}
 
 
 
@@ -84,23 +83,41 @@
 		{{-- @yield('footer') --}}
 		@yield('js')
 
-{{-- <script type="text/javascript">
+			<script>
 
-	$(function(){
-        PNotify.desktop.permission();
-		(new PNotify({
-		    title: 'Desktop Notice',
-		    text: 'If you\'ve given me permission, I\'ll appear as a desktop notification. If you haven\'t, I\'ll still appear as a regular PNotify notice.',
-		    desktop: {
-		        desktop: true
-		    }
-		})).get().click(function(e) {
-		    if ($('.ui-pnotify-closer, .ui-pnotify-sticker, .ui-pnotify-closer *, .ui-pnotify-sticker *').is(e.target)) return;
-		    alert('Hey! You clicked the desktop notification!');
-		});
-    });
+				{{-- PUSHER --}}
+				Pusher.logToConsole = true;
+				var pusher = new Pusher('90125195e3c66249c253', {
+					encrypted: true
+				});
+				var channel = pusher.subscribe('test_channel');
+				channel.bind('my_event', function(data) {
+					notify(data);
+				});
 
-</script> --}}
+				{{-- PNOTIFY --}}
+				var stack = {"dir1": "up", "dir2": "right", "push": "bottom"};
+				var animateIn = "bounceIn";
+				var animateOut = "bounceOut";
+				function notify(data){
+					$.playSound('{{ url('/') }}/sounds/notification_sound');
+					new PNotify({
+						styling: "fontawesome",
+						title: data.name,
+						text: data.message,
+						type: 'info',
+						addclass: "stack-bottomleft",
+						stack: stack,
+						remove: true,
+						animate: {
+							animate: true,
+							in_class: animateIn,
+							out_class: animateOut
+						}
+					});
+				};
+
+			</script>
 
 		@if (Auth::user())
 			<div class="container">

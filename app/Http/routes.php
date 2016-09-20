@@ -25,10 +25,12 @@ Route::group(['middleware' => 'web'], function () {
 			Route::get('/', 						'CasesController@index');
 			Route::get('/about', 					'PagesController@about');
 			Route::get('/test', 					'PagesController@test');//test
+			Route::get('/test2', 					'PagesController@test2');//test2s
 			Route::get('/regenerateThumbnails', 	'PagesController@regenerateThumbnails');
 			Route::get('/send', 					'PagesController@send');
 			Route::get('/settings',					'PagesController@settingsShow');
 			Route::post('/settings',				'PagesController@settingsSave');
+			Route::get('/react',					'PagesController@react');
 
 
 
@@ -51,7 +53,17 @@ Route::group(['middleware' => 'web'], function () {
 				Route::resource('/articles',		'ArticlesController');
 
 				//cases
+				Route::get('/cases/author',			'CasesController@author')->name('cases.author');
 				Route::resource('/cases',			'CasesController');
+				// Route::post('/cases',				'CasesController@store')->name('cases.store');
+				// Route::get('/cases',				'CasesController@index')->name('cases.index');
+				// Route::get('/cases/create',			'CasesController@create')->name('cases.create');
+				// Route::get('/cases/{cases}',		'CasesController@show')->name('cases.show');
+				// Route::delete('/cases/{cases}',		'CasesController@destroy')->name('cases.destroy');
+				// Route::match(['put', 'patch'], '/cases/{cases}', 'CasesController@update')->name('cases.update');
+				// Route::get('/cases/{cases}/edit',	'CasesController@edit')->name('cases.edit');
+
+
 				// Route::get('/cases/author',			'CasesController@casesAuthorOf');
 				// Route::get('/cases/performer',		'CasesController@casesPerformerOf');
 				// Route::get('/cases/member',			'CasesController@casesMemberOf');

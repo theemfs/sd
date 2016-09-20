@@ -35,46 +35,49 @@ class CasesController extends Controller
 	public function index(Request $request)
 	{
 
-
-
-		// FOR USERS
-		$cases_author 		= Auth::user()->authorOfOpen;				// where I am an author
-		$cases_performer 	= Auth::user()->performerOfOpen;			// where I am a performer
-		$cases_member		= Auth::user()->memberOfOpen;				// where I am a member
-		$cases_closed		= Auth::user()->casesAllClosed();			// closed AND where I am author || performer || member
-
+		$cases_author 		= Auth::user()->authorOfOpen;													// where I am an author
+		$cases_member		= Auth::user()->memberOfOpen;													// where I am a member
+		$cases_closed		= Auth::user()->casesAllClosed();												// closed AND where I am author || performer || member
+		$cases_performer 	= Auth::user()->performerOfOpen;												// where I am a performer
+		$cases_open			= Cases::where('status_id','<>','5')->orderBy('updated_at','desc')->get();
+		$cases_closed_all	= Cases::where('status_id','5')->orderBy('updated_at','desc')->get();
+		$cases_new_ids 		= array_column( DB::select(DB::raw("SELECT id FROM cases WHERE cases.id NOT IN (SELECT case_id FROM case_performers)")), "id");
+		$cases_new 			= Cases::whereIn('id',$cases_new_ids)->orderBy('updated_at','desc')->get();
 
 
 		// ONLY FOR ADMIN
-		$cases_open			= Cases::where('status_id','<>','5')->orderBy('updated_at','desc')->get();
-		$cases_new_ids 		= array_column( DB::select(DB::raw("SELECT id FROM cases WHERE cases.id NOT IN (SELECT case_id FROM case_performers)")), "id");
-		$cases_new 			= Cases::whereIn('id',$cases_new_ids)->orderBy('updated_at','desc')->get();
-		$cases_closed_all	= Cases::where('status_id','5')->orderBy('updated_at','desc')->get();
-
-
-
 		if (Auth::user()->is_admin) {
-			return view('cases.index_table')
-				->with('cases_author',		$cases_author)
-				->with('cases_closed',		$cases_closed_all)
-				->with('cases_member',		$cases_member)
-				->with('cases_new',			$cases_new)
-				->with('cases_open',		$cases_open)
-				->with('cases_performer',	$cases_performer)
-			;
+				return view('cases.index_table')
+					->with('cases_author',		$cases_author)
+					->with('cases_closed',		$cases_closed_all)
+					->with('cases_member',		$cases_member)
+					->with('cases_new',			$cases_new)
+					->with('cases_open',		$cases_open)
+					->with('cases_performer',	$cases_performer)
+				;
+		// FOR USERS
 		} else {
-			return view('cases.index_table')
-				->with('cases_author',		$cases_author)
-				->with('cases_closed',		$cases_closed)
-				->with('cases_member',		$cases_member)
-				->with('cases_new',			$cases_new)
-				->with('cases_open',		$cases_open)
-				->with('cases_performer',	$cases_performer)
-			;
+				return view('cases.index_table')
+					->with('cases_author',		$cases_author)
+					->with('cases_closed',		$cases_closed)
+					->with('cases_member',		$cases_member)
+					->with('cases_new',			$cases_new)
+					->with('cases_open',		$cases_open)
+					->with('cases_performer',	$cases_performer)
+				;
 		}
 
+	}
 
 
+
+	// where I am an author
+	public function author()
+	{
+		$cases = Auth::user()->authorOfOpen;
+		return view('cases.index_table_single')
+				->with('cases', $cases)
+		;
 	}
 
 
@@ -359,6 +362,7 @@ class CasesController extends Controller
 		$performer->delete();
 		return redirect()->action('CasesController@index');
 	}
+
 
 
 }

@@ -15,6 +15,7 @@ elixir(function(mix) {
 	mix.copy('bower_components/font-awesome-animation/dist/font-awesome-animation.min.css',						'public/css/');
 	mix.copy('bower_components/font-awesome/css/font-awesome.min.css', 											'public/css/');
 	mix.copy('bower_components/pnotify/dist/pnotify.css',			 											'public/css/');
+	mix.copy('bower_components/animate.css/animate.min.css',			 										'public/css/');
 
 	mix.styles([
 		// 'bootstrap.min.css',
@@ -35,6 +36,8 @@ elixir(function(mix) {
 	mix.copy('bower_components/moment/min/moment-with-locales.min.js', 											'public/js/');
 	mix.copy('bower_components/pnotify/dist/pnotify.desktop.js', 												'public/js/');
 	mix.copy('bower_components/pnotify/dist/pnotify.js', 														'public/js/');
+	mix.copy('bower_components/react/react.min.js', 															'public/js/');
+	mix.copy('bower_components/react/react-dom.min.js', 														'public/js/');
 
 	mix.scripts([
 	// 	// 'jquery.min.js',
@@ -51,17 +54,22 @@ elixir(function(mix) {
 
 
 
-	//VERSIONING
-	mix.version([
-		'public/css/all.css',
-		'public/js/all.js'
-	]);
+	//SOUNDS
+	mix.copy('resources/assets/sounds', 																		'public/sounds/');
 
 
 
 	// //IMAGES
 	mix.copy('resources/assets/images/briefcase.png', 															'public/favicon.ico');
 	mix.copy('vendor/datatables/datatables/media/images', 														'public/images');
+
+
+
+	//VERSIONING
+	mix.version([
+		'public/css/all.css',
+		'public/js/all.js'
+	]);
 
 
 

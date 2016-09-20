@@ -42,6 +42,23 @@
 
 
 
+{{-- <?php
+  require('Pusher.php');
+
+  $options = array(
+    'encrypted' => true
+  );
+  $pusher = new Pusher(
+    '90125195e3c66249c253',
+    'f868e86d1e1e544e46e8',
+    '249970',
+    $options
+  );
+
+  $data['message'] = 'hello world';
+  $pusher->trigger('test_channel', 'my_event', $data);
+?> --}}
+
 @section('js')
 	{{-- <script src="https://js.pusher.com/3.2/pusher.min.js"></script>
 	<script>
