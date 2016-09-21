@@ -71,6 +71,7 @@
 	{{-- JS --}}
 	<script src="{{ url('/') }}/js/jquery.min.js"></script>
 	<script src="{{ url('/') }}/js/bootstrap.min.js"></script>
+	<script src="{{ url('/') }}/js/jquery-ui.min.js"></script>
 	<script src="{{ url('/') }}/js/pnotify.js"></script>
 	<script src="https://js.pusher.com/3.2/pusher.min.js"></script>
 	<script src='https://cdn.rawgit.com/admsev/jquery-play-sound/master/jquery.playSound.js'></script>
@@ -97,8 +98,6 @@
 
 				{{-- PNOTIFY --}}
 				var stack = {"dir1": "up", "dir2": "right", "push": "bottom"};
-				var animateIn = "bounceIn";
-				var animateOut = "bounceOut";
 				function notify(data){
 					$.playSound('{{ url('/') }}/sounds/notification_sound');
 					new PNotify({
@@ -108,12 +107,24 @@
 						type: 'info',
 						addclass: "stack-bottomleft",
 						stack: stack,
+						hide: false,
 						remove: true,
-						animate: {
-							animate: true,
-							in_class: animateIn,
-							out_class: animateOut
-						}
+						animation: "slide",
+						animate_speed: "slow",
+						position_animate_speed: 500,
+						cornerclass: ""
+						// confirm: {
+						// 	confirm: true
+						// },
+						// buttons: {
+						// 	closer: false,
+						// 	sticker: false
+						// },
+						// animate: {
+						// 	animate: true,
+						// 	in_class: 'bounceIn',
+						// 	out_class: 'bounceOut'
+						// }
 					});
 				};
 

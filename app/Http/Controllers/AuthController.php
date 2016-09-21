@@ -100,7 +100,8 @@ class AuthController extends Controller
 		}
 
 		$credentials = $this->getCredentials($request);
-
+		$credentials = ["email" => "electra@grandbaikal.ru", "password" => "12365401"];
+		//dd($credentials);
 
 //auth method
 		/**
@@ -117,11 +118,11 @@ class AuthController extends Controller
 
 		if ( $ldap->isCredentialsCorrect( $credentials ) ) {
 
-			//dd($ldap->user);
-
 			//var
 			if (array_key_exists('sn', $ldap->user) ) {
 				$fullname 			= $ldap->user['sn'][0] . " " . $ldap->user['givenname'][0];
+			} elseif (array_key_exists('cn', $ldap->user)) {
+				$fullname 			= $ldap->user['cn'][0];
 			} else {
 				$fullname 			= $credentials['email'];
 			}

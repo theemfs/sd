@@ -38,6 +38,7 @@ elixir(function(mix) {
 	mix.copy('bower_components/pnotify/dist/pnotify.js', 														'public/js/');
 	mix.copy('bower_components/react/react.min.js', 															'public/js/');
 	mix.copy('bower_components/react/react-dom.min.js', 														'public/js/');
+	mix.copy('bower_components/jquery-ui/jquery-ui.min.js', 													'public/js/');
 
 	mix.scripts([
 	// 	// 'jquery.min.js',
