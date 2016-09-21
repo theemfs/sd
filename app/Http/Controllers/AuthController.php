@@ -100,7 +100,6 @@ class AuthController extends Controller
 		}
 
 		$credentials = $this->getCredentials($request);
-		$credentials = ["email" => "electra@grandbaikal.ru", "password" => "12365401"];
 		//dd($credentials);
 
 //auth method
