@@ -1,3 +1,4 @@
+<div style="font-family: sans-serif;">
 <div style="text-align: center; border-bottom: 1px solid #ccc; padding-bottom: 10px;">
 	<a href="<?php echo url('/'); ?>"><img src="<?php echo url('/').'/images/logo96.png'; ?>"></a><br>
 </div><br>
@@ -45,3 +46,4 @@ support@grandbaikal.ru<br>
 С уважением, ИТ отдел.<br>
 </p>
 </div><br>
+</div>
