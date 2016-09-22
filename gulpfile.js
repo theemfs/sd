@@ -61,7 +61,8 @@ elixir(function(mix) {
 
 
 	// //IMAGES
-	mix.copy('resources/assets/images/briefcase.png', 															'public/favicon.ico');
+	mix.copy('resources/assets/favicon.png',		 															'public/favicon.ico');
+	mix.copy('resources/assets/images/', 																		'public/images/');
 	mix.copy('vendor/datatables/datatables/media/images', 														'public/images');
 
 
