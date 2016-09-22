@@ -5,7 +5,9 @@
 <hr>
 
 <pre>
-<?php echo $msg->text; ?>
+<?php
+	echo mb_substr($msg->text, 0, 100)."...";
+?>
 </pre>
 
 <?php
@@ -24,6 +26,6 @@
 
 <hr>
 
-<p>Это письмо было сформировано автоматически, пожалуйста, не отвечайте на него.</p>
-<p>Для ответа перейдите в личный кабинет по <a href="<?php echo action('CasesController@show', $case->id);?>">ссылке</a></p>
-<p>С уважением, ИТ отдел.</p>
+<span>Это письмо было сформировано автоматически, пожалуйста, <strong style="color:red">не отвечайте на него.</strong></span><br>
+<span>Для ответа перейдите в личный кабинет по <a href="<?php echo action('CasesController@show', $case->id);?>">ссылке</a></span><br>
+<span>С уважением, ИТ отдел.</span><br>
