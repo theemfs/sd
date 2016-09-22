@@ -30,6 +30,7 @@
 
 <hr>
 
+<div style="text-align: center; border-bottom: 1px solid #ccc; padding-top: 10px;">
 <p style="color: #969696; font-size: 11px">
 Вы получили это письмо, так как являетесь участником кейса <a href="<?php echo action('CasesController@show', $case->id);?>">[#<?php echo $case->id; ?>] <?php echo $case->name; ?></a><br><br>
 
@@ -43,3 +44,4 @@ support@grandbaikal.ru<br>
 Подать новую заявку и ознакомиться со статусами созданных ранее заявок вы можете через личный кабинет <a href="http://it.grandbaikal.ru/">it.grandbaikal.ru</a><br>
 С уважением, ИТ отдел.<br>
 </p>
+</div><br>
