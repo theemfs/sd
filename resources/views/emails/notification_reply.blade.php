@@ -4,14 +4,12 @@
 </div><br>
 
 <a href="<?php echo action('UsersController@show', $user->id);?>"><?php echo $user->name; ?></a><br>
-оставил(а) в кейсе <a href="<?php echo action('CasesController@show', $case->id);?>">[#<?php echo $case->id; ?>] <?php echo $case->name; ?></a> новое сообщение<br>
-<span style="color:#969696">(Ниже показана только часть сообщения. Прочесть полностью можно по <a href="<?php echo action('CasesController@show', $case->id);?>" style="color:blue">ссылке</a>)</span><br>
-
+оставил(а) в кейсе <a href="<?php echo action('CasesController@show', $case->id);?>">[#<?php echo $case->id; ?>] <?php echo $case->name; ?></a> новое сообщение:<br>
 <hr>
 
 <pre>
 <?php
-	echo mb_substr($msg->text, 0, 30) . " ...";
+
 ?>
 </pre>
 
