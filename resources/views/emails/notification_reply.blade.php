@@ -9,7 +9,7 @@
 
 <pre>
 <?php
-
+	echo $msg->text;
 ?>
 </pre>
 
