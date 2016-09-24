@@ -298,6 +298,8 @@ class CasesController extends Controller
 
 		$case = Cases::findOrFail($id);
 		$case_before = clone($case);
+		$performers_compare = array();
+		$performers_compare[0] = array_column($case_before->performers->toArray(), 'id');
 
 
 
@@ -308,7 +310,7 @@ class CasesController extends Controller
 
 
 
-		// PROCESSING
+		// PROCESSING SYNC PERFORMERS, MEMBERS
 		if ( !is_null($request->input('performers')) ) {
 			$case->performers()->sync($request->input('performers'));
 		} else {
@@ -322,15 +324,82 @@ class CasesController extends Controller
 		}
 		$case->update($request->all());
 
+
+
+		// DUE_TO SET TO NULL IF DATE IN TOO PAST
 		if ( date( "Y-m-d H:i", strtotime($request->due_to)) < date("Y-m-d H:i", mktime(0, 0, 0, 1, 1, 1971)) ) {
 			$case->due_to = NULL;
 		} else {
 			$case->due_to = date( "Y-m-d H:i:s", strtotime($request->due_to) );
 		}
 
-		//$case->is_closed = $request->status
-
 		$case->update();
+
+
+
+		// SENDING EMAIL NOTIFICATION
+		$performers_compare[1] = array_column($case->performers->toArray(), 'id');
+		$detached = array_diff($performers_compare[0], $performers_compare[1]);
+		$attached = array_diff($performers_compare[1], $performers_compare[0]);
+
+		//return([count($attached), count($detached)]);
+
+		$message = new Messages();
+		$message->is_service_message = 1;
+		$message->case_id = $case->id;
+			if ( count($attached)>0 ) {
+				$message->text .= trans('app.Attached Performers') . ":\n";
+				foreach($attached as $performer_id) {
+					$performer = User::findOrFail($performer_id);
+					$message->text .= "+" . $performer->name . "\n";
+				}
+				Auth::user()->messages()->save($message);
+			}
+
+			if ( count($detached)>0 ) {
+				$message->text .= trans('app.Detached Performers') . ":\n";
+				foreach($detached as $performer_id) {
+					$performer = User::findOrFail($performer_id);
+					$message->text .= "-" . $performer->name . "\n";
+				}
+				Auth::user()->messages()->save($message);
+			}
+
+		$data = array(
+			'case' => $case,
+			'msg' => $message,
+			'user' => Auth::user()
+		);
+
+		foreach($attached as $performer_id) {
+			$performer = User::findOrFail($performer_id);
+			Mail::queue('emails.notification_performer_assignment', $data, function($email) use ($case, $message, $performer) {
+				$email->from( env('MAIL_USERNAME') );
+				$email->to($performer->email);
+				$email->subject("[" . trans('app.Case') . " #$case->id]: \"$case->name\". " . trans('app.Performer Attaching') );
+				$email->priority(2); //high
+			});
+
+		}
+
+		// return([
+		// 	"detached" => $detached,
+		// 	"attached" => $attached
+		// ]);
+
+
+
+		// //$subscribers = User::where('can_be_performer', true)->get();
+		// $subscribers = User::where('is_admin', true)->get();
+
+		// foreach ($subscribers as $subscriber) {
+		// 	Mail::queue('emails.notification_newcase', $data, function($email) use ($case, $message, $subscriber) {
+		// 		$email->from( env('MAIL_USERNAME') );
+		// 		$email->to($subscriber->email);
+		// 		$email->subject("[" . trans('app.Case') . " #$case->id]: \"$case->name\". " . trans('app.New case') );
+		// 		$email->priority(2); //high
+		// 	});
+		// }
 
 
 

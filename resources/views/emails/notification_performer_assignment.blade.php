@@ -2,7 +2,7 @@
 
 
 
-@section('title', '[' . trans('app.Case') . '#' . $case->id . ']: \'' . $case->name . '\'. ' . trans('app.New reply'))
+@section('title', '[' . trans('app.Case') . '#' . $case->id . ']: \'' . $case->name . '\'. ' . trans('app.Performer Attaching'))
 
 
 
@@ -10,13 +10,12 @@
 
 <div style="text-align: center;">
 <a href="<?php echo action('UsersController@show', $user->id);?>"><?php echo $user->name; ?></a><br>
-оставил(а) в кейсе <a href="<?php echo action('CasesController@show', $case->id);?>">[#<?php echo $case->id; ?>] <?php echo $case->name; ?></a> новое сообщение:<br>
+добавил вас исполнителем в кейсе <a href="<?php echo action('CasesController@show', $case->id);?>">[#<?php echo $case->id; ?>] <?php echo $case->name; ?></a><br>
 </div>
 
 <hr>
 
-<pre><?php echo $msg->text;?></pre>
-
+<pre><?php echo $case->text;?></pre>
 <?php
 	foreach ($msg->files as $file) {
 		if ( substr($file->mimetype, 0, 5) == 'image'){
